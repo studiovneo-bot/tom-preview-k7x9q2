@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
+
+<title>Brands — tOM</title>
+<style>
+/* ───────────────────────────────────────────────
+   tOM — BRANDS
+   목적 1순위(브랜드 쪽 심사자)가 실제로 보는 페이지.
+
+   지배 원칙: 설득이 아니라 전시.
+   · "왜 우리인가"를 설명하지 않는다
+   · 브랜드마다 출처 있는 사실 한 문장만. 홍보 문구를 쓰지 않는다
+   · 창립연도는 확인된 것만 쓴다 (미확인·상충 항목은 표기하지 않음)
+   · 이름의 크기가 태도다. 홈과 같은 타이포 스케일을 유지한다
+   · 2026-08-13 Neo: 균일 반복 폐기 → 좌우 교대 비대칭 스프레드.
+     사진은 브랜드별 AI 샘플로 분리해 감도가 겹치지 않게 한다
+   ─────────────────────────────────────────────── */
+
+:root{
+  --bg:#f5f4f1;
+  --ink:#111;
+  --body:#6d6d6d;
+  --soft:#9a9a9a;
+  --line:#dcdcdc;
+
+  --t-nav:22px;
+  --t-body:16px;
+  --t-meta:13px;
+  --t-micro:11px;
+
+  --pad:45px;  /* Róhe 실측 45px (2026-08-16) */
+  --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;  /* Róhe=Acumin Pro. 어도비 폰트 활성화 시 자동 적용, 지금은 Helvetica 폴백 */
+  --display-font:"Times New Roman",Times,"Noto Serif",serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  background:var(--bg);color:var(--body);
+  font-family:"acumin-pro","Acumin Pro","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:var(--t-body);line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+body,p,li,dd,figcaption{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+h1,h2,h3{word-break:keep-all;text-wrap:balance;font-weight:400;color:var(--ink)}
+img{display:block;width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+
+/* ── 헤더 ──────────────────────────────── */
+.head{
+  background:transparent;color:var(--ink);
+  height:90px;padding:0 var(--pad);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;
+}
+/* 로그인 진입점 — 헤더의 빈 모서리에 작게. 메인 5개 메뉴는 건드리지 않는다
+   (2026-08-13 Neo: 지금 구조에서 가장 미학적인 자리에) */
+.acct{
+  font-family:var(--nav-font);font-size:13px;
+  letter-spacing:.3px;text-transform:none;color:var(--body);
+}
+.acct:hover{color:var(--ink)}
+.mark{font-size:26px;line-height:1;letter-spacing:.5px;color:var(--ink);grid-column:2}
+.mark b{font-weight:600}
+.head nav{
+  grid-column:1;grid-row:1;
+  display:flex;align-items:center;gap:35px;flex-wrap:wrap;justify-content:flex-start;
+  font-family:var(--nav-font);font-weight:400;
+  font-size:13px;letter-spacing:.3px;text-transform:none;
+}
+.head nav a{color:var(--body)}
+.head nav a:hover,.head nav a.on{color:var(--ink)}
+.head .util{grid-column:3;grid-row:1;justify-self:end}
+
+/* ── 브랜드 블록 ───────────────────────── */
+.brand{padding:74px var(--pad) 0}
+.brand + .brand{padding-top:96px}
+
+.brand h2{
+  font-family:var(--display-font);
+  font-weight:400;
+  /* 홈 브랜드 리스트와 동일 스케일 — 가장 긴 이름(GIOVANNI CAVAGNA)도 한 줄 */
+  font-size:clamp(2.2rem,9.2vw,8.2rem);
+  line-height:.95;
+  letter-spacing:-.02em;
+  
+}
+.origin{
+  font-family:var(--nav-font);font-weight:300;
+  font-size:var(--t-micro);letter-spacing:.3px;
+  color:var(--soft);margin-top:6px;
+}
+
+/* ── 에디토리얼 스프레드 (2026-08-13 재디자인 v2) ──
+   브랜드당 캠페인 사진 한 장 + 내러티브 칼럼.
+   사진은 각 브랜드 공식 캠페인·룩북에서 — 원본 비율 그대로 존중한다.
+   내러티브 구조: 킥커(도시) → 한 줄 선언(Times) → 본문 → 사실 표 → 링크 */
+.spread{
+  display:grid;grid-template-columns:7fr 5fr;gap:28px;
+  margin-top:30px;align-items:start;
+}
+.spread--b{grid-template-columns:5fr 7fr}
+.spread--b .lead{order:2}
+.spread--b .side{order:1}
+.spread .lead img{width:100%;height:auto}
+/* 세로 사진은 사이트 규격 4:5로 크롭. 가로 캠페인 컷은 원본 비율 유지 */
+.lead.r45 img{aspect-ratio:4/5;object-fit:cover;object-position:center}
+.side .desc .origin{margin:2px 0 16px}
+.side .lede{
+  font-family:var(--display-font);font-weight:400;
+  font-size:clamp(20px,1.9vw,27px);line-height:1.4;color:var(--ink);
+  margin-bottom:14px;
+}
+.side .desc p{max-width:26em;font-size:15px;line-height:1.9;color:var(--body)}
+.side .desc p + p{margin-top:10px}
+.facts{margin-top:24px;border-top:1px solid var(--line)}
+.facts > div{
+  display:grid;grid-template-columns:96px 1fr;gap:12px;
+  padding:9px 0;border-bottom:1px solid var(--line);
+}
+.facts dt{
+  font-family:var(--nav-font);font-size:var(--t-micro);
+  letter-spacing:.3px;color:var(--soft);
+}
+.facts dd{font-size:var(--t-meta);color:var(--ink)}
+.side .more{
+  display:inline-block;margin-top:20px;
+  font-family:var(--nav-font);font-weight:300;
+  font-size:var(--t-meta);letter-spacing:.3px;
+  color:var(--ink);white-space:nowrap;
+  border-bottom:1px solid var(--ink);padding-bottom:2px;
+}
+.side .more:hover{opacity:.5}
+
+.memo{margin:64px var(--pad) 0;padding:11px 13px;border:1px solid var(--line);
+  color:var(--soft);font-size:var(--t-micro);line-height:1.7}
+
+/* ── 검정 푸터 ─────────────────────────── */
+footer{
+  margin-top:96px;background:var(--ink);color:#8f8f8f;
+  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);
+}
+footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+
+@media (max-width:900px){
+  :root{--pad:16px;--t-nav:12px}
+  .brand{padding-top:52px}
+  .brand + .brand{padding-top:64px}
+  .brand h2{font-size:clamp(2.1rem,9vw,9.6rem)}
+  /* 스프레드는 한 칼럼으로: 캠페인 사진 → 내러티브 */
+  .spread,.spread--b{grid-template-columns:1fr;gap:18px}
+  .spread--b .lead{order:0}
+  .spread--b .side{order:0}
+  /* 자동 줄바꿈이 흘러넘치므로 3열 2행으로 명시한다 */
+  /* 좁은 화면 — Róhe 모바일 문법 (2026-08-16): 로고 좌 · Log In 우 한 줄,
+     메뉴는 그 아래 왼쪽 정렬 한 줄. 세로 3단 스택(Log In 고아 줄)을 버림 */
+  .head{height:auto;grid-template-columns:1fr auto;align-items:center;justify-items:start;gap:12px 16px;padding:18px var(--pad) 14px}
+  .mark{grid-column:1;grid-row:1}
+  .head nav{
+    grid-column:1 / -1;grid-row:2;justify-content:flex-start;
+    row-gap:8px;column-gap:18px;
+  }
+  .head .util{grid-column:2;grid-row:1;justify-self:end}
+}
+
+/* 중간 폭(반쪽 창 681~900px) — Róhe는 이 폭에서도 데스크톱 헤더를 유지한다.
+   콘텐츠는 모바일 규칙을 따르더라도 헤더만 3열 한 줄로 복원 (2026-08-16) */
+@media (min-width:681px) and (max-width:900px){
+  .head{height:90px;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:stretch;gap:28px;padding:0 var(--pad)}
+  .mark{grid-column:2;grid-row:1}
+  .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px}
+  .head .util{grid-column:3;grid-row:1;justify-self:end}
+}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <nav>
+    <a href="brands.html" class="on">Brands</a>
+    <a href="new.html">New</a>
+    <a href="exclusive.html">Exclusive</a>
+    <a href="paper.html">Paper</a>
+    <a href="store.html">Store</a>
+  </nav>
+  <div class="mark"><a href="index.html">t<b>OM</b></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a></div>
+</header>
+
+<!-- 자체 브랜드 — 남의 브랜드 위에 우리 이름이 놓인다.
+     사진은 Neo 촬영분(매장 입구·단골 손님). 무엇을 만들지는 아직 미정 —
+     없는 것을 있는 것처럼 쓰지 않는다. -->
+<section class="brand own">
+  <h2>Tom Atelier</h2>
+  <div class="spread spread--b">
+    <figure class="lead r45"><img src="img/store.jpg" alt="tOM 한남 매장 입구 — 들어서는 손님"></figure>
+    <div class="side">
+      <div class="desc">
+        <div class="origin">Hannam, Seoul · Since 1997</div>
+        <p class="lede">스물아홉 해 동안 골랐습니다. 이제 만들 차례입니다.</p>
+        <p>톰은 1997년부터 한남동에 있는 편집샵입니다. 온라인 없이 매장 하나로만 스물아홉 해를 지나왔고, 그 시간 동안 유행보다 오래 견디는 만듦새를 골라 걸어왔습니다. 2027년, 서른 해가 됩니다.</p>
+        <p>톰 아틀리에는 그 시간의 다음 장입니다. 무엇을 만들지는 아직 말하지 않습니다 — 스물아홉 해 동안 고른 눈이 정하는 대로, 여기서 가장 먼저 보게 됩니다.</p>
+        <dl class="facts">
+          <div><dt>Store</dt><dd>한남대로20길 33</dd></div>
+          <div><dt>Since</dt><dd>1997</dd></div>
+          <div><dt>Line</dt><dd>In preparation · Coming</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brand">
+  <h2>Biek Verstappen</h2>
+  <div class="spread spread--a">
+    <figure class="lead"><img src="img/campaign-2026-08-13/biek-campaign.jpg" alt="Biek Verstappen 캠페인 — 손염색 린넨"></figure>
+    <div class="side">
+      <div class="desc">
+        <div class="origin">Amsterdam</div>
+        <p class="lede">멈춘 듯한 시간을 입는다 — 기억처럼 오래된, 그러나 지금의 옷.</p>
+        <p>패션을 배운 적도, 다른 디자이너 밑에서 일한 적도 없이 시작했습니다. 디자이너였던 어머니에게 지속가능성과 천연 소재, 편안함과 쓸모의 미학을 물려받았습니다.</p>
+        <p>색은 염료욕을 최대 네&nbsp;번 거쳐 손으로 만들고, 린넨·헴프·라피아 실크처럼 오래 견뎌온 섬유만 씁니다. 옷과 함께 스카프와 인테리어 오브제를 짓습니다.</p>
+        <dl class="facts">
+          <div><dt>Atelier</dt><dd>Amsterdam</dd></div>
+          <div><dt>Dye</dt><dd>손염색 · 염료욕 최대 4회</dd></div>
+          <div><dt>Fiber</dt><dd>린넨 · 헴프 · 라피아 실크</dd></div>
+        </dl>
+        <a class="more" href="exclusive.html">See pieces</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brand">
+  <h2>Giovanni Cavagna</h2>
+  <div class="spread spread--b">
+    <figure class="lead"><img src="img/campaign-2026-08-13/cavagna-campaign.jpg" alt="Giovanni Cavagna 캠페인 룩북"></figure>
+    <div class="side">
+      <div class="desc">
+        <div class="origin">Milano</div>
+        <p class="lede">창의가 곧 생산 공정의 기초가 되는 작업.</p>
+        <p>니트웨어만 서른&nbsp;해 넘게 해온 사람입니다. 실과 구조에서 출발해 조각처럼 짭니다.</p>
+        <p>지적 호기심과 문화적 관심을 비관습적인 방식으로 새로운 형태와 결합합니다. 끊임없는 리서치가 방법론이 된 작업 — 전부 이탈리아에서 만듭니다.</p>
+        <dl class="facts">
+          <div><dt>Atelier</dt><dd>Milano</dd></div>
+          <div><dt>Craft</dt><dd>니트웨어</dd></div>
+          <div><dt>Making</dt><dd>Made in Italy</dd></div>
+        </dl>
+        <a class="more" href="exclusive.html">See pieces</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brand">
+  <h2>Nostra&shy;santissima</h2>
+  <div class="spread spread--a">
+    <figure class="lead r45"><img src="img/campaign-2026-08-13/nostra-campaign.jpg" alt="Nostrasantissima FW25-26"></figure>
+    <div class="side">
+      <div class="desc">
+        <div class="origin">Italia</div>
+        <p class="lede">선택하는 것이 아니라, 선택받는 옷.</p>
+        <p>소재의 리서치, 가공의 리서치, 그리고 숙련된 손. 창의성과 재단술의 결합만이 옷에 유일한 가치를 준다고 믿습니다.</p>
+        <p>비관습적인 인물들을 위한 옷 — 검정을 중심에 둡니다. 향수 PANACEA는 위스키로 열려 담배와 인센스를 지나 앰버와 오크모스로 가라앉습니다.</p>
+        <dl class="facts">
+          <div><dt>Atelier</dt><dd>Italia</dd></div>
+          <div><dt>House</dt><dd>NostraSantissima Srl</dd></div>
+          <div><dt>Scent</dt><dd>Panacea</dd></div>
+        </dl>
+        <a class="more" href="exclusive.html">See pieces</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brand">
+  <h2>Ziggy Chen</h2>
+  <div class="spread spread--b">
+    <figure class="lead r45"><img src="img/campaign-2026-08-13/ziggy-campaign.jpg" alt="Ziggy Chen 룩북 — 자카드 코트"></figure>
+    <div class="side">
+      <div class="desc">
+        <div class="origin">Shanghai · Since 2012</div>
+        <p class="lede">옷보다 원단이 먼저 온다.</p>
+        <p>중국의 오래된 작업복과 서양의 테일러링을 한 몸에 놓습니다. 낡음의 질감을 새로 짠 원단으로 만들어내는 일 — 시간이 옷의 재료가 됩니다.</p>
+        <p>컬렉션은 상하이에서 전개됩니다. 현재 시즌은 Interlude&nbsp;V, P/F&nbsp;26.</p>
+        <dl class="facts">
+          <div><dt>Atelier</dt><dd>Shanghai · Since 2012</dd></div>
+          <div><dt>Season</dt><dd>Interlude V · P/F 26</dd></div>
+        </dl>
+        <a class="more" href="exclusive.html">See pieces</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="memo">브랜드 사진은 각 브랜드 공식 웹사이트·룩북에서 가져온 내부 시안용 이미지입니다. 대외 공개 전 사용 허가 확인이 필요합니다.</p>
+
+<footer>
+  <nav><a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+</footer>
+
+</body>
+</html>

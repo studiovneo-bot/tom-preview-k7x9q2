@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
+
+<title>New Arrival — tOM</title>
+<style>
+/* ───────────────────────────────────────────────
+   tOM — NEW ARRIVAL
+
+   ONLINE EXCLUSIVE와 성격을 나눈다.
+   · ONLINE EXCLUSIVE = 카탈로그. 사이드바 필터 + 3열
+   · NEW ARRIVAL      = 타임라인. 필터 없음, 입고일 순, 4열
+     "계속 새 물건이 들어온다"는 것 자체가 보여줘야 할 내용이다.
+     심사자에게는 매장이 살아 있다는 증거, VIP에게는 뉴스레터의 내용.
+   ─────────────────────────────────────────────── */
+
+:root{
+  --bg:#f5f4f1; --ink:#111; --body:#6d6d6d; --soft:#9a9a9a; --line:#dcdcdc;
+  --t-nav:22px; --t-body:16px; --t-meta:13px; --t-micro:11px;
+  --pad:45px;  /* Róhe 실측 45px (2026-08-16) */
+  --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;  /* Róhe=Acumin Pro. 어도비 폰트 활성화 시 자동 적용, 지금은 Helvetica 폴백 */
+  --display-font:"Times New Roman",Times,"Noto Serif",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--body);
+  font-family:"acumin-pro","Acumin Pro","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:var(--t-body);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+body,p,li,dd,figcaption{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+h1,h2,h3{word-break:keep-all;text-wrap:balance;font-weight:400;color:var(--ink)}
+img{display:block;width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+
+.head{
+  background:transparent;color:var(--ink);
+  height:90px;padding:0 var(--pad);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;
+}
+/* 로그인 진입점 — 헤더의 빈 모서리에 작게. 메인 5개 메뉴는 건드리지 않는다
+   (2026-08-13 Neo: 지금 구조에서 가장 미학적인 자리에) */
+.acct{
+  font-family:var(--nav-font);font-size:13px;
+  letter-spacing:.3px;text-transform:none;color:var(--body);
+}
+.acct:hover{color:var(--ink)}
+.mark{font-size:26px;line-height:1;letter-spacing:.5px;color:var(--ink);grid-column:2}
+.mark b{font-weight:600}
+.head nav{
+  grid-column:1;grid-row:1;
+  display:flex;align-items:center;gap:35px;flex-wrap:wrap;justify-content:flex-start;
+  font-family:var(--nav-font);font-weight:400;
+  font-size:13px;letter-spacing:.3px;text-transform:none;
+}
+.head nav a{color:var(--body)}
+.head nav a:hover,.head nav a.on{color:var(--ink)}
+.head .util{grid-column:3;grid-row:1;justify-self:end}
+
+/* 브로도비치 스케일 대비 실험 (2026-08-13) — 중간 크기 제목을
+   거대한 디스플레이 + 아주 작은 캡션으로 벌렸다. index/brands의
+   .labels li와 같은 처리 */
+/* 페이지 제목 — 2026-08-13 재구성 v2: 카탈로그 페이지는 심미성보다 작동(원설계 원칙).
+   제목은 라벨 크기로 조용히, 상품 그리드가 주인공이 되게 한다 (H.Lorenzo 절제) */
+.title{
+  padding:44px var(--pad) 26px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;
+}
+.title h1{font-family:var(--nav-font);font-weight:400;
+  font-size:13px;letter-spacing:.4px;color:var(--ink)}
+/* Róhe 컬렉션 페이지 문법 (2026-08-16) — 좌측 작은 라벨, 우측 짧은 인트로.
+   그리드에 들어가기 전에 시즌의 목소리를 한 번만 낸다. 설명이 아니라 사실만 */
+.title .intro{font-size:var(--t-meta);color:var(--body);line-height:1.85;max-width:52ch}
+
+/* ── 입고일 구분 ───────────────────────── */
+.drop{padding:12px var(--pad) 0}
+.drop > h2{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--nav-font);font-weight:300;
+  font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft);
+  margin-bottom:14px;
+}
+.drop > h2::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.grid img{aspect-ratio:4/5;object-fit:cover;object-position:center;transition:opacity .2s}
+.card:hover img{opacity:.85}
+.card figcaption{padding:10px 2px 20px}
+.brand{display:block;font-size:var(--t-micro);letter-spacing:.3px;color:var(--ink)}
+.name{display:block;font-size:var(--t-meta);color:var(--body);margin-top:1px}
+.meta{display:flex;justify-content:space-between;gap:8px;margin-top:5px}
+.price{font-size:var(--t-meta);color:var(--ink)}
+.one{font-family:var(--nav-font);font-weight:300;font-size:var(--t-micro);
+  letter-spacing:.3px;color:var(--soft);white-space:nowrap}
+
+/* ── 뉴스레터 — NEW ARRIVAL이 곧 뉴스레터의 내용이다 ── */
+.sub{
+  margin:70px var(--pad) 0;padding:34px var(--pad);
+  background:var(--ink);color:#fff;text-align:center;
+}
+.sub h3{font-family:var(--nav-font);font-weight:300;color:#fff;
+  font-size:20px;letter-spacing:.3px;}
+.sub p{color:#b3b3b3;font-size:var(--t-meta);margin-top:6px}
+.sub form{display:flex;max-width:420px;margin:16px auto 0}
+.sub input{flex:1;min-width:0;border:1px solid #444;border-right:0;border-radius:0;
+  background:transparent;padding:12px 13px;font:inherit;font-size:var(--t-meta);color:#fff}
+.sub input::placeholder{color:#777}
+.sub input:focus{outline:0;border-color:#fff}
+.sub button{border:0;border-radius:0;background:#fff;color:var(--ink);padding:12px 22px;
+  font-family:var(--nav-font);font-weight:300;font-size:var(--t-meta);}
+
+.memo{margin:26px var(--pad) 0;padding:11px 13px;border:1px solid var(--line);
+  color:var(--soft);font-size:var(--t-micro);line-height:1.7}
+
+footer{margin-top:70px;background:var(--ink);color:#8f8f8f;
+  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);}
+footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+
+@media (max-width:900px){
+  :root{--pad:16px;--t-nav:12px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .title{grid-template-columns:1fr;gap:14px;padding:32px var(--pad) 20px}
+  /* 자동 줄바꿈이 흘러넘치므로 3열 2행으로 명시한다 */
+  /* 좁은 화면 — Róhe 모바일 문법 (2026-08-16): 로고 좌 · Log In 우 한 줄,
+     메뉴는 그 아래 왼쪽 정렬 한 줄. 세로 3단 스택(Log In 고아 줄)을 버림 */
+  .head{height:auto;grid-template-columns:1fr auto;align-items:center;justify-items:start;gap:12px 16px;padding:18px var(--pad) 14px}
+  .mark{grid-column:1;grid-row:1}
+  .head nav{
+    grid-column:1 / -1;grid-row:2;justify-content:flex-start;
+    row-gap:8px;column-gap:18px;
+  }
+  .head .util{grid-column:2;grid-row:1;justify-self:end}
+}
+
+/* 중간 폭(반쪽 창 681~900px) — Róhe는 이 폭에서도 데스크톱 헤더를 유지한다.
+   콘텐츠는 모바일 규칙을 따르더라도 헤더만 3열 한 줄로 복원 (2026-08-16) */
+@media (min-width:681px) and (max-width:900px){
+  .head{height:90px;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:stretch;gap:28px;padding:0 var(--pad)}
+  .mark{grid-column:2;grid-row:1}
+  .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px}
+  .head .util{grid-column:3;grid-row:1;justify-self:end}
+}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <nav>
+    <a href="brands.html">Brands</a>
+    <a href="new.html" class="on">New</a>
+    <a href="exclusive.html">Exclusive</a>
+    <a href="paper.html">Paper</a>
+    <a href="store.html">Store</a>
+  </nav>
+  <div class="mark"><a href="index.html">t<b>OM</b></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a></div>
+</header>
+
+<div class="title">
+  <h1>New Arrival</h1>
+  <p class="intro">매주 새로 들어옵니다. 대부분 한 점씩이며, 다시 들어오지 않는 것도 있습니다.<br>새로 들어온 것은 뉴스레터로 먼저 보내드립니다. <span style="color:var(--soft)">(문구 예시)</span></p>
+</div>
+
+<section class="drop">
+  <h2>27 / SS</h2>
+  <div class="grid">
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-01.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩1,980,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-02.jpg" alt=""></a>
+      <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩2,450,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-03.jpg" alt=""></a>
+      <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩860,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-04.jpg" alt=""></a>
+      <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩640,000</span></span></figcaption></figure>
+  </div>
+</section>
+
+<section class="drop">
+  <h2>26 / FW</h2>
+  <div class="grid">
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-05.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩3,200,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-06.jpg" alt=""></a>
+      <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩1,180,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-07.jpg" alt=""></a>
+      <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩720,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-08.jpg" alt=""></a>
+      <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩1,340,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-09.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩2,760,000</span><span class="one">Sold</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-10.jpg" alt=""></a>
+      <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩1,620,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-11.jpg" alt=""></a>
+      <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩580,000</span><span class="one">Sold</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-12.jpg" alt=""></a>
+      <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">₩940,000</span></span></figcaption></figure>
+  </div>
+</section>
+
+<div class="sub">
+  <h3>Newsletter</h3>
+  <p>새로 들어온 것을 먼저 보내드립니다.</p>
+  <form onsubmit="return false">
+    <input type="email" placeholder="이메일" aria-label="이메일">
+    <button type="submit">구독</button>
+  </form>
+</div>
+
+<p class="memo">대표 제안용 구조 샘플입니다. 사진은 AI로 생성한 더미 이미지이며 실제 상품·브랜드·상품명·가격을 의미하지 않습니다. 팔린 상품을 지우지 않고 <em>Sold</em>로 남겨두는 구조는 유지합니다.</p>
+
+<footer>
+  <nav><a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+</footer>
+
+</body>
+</html>

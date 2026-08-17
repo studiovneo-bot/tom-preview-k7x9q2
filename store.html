@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
+
+<title>Store — tOM</title>
+<style>
+/* ───────────────────────────────────────────────
+   tOM — STORE
+
+   지배 원칙: 설득이 아니라 전시.
+   · "우리는 이런 곳입니다"를 쓰지 않는다. 사진과 사실만 놓는다
+   · 29년은 한 줄이면 족하다. 크게 외치지 않는다
+   · ABOUT이 아니라 STORE인 이유 — ABOUT은 자기설명이 된다
+   · 매장 사진이 이 페이지의 내용 전부다
+   ─────────────────────────────────────────────── */
+
+:root{
+  --bg:#f5f4f1; --ink:#111; --body:#6d6d6d; --soft:#9a9a9a; --line:#dcdcdc;
+  --t-nav:22px; --t-body:16px; --t-meta:13px; --t-micro:11px;
+  --pad:45px;  /* Róhe 실측 45px (2026-08-16) */
+  --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;  /* Róhe=Acumin Pro. 어도비 폰트 활성화 시 자동 적용, 지금은 Helvetica 폴백 */
+  --display-font:"Times New Roman",Times,"Noto Serif",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--body);
+  font-family:"acumin-pro","Acumin Pro","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:var(--t-body);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+body,p,li,dd,figcaption{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+h1,h2,h3{word-break:keep-all;text-wrap:balance;font-weight:400;color:var(--ink)}
+img{display:block;width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+
+.head{
+  background:transparent;color:var(--ink);
+  height:90px;padding:0 var(--pad);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;
+}
+/* 로그인 진입점 — 헤더의 빈 모서리에 작게. 메인 5개 메뉴는 건드리지 않는다
+   (2026-08-13 Neo: 지금 구조에서 가장 미학적인 자리에) */
+.acct{
+  font-family:var(--nav-font);font-size:13px;
+  letter-spacing:.3px;text-transform:none;color:var(--body);
+}
+.acct:hover{color:var(--ink)}
+.mark{font-size:26px;line-height:1;letter-spacing:.5px;color:var(--ink);grid-column:2}
+.mark b{font-weight:600}
+.head nav{
+  grid-column:1;grid-row:1;
+  display:flex;align-items:center;gap:35px;flex-wrap:wrap;justify-content:flex-start;
+  font-family:var(--nav-font);font-weight:400;
+  font-size:13px;letter-spacing:.3px;text-transform:none;
+}
+.head nav a{color:var(--body)}
+.head nav a:hover,.head nav a.on{color:var(--ink)}
+.head .util{grid-column:3;grid-row:1;justify-self:end}
+
+/* ── 큰 사진 하나 ──────────────────────── */
+.lead{padding:28px var(--pad) 0}
+.lead img{aspect-ratio:16/9;object-fit:cover;object-position:center 60%}
+
+/* ── 한 줄 + 정보 ──────────────────────── */
+.info{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  padding:44px var(--pad) 0;align-items:start;
+}
+.since{
+  font-family:var(--display-font);font-weight:400;
+  font-size:clamp(1.7rem,5.4vw,4.6rem);
+  line-height:1.02;letter-spacing:-.005em;
+  color:var(--ink);
+}
+.since small{
+  display:block;margin-top:12px;
+  font-family:inherit;font-weight:300;
+  font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft);
+}
+dl{display:grid;grid-template-columns:auto 1fr;gap:5px 22px}
+dt{
+  font-family:var(--nav-font);font-weight:300;
+  font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft);
+  padding-top:3px;
+}
+dd{color:var(--ink);font-size:var(--t-meta)}
+dd a{border-bottom:1px solid var(--line)}
+dd a:hover{border-color:var(--ink)}
+
+/* ── 사진 — 아트북 페이싱 (Róhe 랜딩·룩북 문법, 2026-08-16) ──
+   균일 3열을 버리고 큰 사진 하나 + 아주 작은 사진 하나를 비대칭으로.
+   Róhe가 거대한 착장 사진 옆에 작은 풍경화를 놓듯,
+   스케일 차이 자체가 응시의 리듬을 만든다. 캡션·설명 없음 — 전시 원칙 유지 */
+.pair{
+  display:grid;grid-template-columns:8fr 4fr;gap:6px 72px;
+  padding:72px var(--pad) 0;align-items:end;
+}
+.pair .big img{aspect-ratio:4/5;object-fit:cover;object-position:center}
+.pair .small{max-width:58%}
+.pair .small img{aspect-ratio:4/5;object-fit:cover;object-position:center}
+.solo{padding:72px var(--pad) 0}
+.solo img{max-width:44%;margin:0 auto;aspect-ratio:4/5;object-fit:cover;object-position:center}
+
+footer{margin-top:80px;background:var(--ink);color:#8f8f8f;
+  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);}
+footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+
+@media (max-width:900px){
+  :root{--pad:16px;--t-nav:12px}
+  .lead img{aspect-ratio:4/3}
+  .info{grid-template-columns:1fr;gap:26px;padding-top:32px}
+  /* 모바일에서도 스케일 대비를 유지한다 — 작은 사진은 계속 작게 (Róhe 모바일 방식) */
+  .pair{grid-template-columns:1fr;gap:44px;padding-top:44px}
+  .pair .small{max-width:52%;margin-left:auto}
+  .solo{padding-top:44px}
+  .solo img{max-width:72%}
+  /* 자동 줄바꿈이 흘러넘치므로 3열 2행으로 명시한다 */
+  /* 좁은 화면 — Róhe 모바일 문법 (2026-08-16): 로고 좌 · Log In 우 한 줄,
+     메뉴는 그 아래 왼쪽 정렬 한 줄. 세로 3단 스택(Log In 고아 줄)을 버림 */
+  .head{height:auto;grid-template-columns:1fr auto;align-items:center;justify-items:start;gap:12px 16px;padding:18px var(--pad) 14px}
+  .mark{grid-column:1;grid-row:1}
+  .head nav{
+    grid-column:1 / -1;grid-row:2;justify-content:flex-start;
+    row-gap:8px;column-gap:18px;
+  }
+  .head .util{grid-column:2;grid-row:1;justify-self:end}
+}
+
+/* 중간 폭(반쪽 창 681~900px) — Róhe는 이 폭에서도 데스크톱 헤더를 유지한다.
+   콘텐츠는 모바일 규칙을 따르더라도 헤더만 3열 한 줄로 복원 (2026-08-16) */
+@media (min-width:681px) and (max-width:900px){
+  .head{height:90px;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:stretch;gap:28px;padding:0 var(--pad)}
+  .mark{grid-column:2;grid-row:1}
+  .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px}
+  .head .util{grid-column:3;grid-row:1;justify-self:end}
+}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <nav>
+    <a href="brands.html">Brands</a>
+    <a href="new.html">New</a>
+    <a href="exclusive.html">Exclusive</a>
+    <a href="paper.html">Paper</a>
+    <a href="store.html" class="on">Store</a>
+  </nav>
+  <div class="mark"><a href="index.html">t<b>OM</b></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a></div>
+</header>
+
+<div class="lead">
+  <img src="img/store.jpg" alt="tOM 한남 매장 입구">
+</div>
+
+<div class="info">
+  <div class="since">
+    Hannam<br>Since 1997
+    <small>서울 용산구</small>
+  </div>
+
+  <dl>
+    <dt>Address</dt><dd>서울 용산구 한남대로20길 33<br><a href="#">지도에서 보기</a></dd>
+    <dt>Hours</dt><dd>12:00 — 21:00<br>연중무휴</dd>
+    <dt>Tel</dt><dd><a href="tel:0231432616">02-3143-2616</a></dd>
+    <dt>Instagram</dt><dd><a href="https://www.instagram.com/tom_hannam_official/">@tom_hannam_official</a></dd>
+  </dl>
+</div>
+
+<div class="pair">
+  <div class="big"><img src="img/st1.jpg" alt=""></div>
+  <div class="small"><img src="img/st2.jpg" alt=""></div>
+</div>
+
+<div class="solo">
+  <img src="img/st3.jpg" alt="">
+</div>
+
+<footer>
+  <nav><a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>tOM — preview</title>
+<style>
+:root{--bg:#f5f4f1;--ink:#111;--body:#6d6d6d;--soft:#9a9a9a;--line:#dcdcdc}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--body);
+  font-family:"acumin-pro","Acumin Pro","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  -webkit-font-smoothing:antialiased;
+}
+.box{width:min(360px,86vw);text-align:center}
+.mark{font-size:26px;letter-spacing:.5px;color:var(--ink)}
+.mark b{font-weight:600}
+p{font-size:13px;letter-spacing:.3px;margin-top:14px;line-height:1.8;word-break:keep-all}
+form{display:flex;margin-top:22px}
+input{
+  flex:1;min-width:0;border:1px solid var(--line);border-right:0;border-radius:0;
+  background:transparent;padding:12px 13px;font:inherit;font-size:13px;color:var(--ink);text-align:center;
+}
+input:focus{outline:0;border-color:var(--ink)}
+button{
+  border:0;border-radius:0;cursor:pointer;background:var(--ink);color:#fff;
+  padding:12px 22px;font:inherit;font-size:12px;letter-spacing:.3px;
+}
+.err{display:none;margin-top:12px;font-size:12px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="mark">t<b>OM</b></div>
+  <p>비공개 시연 페이지입니다.<br>전달받은 암호를 입력해 주세요.</p>
+  <form id="f">
+    <input id="k" type="password" autocomplete="off" aria-label="암호">
+    <button type="submit">입장</button>
+  </form>
+  <p class="err" id="e">암호가 맞지 않습니다.</p>
+</div>
+<script>
+document.getElementById('f').addEventListener('submit',function(ev){
+  ev.preventDefault();
+  if(document.getElementById('k').value.trim()==='hannam1997'){
+    try{sessionStorage.setItem('tomkey','ok');}catch(e){}
+    location.replace('index.html');
+  }else{
+    document.getElementById('e').style.display='block';
+  }
+});
+</script>
+</body>
+</html>
