@@ -236,10 +236,23 @@ footer a:hover{color:#fff}
   .mark{grid-column:1;grid-row:1}
   .head nav{grid-column:1 / -1;grid-row:2;justify-content:flex-start;row-gap:8px;column-gap:18px}
   .head .util{grid-column:2;grid-row:1;justify-self:end;gap:16px}
-  /* 모바일 헤더는 두 줄(로고·유틸 / 메뉴)이라 그대로 따라오면 칸 캡션과 겹친다.
-     스크롤이 시작되면 메뉴 줄만 접고 로고·유틸 한 줄로 따라온다 */
-  .head nav{transition:opacity .2s ease}
-  .head--tight nav{display:none}
+  /* 2026-08-18 Neo — 폰에서는 칸이 한 줄씩 세로로 쌓이므로
+     헤더가 칸이 바뀔 때마다 앞 칸의 캡션과 겹쳤다.
+     **내릴 때 숨고 올릴 때 돌아오는** 방식으로 바꾼다.
+     내리는 중에는 사진만 보이고, 손가락을 위로 올리면 메뉴가 통째로 돌아온다.
+     (앞 판의 '메뉴 줄만 접기'는 겹침 자체를 없애지 못해 폐기) */
+  .head{transition:transform .28s ease, background-color .2s ease}
+  .head--away{transform:translateY(-100%)}
+  /* 맨 위(첫 사진 위)에서는 투명 그대로 — 첫인상은 사진이 화면을 꽉 채운다.
+     스크롤을 올려 헤더를 다시 불러낸 때만 종이색 띠를 깐다.
+     그 순간엔 앞 칸의 캡션과 반드시 겹치고, 뒤 사진 밝기도 예측할 수 없다.
+     띠는 '항상 있는 비용'이 아니라 '메뉴를 부를 때만 생기는 것'이라 사진을 잠식하지 않는다 */
+  .head--solid{background:var(--bg);box-shadow:0 1px 0 rgba(17,17,17,.10)}
+  .head--solid a{color:var(--ink) !important}
+  .head--solid .mark img{filter:none !important}
+  .head--solid .mk-r{display:none}
+  /* 세로로 쌓이면 사진 경계도 가로다 — 투명 상태의 로고는 좌우가 아니라 위아래로 가른다 */
+  .mark .mk-r{clip-path:inset(50% 0 0 0)}
 }
 /* 중간 폭(반쪽 창 681~900px)은 데스크톱 헤더 유지 */
 @media (min-width:681px) and (max-width:900px){
@@ -368,9 +381,15 @@ footer a:hover{color:#fff}
   /* 로고 두 겹은 각자 자기 절반만 잰다 (data-half) */
   function rectOf(el){
     var r=el.getBoundingClientRect(), h=el.getAttribute('data-half');
+    if(!h) return r;
+    /* 좁은 화면은 칸이 세로로 쌓여 사진 경계가 가로다 — 판정도 위아래로 나눈다 */
+    var narrow=window.matchMedia('(max-width:900px)').matches;
+    if(narrow){
+      if(h==='l') return {left:r.left, right:r.right, top:r.top, bottom:r.top+r.height/2};
+      return {left:r.left, right:r.right, top:r.top+r.height/2, bottom:r.bottom};
+    }
     if(h==='l') return {left:r.left, right:r.left+r.width/2, top:r.top, bottom:r.bottom};
-    if(h==='r') return {left:r.left+r.width/2, right:r.right, top:r.top, bottom:r.bottom};
-    return r;
+    return {left:r.left+r.width/2, right:r.right, top:r.top, bottom:r.bottom};
   }
   var maps=[], ready=false;
 
@@ -462,16 +481,28 @@ footer a:hover{color:#fff}
       var PAD=6;   /* 글자 주변 여유 — 획 사이로 배경이 비쳐 보이는 폭 */
       /* 이음매에 걸친 로고 절반은 가로 여유를 주면 안 된다.
          6px만 줘도 옆 칸의 흰 사진이 섞여 평균이 70을 넘어 잉크로 잘못 판정됐다 */
-      var HP = el.getAttribute && el.getAttribute('data-half') ? 0 : PAD;
-      var L=lum(r.left-HP, r.right+HP, Math.max(0,r.top-PAD), r.bottom+PAD);
+      /* 이음매에 걸친 절반은 그 방향의 여유를 주면 안 된다.
+         6px만 줘도 옆 사진이 섞여 판정이 뒤집힌다 */
+      var half = el.getAttribute && el.getAttribute('data-half');
+      var narrow = window.matchMedia('(max-width:900px)').matches;
+      var HP = half && !narrow ? 0 : PAD;
+      var VP = half &&  narrow ? 0 : PAD;
+      var L=lum(r.left-HP, r.right+HP, Math.max(0,r.top-VP), r.bottom+VP);
       el.classList.toggle('z-paper', L<THRESHOLD);
     });
   }
 
+  /* 폰: 내릴 때 숨고 올릴 때 돌아온다. 데스크톱은 늘 붙어 있다 */
+  var lastY=window.pageYOffset;
   function tighten(){
     if(BANDMODE) return;
     var narrow=window.matchMedia('(max-width:900px)').matches;
-    head.classList.toggle('head--tight', narrow && window.pageYOffset>40);
+    var y=window.pageYOffset, dy=y-lastY;
+    if(Math.abs(dy)>4) lastY=y;
+    if(!narrow){ head.classList.remove('head--away','head--solid'); return; }
+    if(y<=60){ head.classList.remove('head--away','head--solid'); return; }  /* 맨 위 = 투명 */
+    if(dy>4){ head.classList.add('head--away'); }                            /* 내리는 중 = 사라짐 */
+    else if(dy<-4){ head.classList.remove('head--away'); head.classList.add('head--solid'); }
   }
 
   var tick=false;

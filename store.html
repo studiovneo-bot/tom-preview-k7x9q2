@@ -62,9 +62,17 @@ a{color:inherit;text-decoration:none}
 .head nav a:hover,.head nav a.on{color:var(--ink)}
 .head .util{grid-column:3;grid-row:1;justify-self:end}
 
-/* ── 큰 사진 하나 ──────────────────────── */
-.lead{padding:76px var(--pad) 0}
-.lead img{aspect-ratio:16/9;object-fit:cover;object-position:center 60%}
+/* ── 사진 배열 — 12칸 공통 격자 (2026-08-18 Neo "사진 배열을 깔끔하게 맞추어줘") ──
+   그전에는 사진 폭이 1310 / 825 / 239 / 576px로 제각각이라
+   어느 모서리도 서로 맞지 않았다. 비대칭은 유지하되 **모든 모서리가
+   같은 격자선 위에 떨어지도록** 세 블록에 같은 12칸 격자를 깐다.
+   비대칭은 '아무 데나 놓는 것'이 아니라 '격자 위에서 다르게 놓는 것'이다 */
+.lead,.pair,.solo{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  column-gap:16px;padding-left:var(--pad);padding-right:var(--pad);
+}
+.lead{padding-top:76px}
+.lead img{grid-column:1 / -1;aspect-ratio:16/9;object-fit:cover;object-position:center 60%}
 
 /* ── 한 줄 + 정보 ──────────────────────── */
 /* 2026-08-18 Neo: 이미지가 아니라 활자로 연다 — Hannam Since 1997이 첫 화면 */
@@ -93,19 +101,16 @@ dd{color:var(--ink);font-size:var(--t-meta)}
 dd a{border-bottom:1px solid var(--line)}
 dd a:hover{border-color:var(--ink)}
 
-/* ── 사진 — 아트북 페이싱 (Róhe 랜딩·룩북 문법, 2026-08-16) ──
-   균일 3열을 버리고 큰 사진 하나 + 아주 작은 사진 하나를 비대칭으로.
-   Róhe가 거대한 착장 사진 옆에 작은 풍경화를 놓듯,
-   스케일 차이 자체가 응시의 리듬을 만든다. 캡션·설명 없음 — 전시 원칙 유지 */
-.pair{
-  display:grid;grid-template-columns:8fr 4fr;gap:6px 72px;
-  padding:72px var(--pad) 0;align-items:end;
-}
-.pair .big img{aspect-ratio:4/5;object-fit:cover;object-position:center}
-.pair .small{max-width:58%}
-.pair .small img{aspect-ratio:4/5;object-fit:cover;object-position:center}
-.solo{padding:72px var(--pad) 0}
-.solo img{max-width:44%;margin:0 auto;aspect-ratio:4/5;object-fit:cover;object-position:center}
+/* 아트북 페이싱 (Róhe 룩북 문법) — 큰 사진 옆에 아주 작은 사진.
+   스케일 차이가 응시의 리듬을 만든다. 캡션·설명 없음 — 전시 원칙 유지.
+   단 이제 둘 다 격자선 위에 앉는다: 큰 것은 1~7칸, 작은 것은 10~12칸(오른쪽 끝 정렬) */
+.pair{padding-top:72px;align-items:end}
+.pair .big{grid-column:1 / 8}
+.pair .small{grid-column:10 / 13}
+.pair .big img,.pair .small img{aspect-ratio:4/5;object-fit:cover;object-position:center}
+/* 솔로는 가운데 6칸 — 좌우가 각각 3칸씩 비어 정확히 대칭이다 */
+.solo{padding-top:72px}
+.solo img{grid-column:4 / 10;aspect-ratio:4/5;object-fit:cover;object-position:center}
 
 footer{margin-top:80px;background:var(--ink);color:#8f8f8f;
   padding:24px var(--pad);text-align:center;font-size:var(--t-micro);}
@@ -115,13 +120,16 @@ footer a:hover{color:#fff}
 
 @media (max-width:900px){
   :root{--pad:16px;--t-nav:12px}
+  .lead,.pair,.solo{grid-template-columns:1fr;column-gap:0}
+  .lead img,.pair .big,.pair .small,.solo img{grid-column:1 / -1}
   .lead img{aspect-ratio:4/3}
   .info{grid-template-columns:1fr;gap:26px;padding-top:32px}
   /* 모바일에서도 스케일 대비를 유지한다 — 작은 사진은 계속 작게 (Róhe 모바일 방식) */
-  .pair{grid-template-columns:1fr;gap:44px;padding-top:44px}
-  .pair .small{max-width:52%;margin-left:auto}
+  .pair{row-gap:44px;padding-top:44px}
+  /* 모바일에서도 스케일 대비를 유지한다 — 작은 사진은 계속 작게 (Róhe 모바일 방식) */
+  .pair .small{width:52%;margin-left:auto}
   .solo{padding-top:44px}
-  .solo img{max-width:72%}
+  .solo img{width:72%;margin:0 auto}
   /* 자동 줄바꿈이 흘러넘치므로 3열 2행으로 명시한다 */
   /* 좁은 화면 — Róhe 모바일 문법 (2026-08-16): 로고 좌 · Log In 우 한 줄,
      메뉴는 그 아래 왼쪽 정렬 한 줄. 세로 3단 스택(Log In 고아 줄)을 버림 */
@@ -200,7 +208,9 @@ img{filter:grayscale(1) contrast(1.06)}
 
 
 <div class="pair">
-  <div class="big"><img src="img/collection-2024/store-sign.jpg" alt="tOM 외벽 간판"></div>
+  <!-- store-sign.jpg는 파일 자체에 흰 테두리가 구워져 있고, 같은 외벽 간판이
+       홈의 Hannam 칸에도 쓰인다. 매장 안을 보여주는 컷으로 교체 (2026-08-18) -->
+  <div class="big"><img src="img/store-photos/R0018753.jpg" alt="tOM 매장 내부"></div>
   <div class="small"><img src="img/collection-2024/store-object.jpg" alt=""></div>
 </div>
 
