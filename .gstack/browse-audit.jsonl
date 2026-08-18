@@ -18,3 +18,6 @@
 {"ts":"2026-08-18T13:52:07.712Z","cmd":"viewport","args":"1400x900","origin":"about:blank","durationMs":4,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-08-18T13:52:07.785Z","cmd":"goto","args":"http://127.0.0.1:8765/home.html","origin":"http://127.0.0.1:8765/home.html","durationMs":20,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-08-18T13:52:09.903Z","cmd":"eval","args":"/tmp/capscan.js","origin":"http://127.0.0.1:8765/home.html","durationMs":33,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-18T14:09:22.332Z","cmd":"viewport","args":"390x844","origin":"http://127.0.0.1:8765/home.html","durationMs":2,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-18T14:09:22.395Z","cmd":"goto","args":"http://127.0.0.1:8765/home.html","origin":"http://127.0.0.1:8765/home.html","durationMs":9,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-18T14:09:24.298Z","cmd":"eval","args":"/tmp/capscan.js","origin":"http://127.0.0.1:8765/home.html","durationMs":22,"status":"ok","hasCookies":false,"mode":"launched"}
