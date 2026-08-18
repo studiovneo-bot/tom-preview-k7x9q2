@@ -107,10 +107,9 @@ a{color:inherit;text-decoration:none}
 .cell figcaption{
   position:absolute;left:0;right:0;bottom:0;
   /* Totême 실측은 바닥에서 130px(padding-bottom 96px)이지만 tOM 사진에서는
-     그 높이가 정확히 인물·사물 위에 얹힌다. 12px 간격으로 세로 위치를 훑어
-     네 칸의 글자 자리 휘도가 가장 갈리는 28px로 내렸다.
-     (그 자리에서 arrivals 242 / store 30 — 잉크·흰색이 확실히 갈린다) */
-  padding-bottom:28px;
+     그 높이가 정확히 인물·사물 위에 얹힌다. 8px 간격으로 훑어 네 칸 모두
+     바닥에 가까울수록 좋았다(사진 하단이 바닥·아스팔트라 비교적 고르다). 18px */
+  padding-bottom:18px;
   text-align:center;pointer-events:none;
 }
 /* 2026-08-18 Neo "폰트를 세리프로 해보자" — Totême는 산세리프 라이트지만
@@ -118,20 +117,27 @@ a{color:inherit;text-decoration:none}
    18→22px, 12→13px로 올리고 굵기 300(세리프에 없는 굵기)을 400으로 되돌린다 */
 .cell .t{
   display:block;font-family:var(--display-font);
-  font-size:22px;font-weight:400;line-height:1.24;
+  font-size:28px;font-weight:400;line-height:1.22;
   letter-spacing:0;
 }
 .cell .s{
   display:block;font-family:var(--display-font);
-  font-size:13px;font-weight:400;line-height:1.6;
-  text-transform:capitalize;margin-top:8px;
+  font-size:14px;font-weight:400;line-height:1.6;
+  text-transform:capitalize;margin-top:7px;
 }
-/* 칸마다 '글자가 실제로 놓이는 자리'의 휘도를 캔버스로 재서 고른 색.
-   칸 전체 폭이 아니라 Range로 글자 범위만 재야 한다 — 처음에 전체 폭을 재서
-   arrivals 칸 색을 반대로 골랐었다.
-   실측(padding-bottom 28px 기준): arrivals 192·246 / paper 125·181 /
-   exclusive 114·110 / store 40·32
-   → 앞 세 칸 잉크, 매장 칸만 흰색.
+/* 칸별 캡션 색 — 2026-08-18 Neo "메인홈 4구성 메뉴의 가독성이 너무 떨어져"
+
+   **평균 휘도로 고르면 안 된다.** 두 번 틀렸다.
+   ① 처음엔 칸 전체 폭을 재서 arrivals를 반대로 골랐고
+   ② 다음엔 글자 범위를 쟀지만 '평균'을 써서 exclusive-night을 흰색으로 골랐다.
+      그 자리는 밝은 골함석 벽과 검은 옷이 섞여 평균은 중간이지만
+      **글자 면적의 97%가 대비 3.5 미만**이었다. 사실상 안 보이는 상태였다.
+
+   판정 기준을 평균에서 **'대비 3.5 미만인 픽셀의 비율'** 로 바꿨다.
+   각 사진에서 캡션 높이를 8px 간격으로 훑어 그 비율이 최소가 되는 색을 고른다.
+   결과(나쁨 비율): arrivals 잉크 0% / paper 잉크 14% / exclusive 잉크 4% / store 흰색 0%
+   → 매장 칸만 흰색, 나머지 셋은 잉크.
+
    Totême는 네 칸 전부 잉크 하나로 끝난다. 사진이 전부 하이키라서 가능한 일이다 */
 .cell--ink figcaption{color:#090909}
 .cell--paper figcaption{color:#f2f1ee}
@@ -272,11 +278,14 @@ footer a:hover{color:#fff}
   </a>
 
   <a class="cell cell--ink" href="paper.html">
-    <img src="img/main-2026-08-18/paper-nars-book.jpg" alt="tOM Paper">
+    <!-- NARS 책 컷은 캡션 자리에서 흰 책등과 검은 옷이 정확히 갈라져
+         어떤 색을 써도 글자 면적의 25~75%가 묻혔다. Paper 페이지 안으로 보내고
+         하단이 비어 있는 이 컷으로 교체 (2026-08-18) -->
+    <img src="img/collection-2024/paper-model.jpg" alt="tOM Paper">
     <figcaption><span class="t">tOM Paper</span><span class="s">Journal</span></figcaption>
   </a>
 
-  <a class="cell cell--paper" href="exclusive.html">
+  <a class="cell cell--ink" href="exclusive.html">
     <img src="img/main-2026-08-18/exclusive-night.jpg" alt="온라인 단독 상품">
     <figcaption><span class="t">Online Exclusive</span><span class="s">Exclusive</span></figcaption>
   </a>
