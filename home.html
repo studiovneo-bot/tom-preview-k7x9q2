@@ -98,7 +98,13 @@ a{color:inherit;text-decoration:none}
 /* ── 풀블리드 히어로 (Róhe 랜딩, 2026-08-16 Neo) ──
    헤더 바로 아래, 여백 없이 화면을 가득 채우는 사진 한 장.
    텍스트·오버레이·버튼 없음 — 사진이 첫 화면의 전부다 */
-.lead{aspect-ratio:2.2/1;overflow:hidden}  /* 2026-08-18 Neo: 얇은 가로 밴드 — 3:2가 답답 */
+/* 2026-08-18 Neo "메인 이미지 밑 사진과의 경계가 애매하다":
+   풀블리드를 버리고 아래 사진 2장과 같은 45px 거터 안으로 넣는다.
+   원인은 두 가지였다 — 히어로 하단이 밝은 회색이라 배경(#f5f4f1)과 톤이 붙고,
+   좌우가 풀블리드라 아래 열과 어긋나 경계선이 사라졌다.
+   같은 열로 맞추니 히어로가 '한 장의 판'으로 읽힌다.
+   (2026-08-16 Róhe 풀블리드 결정을 이 지시로 뒤집음) */
+.lead{aspect-ratio:2.2/1;overflow:hidden;margin:0 var(--pad)}  /* 2026-08-18 Neo: 얇은 가로 밴드 — 3:2가 답답 */
 .lead img{width:100%;height:100%;object-fit:cover;object-position:center 12%}  /* 2026-08-18: 이미지를 위로 — 옷이 밴드 중앙에, 스탠드 헤드는 유지 */
 /* 모바일 히어로는 4:5 — 2026-08-17 Neo. Róhe 실측(모바일도 3:2)에서 이탈:
    390px에서 3:2는 260px 밴드라 첫인상이 약하다. 4:5 = 상품 이미지 규격과도 일치 */
@@ -162,8 +168,8 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ── 사진 2장 = NEW ARRIVAL / ONLINE EXCLUSIVE 입구 ── */
-/* 2026-08-13 방향 확정: 주인공은 브랜드 타이포 하나.
-   사진 위 오버레이를 걷어내고 캡션은 사진 아래에 조용히 둔다 */
+/* 2026-08-13: 주인공은 브랜드 타이포 하나 — 사진 위 오버레이를 걷어냈었다.
+   2026-08-18 Neo가 뒤집음: 캡션을 사진 한가운데로 올리고 세리프로 키운다 */
 .hero{
   display:grid;grid-template-columns:1fr 1fr;gap:16px;
   padding:36px var(--pad) 0;
@@ -171,12 +177,25 @@ a{color:inherit;text-decoration:none}
 .hero img{aspect-ratio:4/5;object-fit:cover;object-position:center;transition:opacity .2s}
 .hero a{display:block}
 .hero a:hover img{opacity:.82}
+/* 2026-08-18 Neo 지시: 캡션을 사진 아래에서 사진 한가운데로.
+   세리프로 키워 부각시키되 그림자·스크림 같은 효과는 쓰지 않는다 */
+.hero figure{position:relative}
 .hero figcaption{
-  padding-top:13px;text-align:center;
-  font-family:var(--nav-font);font-weight:300;
-  font-size:13px;letter-spacing:.3px;
-  color:var(--ink);line-height:1;
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  text-align:center;
 }
+.hero figcaption a{
+  pointer-events:auto;display:inline-block;
+  font-family:var(--display-font);font-weight:400;
+  font-size:clamp(34px,3.7vw,56px);letter-spacing:-.005em;
+  line-height:1.02;color:var(--ink);
+  /* 반전 합성(mix-blend-mode:difference)도 시험했으나 두 사진 모두
+     글자 자리의 밝기 편차가 커서(28~240 / 1~243) 중간톤으로 뭉개졌다.
+     그림자·스크림 없이 잉크 단색이 가장 강하다 */
+}
+.hero figcaption a:hover{color:var(--red)}
 
 /* ── 브랜드 이름 — 이 페이지의 주인공 ──── */
 .labels{padding:92px var(--pad) 0}
@@ -376,7 +395,7 @@ img{filter:grayscale(1) contrast(1.06)}
   <img src="img/collection-2024/hero-cstand.jpg" alt="tOM — Uma Wang">
 </section>
 
-<!-- 상품 입구 — NEW ARRIVAL / ONLINE EXCLUSIVE. 캡션은 사진 아래 조용히 -->
+<!-- 상품 입구 — NEW ARRIVAL / ONLINE EXCLUSIVE. 캡션은 사진 한가운데 세리프로 (2026-08-18 Neo) -->
 <div class="hero">
   <figure>
     <a href="new.html"><img src="img/collection-2024/arrivals-suit.jpg" alt="새로 들어온 상품"></a>
