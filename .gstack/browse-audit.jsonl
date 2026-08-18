@@ -1,0 +1,17 @@
+{"ts":"2026-08-17T12:25:54.387Z","cmd":"viewport","args":"1440x900","origin":"about:blank","durationMs":4,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:54.447Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":8,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:55.582Z","cmd":"screenshot","args":"--viewport /tmp/tom-rohe/cover-desktop.png","origin":"http://localhost:8765/","durationMs":40,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:56.187Z","cmd":"click","args":".cover","origin":"http://localhost:8765/home.html","durationMs":551,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:57.283Z","cmd":"url","args":"","origin":"http://localhost:8765/home.html","durationMs":0,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:57.342Z","cmd":"viewport","args":"390x844","origin":"http://localhost:8765/home.html","durationMs":4,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:57.401Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":5,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:58.502Z","cmd":"screenshot","args":"--viewport /tmp/tom-rohe/cover-mobile.png","origin":"http://localhost:8765/","durationMs":10,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:25:58.557Z","cmd":"viewport","args":"1440x900","origin":"http://localhost:8765/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:26:29.792Z","cmd":"viewport","args":"390x844","origin":"http://localhost:8765/","durationMs":5,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:26:29.853Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":6,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:26:30.967Z","cmd":"screenshot","args":"--viewport /tmp/tom-rohe/cover-mobile-v2.png","origin":"http://localhost:8765/","durationMs":22,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:26:31.024Z","cmd":"viewport","args":"1440x900","origin":"http://localhost:8765/","durationMs":2,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:34:36.781Z","cmd":"viewport","args":"1440x900","origin":"http://localhost:8765/","durationMs":0,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:34:36.839Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":6,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:34:37.925Z","cmd":"js","args":"\n(()=>{\n  const lis=[...document.querySelectorAll('.wall li')].map(li=>{const r=li.getBoundingClientRect(); const vis=Math.max(0,Math.min(r.bottom,900)-Math.max(r.top,0))/r.height; return {name:li.tex…","origin":"http://localhost:8765/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-08-17T12:34:38.004Z","cmd":"screenshot","args":"--viewport /tmp/tom-rohe/cover-desktop-v2.png","origin":"http://localhost:8765/","durationMs":25,"status":"ok","hasCookies":false,"mode":"launched"}

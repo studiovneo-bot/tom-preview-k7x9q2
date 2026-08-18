@@ -50,7 +50,8 @@ button{font:inherit;cursor:pointer}
   letter-spacing:.3px;text-transform:none;color:var(--body);
 }
 .acct:hover{color:var(--ink)}
-.mark{font-size:26px;line-height:1;letter-spacing:.5px;color:var(--ink);grid-column:2}
+.mark{line-height:1;grid-column:2}
+.mark img{height:24px;width:auto;display:block}  /* 2026-08-18 실제 로고 수령 — 텍스트 조합 폐기 */
 .mark b{font-weight:600}
 .head nav{
   grid-column:1;grid-row:1;
@@ -97,6 +98,15 @@ button{font:inherit;cursor:pointer}
 .price{font-size:var(--t-meta);color:var(--ink)}
 .one{font-family:var(--nav-font);font-weight:300;font-size:var(--t-micro);
   letter-spacing:.3px;color:var(--soft);white-space:nowrap}
+/* 입고 알림 — 조사 결론: 이 계열에서 재입고·입고 알림은 부가기능이 아니라
+   핵심 판매 채널이다 (No Man Walks Alone). 재고 1점이라 같은 옷은 다시 없지만
+   "이 브랜드가 새로 들어오면 알려드린다"로 잇는다. 착지는 뉴스레터 (2026-08-17) */
+.notify{
+  display:inline-block;margin-top:6px;
+  font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px;
+  color:var(--soft);border-bottom:1px solid var(--line);padding-bottom:1px;
+}
+.notify:hover{color:var(--ink);border-color:var(--ink)}
 
 /* ── 뉴스레터 — NEW ARRIVAL이 곧 뉴스레터의 내용이다 ── */
 .sub{
@@ -147,6 +157,22 @@ footer a:hover{color:#fff}
   .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px}
   .head .util{grid-column:3;grid-row:1;justify-self:end}
 }
+
+/* ── 2026-08-17 GPT 리뷰 반영 ───────────────
+   · 내부 메모는 손님 화면에서 숨긴다 — ?review 로 열면 보인다 (리뷰 모드)
+   · Paper는 실제 기사 1편이 생길 때까지 기본 내비에서 임시 제외 (리뷰 모드에선 보임)
+   · 모바일: 운영 텍스트 14px+/대비 상향, 터치 영역 44px 확보 */
+.memo{display:none}
+.review .memo{display:block}
+/* Paper 메뉴 복귀 — 2026-08-18 Neo. 실기사 후보(전시·팝업) 확보로 게이팅 해제 */
+.head .util{display:flex;gap:28px}
+@media (max-width:680px){
+  :root{--t-meta:14px;--t-micro:12px;--soft:#6d6d6d;--body:#595959}
+  .head nav a,.acct{padding:12px 2px}
+  footer a{display:inline-block;padding:12px 6px}
+  .head .util{gap:16px}
+  .notify{padding:12px 2px;margin-top:0}
+}
 </style>
 </head>
 <body>
@@ -154,18 +180,17 @@ footer a:hover{color:#fff}
 <header class="head">
   <nav>
     <a href="brands.html">Brands</a>
-    <a href="new.html" class="on">New</a>
+    <a href="new.html" class="on">Arrivals</a>
     <a href="exclusive.html">Exclusive</a>
-    <a href="paper.html">Paper</a>
+    <a class="nav-paper" href="paper.html">Paper</a>
     <a href="store.html">Store</a>
   </nav>
-  <div class="mark"><a href="index.html">t<b>OM</b></a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a></div>
+  <div class="mark"><a href="home.html"><img src="img/tom-logo.svg" alt="tOM"></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="#">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
 <div class="title">
   <h1>New Arrival</h1>
-  <p class="intro">매주 새로 들어옵니다. 대부분 한 점씩이며, 다시 들어오지 않는 것도 있습니다.<br>새로 들어온 것은 뉴스레터로 먼저 보내드립니다. <span style="color:var(--soft)">(문구 예시)</span></p>
 </div>
 
 <section class="drop">
@@ -203,20 +228,22 @@ footer a:hover{color:#fff}
       <span class="meta"><span class="price">₩1,340,000</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-09.jpg" alt=""></a>
       <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩2,760,000</span><span class="one">Sold</span></span></figcaption></figure>
+      <span class="meta"><span class="price">₩2,760,000</span><span class="one">Sold</span></span>
+      <a class="notify" href="#newsletter">이 브랜드 입고 알림</a></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-10.jpg" alt=""></a>
       <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
       <span class="meta"><span class="price">₩1,620,000</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-11.jpg" alt=""></a>
       <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩580,000</span><span class="one">Sold</span></span></figcaption></figure>
+      <span class="meta"><span class="price">₩580,000</span><span class="one">Sold</span></span>
+      <a class="notify" href="#newsletter">이 브랜드 입고 알림</a></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-12.jpg" alt=""></a>
       <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
       <span class="meta"><span class="price">₩940,000</span></span></figcaption></figure>
   </div>
 </section>
 
-<div class="sub">
+<div class="sub" id="newsletter">
   <h3>Newsletter</h3>
   <p>새로 들어온 것을 먼저 보내드립니다.</p>
   <form onsubmit="return false">
@@ -228,8 +255,17 @@ footer a:hover{color:#fff}
 <p class="memo">대표 제안용 구조 샘플입니다. 사진은 AI로 생성한 더미 이미지이며 실제 상품·브랜드·상품명·가격을 의미하지 않습니다. 팔린 상품을 지우지 않고 <em>Sold</em>로 남겨두는 구조는 유지합니다.</p>
 
 <footer>
-  <nav><a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+  <nav><a class="nav-paper" href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
 </footer>
 
+<script>
+/* 리뷰 모드 + Bag 카운트 (2026-08-17) */
+(function(){try{
+  if(location.search.indexOf('review')>-1)sessionStorage.setItem('tomreview','1');
+  if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
+  var n=sessionStorage.getItem('tombag')||'0';
+  document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+}catch(e){}})();
+</script>
 </body>
 </html>

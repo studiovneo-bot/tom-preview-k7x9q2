@@ -69,7 +69,8 @@ button{font:inherit;cursor:pointer}
   letter-spacing:.3px;text-transform:none;color:var(--body);
 }
 .acct:hover{color:var(--ink)}
-.mark{font-size:26px;line-height:1;letter-spacing:.5px;color:var(--ink);grid-column:2}
+.mark{line-height:1;grid-column:2}
+.mark img{height:24px;width:auto;display:block}  /* 2026-08-18 실제 로고 수령 — 텍스트 조합 폐기 */
 .mark b{font-weight:600}
 .head nav{
   grid-column:1;grid-row:1;
@@ -94,17 +95,21 @@ button{font:inherit;cursor:pointer}
    · 패널 430px(30.8%) · 우측 여백 45px · 이미지 간격 30px.
    이미지 비율만 tOM 규격 4:5 유지 (Róhe는 0.73) */
 .pdp{
-  display:grid;grid-template-columns:50.8% 1fr;column-gap:18.4%;
+  display:grid;grid-template-columns:50.8% 1fr;column-gap:18.4%;row-gap:30px;
   padding:0 var(--pad) 0 0;align-items:start;
 }
 
-.shots{display:flex;flex-direction:column;gap:30px}
-.shots img{aspect-ratio:4/5;object-fit:cover;object-position:center}
+/* 이미지 열을 둘로 쪼갠다 (2026-08-17 GPT 리뷰 #1):
+   모바일에서 첫 이미지 → 정보·가격·CTA → 나머지 이미지 순서가 되도록.
+   데스크톱은 그리드 배치로 기존과 동일하게 보인다 */
+.shot-first{grid-column:1;grid-row:1}
+.shots-rest{grid-column:1;grid-row:2;display:flex;flex-direction:column;gap:30px}
+.shot-first img,.shots-rest img{aspect-ratio:4/5;object-fit:cover;object-position:center}
 /* 배열: 대형 → 디테일 2업 페어 → 대형 (Róhe 문법) */
 .pair2{display:grid;grid-template-columns:1fr 1fr;gap:30px}
 
 /* 정보 패널은 스크롤을 따라온다 */
-.info{position:sticky;top:24px;padding-top:34px}
+.info{position:sticky;top:24px;padding-top:34px;grid-column:2;grid-row:1/span 2}
 
 /* 브로도비치 스케일 대비 실험 (2026-08-13) — 브랜드명을 거대하게,
    상품명은 아주 작은 라벨로. 중간 크기(기존 19px 상품명)를 없앤다 */
@@ -222,11 +227,12 @@ footer a:hover{color:#fff}
 
 @media (max-width:900px){
   :root{--pad:16px;--t-nav:12px}
-  /* 모바일: 이미지 풀블리드, 패널은 좌우 여백 (Róhe 모바일 방식) */
+  /* 모바일: 첫 이미지 → 정보·가격·CTA → 나머지 이미지 (GPT 리뷰 #1) */
   .pdp{grid-template-columns:1fr;gap:24px;padding:0}
-  .shots{gap:8px}
+  .shot-first,.shots-rest{grid-column:1;grid-row:auto}
+  .shots-rest{gap:8px}
   .pair2{grid-template-columns:1fr;gap:8px}
-  .info{position:static;padding:0 var(--pad)}
+  .info{position:static;padding:0 var(--pad);grid-column:1;grid-row:auto}
   .more .row{grid-template-columns:repeat(2,1fr)}
   .svc{grid-template-columns:1fr;gap:26px;padding:36px var(--pad)}
   /* 자동 줄바꿈이 흘러넘치므로 3열 2행으로 명시한다 */
@@ -249,6 +255,30 @@ footer a:hover{color:#fff}
   .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px}
   .head .util{grid-column:3;grid-row:1;justify-self:end}
 }
+
+/* ── 2026-08-17 GPT 리뷰 반영 ───────────────
+   · 내부 메모는 손님 화면에서 숨긴다 — ?review 로 열면 보인다 (리뷰 모드)
+   · Paper는 실제 기사 1편이 생길 때까지 기본 내비에서 임시 제외 (리뷰 모드에선 보임)
+   · 모바일: 운영 텍스트 14px+/대비 상향, 터치 영역 44px 확보 */
+.memo{display:none}
+.review .memo{display:block}
+/* Paper 메뉴 복귀 — 2026-08-18 Neo. 실기사 후보(전시·팝업) 확보로 게이팅 해제 */
+.head .util{display:flex;gap:28px}
+@media (max-width:680px){
+  :root{--t-meta:14px;--t-micro:12px;--soft:#6d6d6d;--body:#595959}
+  /* 첫 이미지를 지나면 CTA가 화면 하단에 고정 (GPT 리뷰: sticky CTA) */
+  .buy{
+    position:fixed;bottom:0;left:0;right:0;z-index:10;margin-top:0;
+    grid-template-columns:1fr 1fr;gap:6px;
+    background:var(--bg);padding:10px var(--pad);
+    border-top:1px solid var(--line);
+  }
+  body{padding-bottom:76px}
+  .acc summary{padding:15px 0}
+  .head nav a,.acct{padding:12px 2px}
+  footer a{display:inline-block;padding:12px 6px}
+  .head .util{gap:16px}
+}
 </style>
 </head>
 <body>
@@ -256,65 +286,61 @@ footer a:hover{color:#fff}
 <header class="head">
   <nav>
     <a href="brands.html">Brands</a>
-    <a href="new.html">New</a>
+    <a href="new.html">Arrivals</a>
     <a href="exclusive.html">Exclusive</a>
-    <a href="paper.html">Paper</a>
+    <a class="nav-paper" href="paper.html">Paper</a>
     <a href="store.html">Store</a>
   </nav>
-  <div class="mark"><a href="index.html">t<b>OM</b></a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a></div>
+  <div class="mark"><a href="home.html"><img src="img/tom-logo.svg" alt="tOM"></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="#">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
 <div class="pdp">
 
-  <!-- 이미지 4장 — Róhe 배열: 대형 → 디테일 2업 → 대형 -->
-  <div class="shots">
-    <img src="img/p1.jpg" alt="정면">
-    <div class="pair2">
-      <img src="img/p5.jpg" alt="디테일">
-      <img src="img/p8.jpg" alt="디테일">
-    </div>
-    <img src="img/p3.jpg" alt="착장">
+  <!-- 이미지 4장 — Róhe 배열: 대형 → 디테일 2업 → 대형.
+       모바일 순서(첫 이미지→정보→나머지)를 위해 첫 장을 분리 (2026-08-17) -->
+  <div class="shot-first">
+    <img src="img/collection-2024/bag-antler.jpg" alt="정면">
   </div>
 
   <!-- 정보 -->
   <div class="info">
-    <div class="brand">Ziggy Chen</div>
+    <div class="brand">Tagliovivo</div>
     <h1>상품명</h1>
     <div class="price">₩1,980,000</div>
 
     <div class="only">
       <span class="label">Unique Piece</span>
-      <span>Size 48 · Last piece</span>
+      <span>Edition 3/5 · Last piece</span>
     </div>
 
     <div class="buy">
-      <button class="btn">장바구니에 담기</button>
+      <button class="btn" id="addbag">장바구니에 담기</button>
       <button class="btn ghost">문의하기</button>
     </div>
 
     <div class="spec">
       <h3>Details</h3>
       <table>
-        <tr><th>소재</th><td>울 100%</td></tr>
-        <tr><th>원산지</th><td>Made in China</td></tr>
-        <tr><th>핏</th><td>정사이즈. 여유 있는 실루엣</td></tr>
-        <tr><th>모델</th><td>178cm, 48 착용</td></tr>
+        <tr><th>소재</th><td>이탤리언 레더</td></tr>
+        <tr><th>원산지</th><td>Made in Italy</td></tr>
+        <tr><th>에디션</th><td>2024 · No. 3/5</td></tr>
+        <tr><th>제작</th><td>Tagliovivo × tOM 협업</td></tr>
       </table>
     </div>
 
     <!-- 실측 — tOM이 다른 곳과 다르게 가는 지점 -->
     <div class="spec">
-      <h3>Measurements — Size 48</h3>
+      <h3>Measurements</h3>
       <table>
-        <tr><th>어깨</th><td>46 cm</td></tr>
-        <tr><th>가슴</th><td>56 cm</td></tr>
-        <tr><th>소매</th><td>64 cm</td></tr>
-        <tr><th>총장</th><td>92 cm</td></tr>
+        <tr><th>가로</th><td>38 cm</td></tr>
+        <tr><th>높이</th><td>30 cm</td></tr>
+        <tr><th>폭</th><td>14 cm</td></tr>
+        <tr><th>핸들</th><td>40 cm</td></tr>
       </table>
     </div>
 
-    <p class="note">한 점뿐이라 교환은 어렵습니다. 사이즈가 확실하지 않으시면 문의해 주십시오.<br>
+    <p class="note">한 점뿐이라 교환은 어렵습니다. 궁금한 점은 문의해 주십시오.<br>
     실측은 사람이 직접 재며 1~2cm 오차가 있을 수 있습니다.</p>
 
     <!-- 이차 정보는 접는다 (Róhe PDP). 문구는 정책 확정 전 예시 -->
@@ -330,18 +356,26 @@ footer a:hover{color:#fff}
     </div>
 
     <!-- 경로 — Róhe처럼 패널 맨 아래 -->
-    <div class="crumb"><a href="exclusive.html">Online Exclusive</a> — Ziggy Chen</div>
+    <div class="crumb"><a href="exclusive.html">Online Exclusive</a> — Tagliovivo</div>
+  </div>
+
+  <div class="shots-rest">
+    <div class="pair2">
+      <img src="img/collection-2024/bag-label.jpg" alt="라벨 각인">
+      <img src="img/collection-2024/bag-ladder.jpg" alt="디테일">
+    </div>
+    <img src="img/collection-2024/bag-hand.jpg" alt="스케일">
   </div>
 </div>
 
 <!-- 같은 브랜드 -->
 <section class="more">
-  <h2>Ziggy Chen — Other pieces</h2>
+  <h2>Tagliovivo — Other pieces</h2>
   <div class="row">
-    <figure><a href="#"><img src="img/p5.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩3,200,000</figcaption></figure>
-    <figure><a href="#"><img src="img/p9.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩2,760,000</figcaption></figure>
-    <figure><a href="#"><img src="img/p6.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩1,180,000</figcaption></figure>
-    <figure><a href="#"><img src="img/p10.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩1,620,000</figcaption></figure>
+    <figure><a href="#"><img src="img/collection-2024/bag-ladder.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩3,200,000</figcaption></figure>
+    <figure><a href="#"><img src="img/collection-2024/exclusive-whitebag.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩2,760,000</figcaption></figure>
+    <figure><a href="#"><img src="img/collection-2024/bag-hand.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩1,180,000</figcaption></figure>
+    <figure><a href="#"><img src="img/collection-2024/bag-antler.jpg" alt=""></a><figcaption><span class="p">상품명</span><br>₩1,620,000</figcaption></figure>
   </div>
 </section>
 
@@ -364,8 +398,31 @@ footer a:hover{color:#fff}
 </section>
 
 <footer>
-  <nav><a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+  <nav><a class="nav-paper" href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
 </footer>
 
+<script>
+/* 장바구니 피드백 (2026-08-17 GPT 리뷰 #2) — 실제 결제 없음, 상태 데모.
+   담으면 헤더 Bag 숫자가 오르고 버튼이 잠시 확인 문구로 바뀐다 */
+(function(){
+  var b=document.getElementById('addbag'); if(!b)return;
+  b.addEventListener('click',function(){
+    try{
+      var n=parseInt(sessionStorage.getItem('tombag')||'0',10)+1;
+      sessionStorage.setItem('tombag',String(n));
+      document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+    }catch(e){}
+    var t=b.textContent; b.textContent='담았습니다'; b.disabled=true;
+    setTimeout(function(){b.textContent=t;b.disabled=false},1400);
+  });
+})();
+/* 리뷰 모드 + Bag 카운트 (2026-08-17) */
+(function(){try{
+  if(location.search.indexOf('review')>-1)sessionStorage.setItem('tomreview','1');
+  if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
+  var n=sessionStorage.getItem('tombag')||'0';
+  document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+}catch(e){}})();
+</script>
 </body>
 </html>

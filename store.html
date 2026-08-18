@@ -49,7 +49,8 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.3px;text-transform:none;color:var(--body);
 }
 .acct:hover{color:var(--ink)}
-.mark{font-size:26px;line-height:1;letter-spacing:.5px;color:var(--ink);grid-column:2}
+.mark{line-height:1;grid-column:2}
+.mark img{height:24px;width:auto;display:block}  /* 2026-08-18 실제 로고 수령 — 텍스트 조합 폐기 */
 .mark b{font-weight:600}
 .head nav{
   grid-column:1;grid-row:1;
@@ -62,13 +63,14 @@ a{color:inherit;text-decoration:none}
 .head .util{grid-column:3;grid-row:1;justify-self:end}
 
 /* ── 큰 사진 하나 ──────────────────────── */
-.lead{padding:28px var(--pad) 0}
+.lead{padding:76px var(--pad) 0}
 .lead img{aspect-ratio:16/9;object-fit:cover;object-position:center 60%}
 
 /* ── 한 줄 + 정보 ──────────────────────── */
+/* 2026-08-18 Neo: 이미지가 아니라 활자로 연다 — Hannam Since 1997이 첫 화면 */
 .info{
   display:grid;grid-template-columns:1fr 1fr;gap:40px;
-  padding:44px var(--pad) 0;align-items:start;
+  padding:110px var(--pad) 0;align-items:start;
 }
 .since{
   font-family:var(--display-font);font-weight:400;
@@ -140,6 +142,28 @@ footer a:hover{color:#fff}
   .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px}
   .head .util{grid-column:3;grid-row:1;justify-self:end}
 }
+
+/* ── 2026-08-17 GPT 리뷰 반영 ───────────────
+   · 내부 메모는 손님 화면에서 숨긴다 — ?review 로 열면 보인다 (리뷰 모드)
+   · Paper는 실제 기사 1편이 생길 때까지 기본 내비에서 임시 제외 (리뷰 모드에선 보임)
+   · 모바일: 운영 텍스트 14px+/대비 상향, 터치 영역 44px 확보 */
+.memo{display:none}
+.review .memo{display:block}
+/* Paper 메뉴 복귀 — 2026-08-18 Neo. 실기사 후보(전시·팝업) 확보로 게이팅 해제 */
+.head .util{display:flex;gap:28px}
+@media (max-width:680px){
+  :root{--t-meta:14px;--t-micro:12px;--soft:#6d6d6d;--body:#595959}
+  .head nav a,.acct{padding:12px 2px}
+  footer a{display:inline-block;padding:12px 6px}
+  .head .util{gap:16px}
+}
+
+/* ── 단면·강렬 1차 (2026-08-17 Neo "더 단면적이며 더 강렬하게") ──
+   매장·에디토리얼 사진은 전부 흑백 고대비로 강제 통일.
+   무드분석 "컬러로 찍어도 색이 거의 없다"를 시스템으로 만든다.
+   ⚠️ 상품 페이지(new/exclusive/product)는 제외 — 색상은 구매 판단 정보(표시광고법) */
+img{filter:grayscale(1) contrast(1.06)}
+.mark img{filter:none}  /* 로고 고유색 보존 */
 </style>
 </head>
 <body>
@@ -147,22 +171,18 @@ footer a:hover{color:#fff}
 <header class="head">
   <nav>
     <a href="brands.html">Brands</a>
-    <a href="new.html">New</a>
+    <a href="new.html">Arrivals</a>
     <a href="exclusive.html">Exclusive</a>
-    <a href="paper.html">Paper</a>
+    <a class="nav-paper" href="paper.html">Paper</a>
     <a href="store.html" class="on">Store</a>
   </nav>
-  <div class="mark"><a href="index.html">t<b>OM</b></a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a></div>
+  <div class="mark"><a href="home.html"><img src="img/tom-logo.svg" alt="tOM"></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="#">Bag (<span class="bagn">0</span>)</a></div>
 </header>
-
-<div class="lead">
-  <img src="img/store.jpg" alt="tOM 한남 매장 입구">
-</div>
 
 <div class="info">
   <div class="since">
-    Hannam<br>Since 1997
+    Since 1997
     <small>서울 용산구</small>
   </div>
 
@@ -174,18 +194,32 @@ footer a:hover{color:#fff}
   </dl>
 </div>
 
+<div class="lead">
+  <img src="img/store.jpg" alt="tOM 한남 매장 입구">
+</div>
+
+
 <div class="pair">
-  <div class="big"><img src="img/st1.jpg" alt=""></div>
-  <div class="small"><img src="img/st2.jpg" alt=""></div>
+  <div class="big"><img src="img/collection-2024/store-sign.jpg" alt="tOM 외벽 간판"></div>
+  <div class="small"><img src="img/collection-2024/store-object.jpg" alt=""></div>
 </div>
 
 <div class="solo">
-  <img src="img/st3.jpg" alt="">
+  <img src="img/collection-2024/store-pouch.jpg" alt="">
 </div>
 
 <footer>
-  <nav><a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+  <nav><a class="nav-paper" href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
 </footer>
 
+<script>
+/* 리뷰 모드 + Bag 카운트 (2026-08-17) */
+(function(){try{
+  if(location.search.indexOf('review')>-1)sessionStorage.setItem('tomreview','1');
+  if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
+  var n=sessionStorage.getItem('tombag')||'0';
+  document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+}catch(e){}})();
+</script>
 </body>
 </html>

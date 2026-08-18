@@ -8,7 +8,7 @@ cd "$(dirname "$0")"
 SRC="../tom-proto"
 
 # 1) 본선 복사 (실험 파일 v1~v3, README 제외)
-for f in index brands new exclusive product paper store login signup; do
+for f in index home brands new exclusive product paper store login signup; do
   cp "$SRC/$f.html" "./$f.html"
 done
 rm -rf img && cp -R "$SRC/img" img
