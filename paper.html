@@ -70,9 +70,9 @@ a{color:inherit;text-decoration:none}
    화살표(호버)·점·스와이프 — 홈 캐러셀과 같은 문법 */
 .feature{padding:0}
 .stage{position:relative;aspect-ratio:2.2/1;background:#e9e8e5;overflow:hidden}
-.stage a{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease}
-.stage a.on{opacity:1}
-.stage img{width:100%;height:100%;object-fit:cover;object-position:center}
+.stage .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease;display:block}
+.stage .slide.on{opacity:1}
+.stage .slide img{width:100%;height:100%;object-fit:cover;object-position:center}
 .stage .nav{
   position:absolute;top:0;bottom:0;width:64px;z-index:2;
   display:flex;align-items:center;border:0;background:transparent;
@@ -97,7 +97,7 @@ a{color:inherit;text-decoration:none}
   background:var(--line);cursor:pointer;transition:background .3s;
 }
 .dots button.on{background:var(--ink)}
-@media (prefers-reduced-motion:reduce){.stage a,.fcap .c{transition:none}}
+@media (prefers-reduced-motion:reduce){.stage .slide,.fcap .c{transition:none}}
 /* 홈 히어로와 같은 임계값(≤680)에서 4:5 — 681~900 구간도 홈과 동일하게 2.2:1 유지 (QA 10차) */
 @media (max-width:680px){
   .stage{aspect-ratio:4/5}
@@ -113,6 +113,8 @@ a{color:inherit;text-decoration:none}
 
 /* ── 기사 목록 ─────────────────────────── */
 .list{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px;padding:64px var(--pad) 0}
+.soon{cursor:default}
+.item .soon img{opacity:.92}
 .item img{aspect-ratio:4/5;object-fit:cover;object-position:center;transition:opacity .2s}
 .item a:hover img{opacity:.88}
 .item h3{font-size:16px;line-height:1.45;margin-top:11px;font-weight:400}
@@ -121,12 +123,6 @@ a{color:inherit;text-decoration:none}
 
 .memo{margin:56px var(--pad) 0;padding:11px 13px;border:1px solid var(--line);
   color:var(--soft);font-size:var(--t-micro);line-height:1.7}
-
-footer{margin-top:70px;background:var(--ink);color:#8f8f8f;
-  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);}
-footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-footer a{color:#8f8f8f}
-footer a:hover{color:#fff}
 
 @media (max-width:900px){
   :root{--pad:16px;--t-nav:12px}
@@ -174,6 +170,40 @@ footer a:hover{color:#fff}
    ⚠️ 상품 페이지(new/exclusive/product)는 제외 — 색상은 구매 판단 정보(표시광고법) */
 img{filter:grayscale(1) contrast(1.06)}
 .mark img{filter:none}  /* 로고 고유색 보존 */
+/* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
+footer{
+  margin-top:88px;background:var(--ink);color:#8f8f8f;
+  padding:52px var(--pad) 30px;font-size:var(--t-micro);line-height:1.9;
+  text-align:left;
+}
+.f-top{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding-bottom:34px;border-bottom:1px solid #2a2a2a;
+}
+.f-col h4{
+  font-family:var(--display-font);font-weight:400;color:#f5f4f1;
+  font-size:14px;letter-spacing:.06em;margin-bottom:12px;
+}
+.f-col a{display:block;color:#8f8f8f;padding:3px 0}
+.f-col a:hover{color:#fff}
+.f-col p{margin:0;color:#8f8f8f}
+.f-biz{padding-top:22px;color:#6b6b6b}
+.f-biz p{margin:0}
+.f-tbd{
+  color:#8f8f8f;border-bottom:1px dotted #5a5a5a;
+}
+.f-copy{margin-top:14px !important;color:#5a5a5a}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+@media (max-width:900px){
+  footer{padding:38px var(--pad) 26px}
+  .f-top{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .f-col a{padding:7px 0}
+}
+@media (max-width:520px){
+  .f-top{grid-template-columns:1fr;gap:22px}
+}
+/* FOOTER:END */
 </style>
 </head>
 <body>
@@ -187,15 +217,15 @@ img{filter:grayscale(1) contrast(1.06)}
     <a href="store.html">Store</a>
   </nav>
   <div class="mark"><a href="home.html"><img src="img/tom-logo.svg" alt="tOM"></a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="#">Bag (<span class="bagn">0</span>)</a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
 <!-- 상단 머리기사 캐러셀 — 2.2:1, 8초 전환 (2026-08-18 Neo) -->
 <section class="feature">
   <div class="stage" id="stage">
-    <a class="on" href="#"><img src="img/collection-2024/paper-nars.jpg" alt=""></a>
-    <a href="#"><img src="img/collection-2024/paper-chest.jpg" alt=""></a>
-    <a href="#"><img src="img/collection-2024/exhibition-2024.jpg" alt=""></a>
+    <a class="slide on" href="paper-no35.html"><img src="img/collection-2024/paper-no35-hero.jpg" alt="tagliovivo × tOM 가방 안쪽의 가죽 라벨"></a>
+    <span class="slide soon"><img src="img/collection-2024/paper-chest.jpg" alt=""></span>
+    <span class="slide soon"><img src="img/collection-2024/exhibition-2024.jpg" alt=""></span>
     <button type="button" class="nav prev" aria-label="이전">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 4L7 12l8 8"/></svg>
     </button>
@@ -206,9 +236,9 @@ img{filter:grayscale(1) contrast(1.06)}
   <div class="fcap">
     <div class="slot" id="fcap">
       <div class="c on">
-        <span class="kicker">Store</span>
-        <h2>기사 제목이 들어갈 자리입니다</h2>
-        <span class="date">2026. 08. 11</span>
+        <span class="kicker">Brand</span>
+        <h2><a href="paper-no35.html">Nº 3 / 5 — 라벨 한&nbsp;장에 두&nbsp;종류의 글씨가 있다</a></h2>
+        <span class="date">2026. 08. 21</span>
       </div>
       <div class="c">
         <span class="kicker">Store</span>
@@ -232,59 +262,91 @@ img{filter:grayscale(1) contrast(1.06)}
 <!-- 기사 목록 — 매장 사진 38장 선별분으로 교체 (2026-08-17) -->
 <div class="list">
   <article class="item">
-    <a href="#"><img src="img/collection-2024/paper-chest.jpg" alt=""></a>
-    <h3>기사 제목이 들어갈 자리입니다</h3>
-    <span class="kicker">Store</span>
-    <span class="date">2026. 08. 04</span>
+    <a href="paper-no35.html"><img src="img/collection-2024/paper-no35-number.jpg" alt="잉크로 적힌 2024와 3/5"></a>
+    <h3><a href="paper-no35.html">Nº 3 / 5</a></h3>
+    <span class="kicker">Brand</span>
+    <span class="date">2026. 08. 21</span>
   </article>
 
   <article class="item">
-    <a href="#"><img src="img/collection-2024/paper-detail.jpg" alt=""></a>
+    <span class="soon"><img src="img/collection-2024/paper-detail.jpg" alt=""></span>
     <h3>기사 제목이 들어갈 자리입니다</h3>
     <span class="kicker">Process</span>
     <span class="date">2026. 07. 28</span>
   </article>
 
   <article class="item">
-    <a href="#"><img src="img/collection-2024/popup-2024.jpg" alt=""></a>
+    <span class="soon"><img src="img/collection-2024/popup-2024.jpg" alt=""></span>
     <h3>기사 제목이 들어갈 자리입니다</h3>
     <span class="kicker">Season</span>
     <span class="date">2026. 07. 14</span>
   </article>
 
   <article class="item">
-    <a href="#"><img src="img/collection-2024/paper-coat.jpg" alt=""></a>
+    <span class="soon"><img src="img/collection-2024/paper-coat.jpg" alt=""></span>
     <h3>기사 제목이 들어갈 자리입니다</h3>
     <span class="kicker">Store</span>
     <span class="date">2026. 06. 30</span>
   </article>
 
   <article class="item">
-    <a href="#"><img src="img/collection-2024/exhibition-2024.jpg" alt=""></a>
+    <span class="soon"><img src="img/collection-2024/exhibition-2024.jpg" alt=""></span>
     <h3>기사 제목이 들어갈 자리입니다</h3>
     <span class="kicker">Brand</span>
     <span class="date">2026. 06. 16</span>
   </article>
 
   <article class="item">
-    <a href="#"><img src="img/collection-2024/paper-glasses.jpg" alt=""></a>
+    <span class="soon"><img src="img/collection-2024/paper-glasses.jpg" alt=""></span>
     <h3>기사 제목이 들어갈 자리입니다</h3>
     <span class="kicker">Process</span>
     <span class="date">2026. 06. 02</span>
   </article>
 </div>
 
-<p class="memo">구조 확인용 자리입니다. 기사 제목·본문·날짜는 전부 비어 있고 사진은 매장 사진을 임시로 놓은 것입니다. 무엇을 쓸 것인지(브랜드 이야기 · 제작 과정 · 시즌 · 매장)는 아직 정해지지 않았습니다.</p>
+<p class="memo"><b>첫 실기사 1편이 실제로 열립니다</b> — 머리기사와 목록 첫 칸의 「Nº 3 / 5」. 나머지 8칸은 아직 구조 확인용 자리이고 제목·날짜는 예시입니다. 무엇을 더 쓸 것인지(브랜드 이야기 · 제작 과정 · 시즌 · 매장)는 정해지지 않았습니다.</p>
 
+<!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
-  <nav><a class="nav-paper" href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+  <div class="f-top">
+    <div class="f-col">
+      <h4>Shop</h4>
+      <a href="new.html">Arrivals</a>
+      <a href="exclusive.html">Online Exclusive</a>
+      <a href="brands.html">Brands</a>
+    </div>
+    <div class="f-col">
+      <h4>Information</h4>
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns &amp; Exchange</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="f-col">
+      <h4>Read</h4>
+      <a href="paper.html">tOM Paper</a>
+      <a href="store.html">Hannam Store</a>
+    </div>
+    <div class="f-col">
+      <h4>Visit</h4>
+      <p>서울 용산구 한남대로20길 33</p>
+      <p>12:00 &mdash; 21:00 &middot; 연중무휴</p>
+      <a href="tel:0231432616">02-3143-2616</a>
+      <a href="https://www.instagram.com/tom_hannam_official/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="f-biz">
+    <p>상호 tOM &middot; 대표 <span class="f-tbd">확인 전</span> &middot; 사업자등록번호 <span class="f-tbd">확인 전</span> &middot; 통신판매업 신고번호 <span class="f-tbd">확인 전</span></p>
+    <p>서울 용산구 한남대로20길 33 &middot; 개인정보보호책임자 <span class="f-tbd">확인 전</span></p>
+    <p class="f-copy">&copy; 2026 tOM</p>
+  </div>
 </footer>
+<!-- FOOTER:END -->
 
 <script>
 /* 머리기사 캐러셀 — 8초, 라이브러리 없음 (홈 캐러셀과 같은 문법) */
 (function(){
   var stage=document.getElementById('stage'); if(!stage)return;
-  var slides=stage.querySelectorAll('a');
+  var slides=stage.querySelectorAll('.slide');
   var caps=document.querySelectorAll('#fcap .c');
   var dots=document.querySelectorAll('#dots button');
   var prevBtn=stage.querySelector('.nav.prev'), nextBtn=stage.querySelector('.nav.next');

@@ -107,12 +107,6 @@ button{font:inherit;cursor:pointer}
 .memo{margin:26px var(--pad) 0;padding:11px 13px;border:1px solid var(--line);
   color:var(--soft);font-size:var(--t-micro);line-height:1.7}
 
-footer{margin-top:70px;background:var(--ink);color:#8f8f8f;
-  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);}
-footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-footer a{color:#8f8f8f}
-footer a:hover{color:#fff}
-
 @media (max-width:900px){
   :root{--pad:16px;--t-nav:12px}
   .grid{grid-template-columns:repeat(2,1fr)}
@@ -150,6 +144,40 @@ footer a:hover{color:#fff}
   footer a{display:inline-block;padding:12px 6px}
   .head .util{gap:16px}
 }
+/* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
+footer{
+  margin-top:88px;background:var(--ink);color:#8f8f8f;
+  padding:52px var(--pad) 30px;font-size:var(--t-micro);line-height:1.9;
+  text-align:left;
+}
+.f-top{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding-bottom:34px;border-bottom:1px solid #2a2a2a;
+}
+.f-col h4{
+  font-family:var(--display-font);font-weight:400;color:#f5f4f1;
+  font-size:14px;letter-spacing:.06em;margin-bottom:12px;
+}
+.f-col a{display:block;color:#8f8f8f;padding:3px 0}
+.f-col a:hover{color:#fff}
+.f-col p{margin:0;color:#8f8f8f}
+.f-biz{padding-top:22px;color:#6b6b6b}
+.f-biz p{margin:0}
+.f-tbd{
+  color:#8f8f8f;border-bottom:1px dotted #5a5a5a;
+}
+.f-copy{margin-top:14px !important;color:#5a5a5a}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+@media (max-width:900px){
+  footer{padding:38px var(--pad) 26px}
+  .f-top{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .f-col a{padding:7px 0}
+}
+@media (max-width:520px){
+  .f-top{grid-template-columns:1fr;gap:22px}
+}
+/* FOOTER:END */
 </style>
 </head>
 <body>
@@ -163,7 +191,7 @@ footer a:hover{color:#fff}
     <a href="store.html">Store</a>
   </nav>
   <div class="mark"><a href="home.html"><img src="img/tom-logo.svg" alt="tOM"></a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="#">Bag (<span class="bagn">0</span>)</a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
 <div class="title">
@@ -234,9 +262,41 @@ footer a:hover{color:#fff}
 
 <p class="memo">구조 확인용 자리입니다. 사진은 AI로 생성한 더미 이미지이며 실제 상품·브랜드·상품명·가격을 의미하지 않습니다. 실제 상품 촬영본과 확인된 상품 정보로 교체해야 합니다.</p>
 
+<!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
-  <nav><a class="nav-paper" href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a></nav>
+  <div class="f-top">
+    <div class="f-col">
+      <h4>Shop</h4>
+      <a href="new.html">Arrivals</a>
+      <a href="exclusive.html">Online Exclusive</a>
+      <a href="brands.html">Brands</a>
+    </div>
+    <div class="f-col">
+      <h4>Information</h4>
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns &amp; Exchange</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="f-col">
+      <h4>Read</h4>
+      <a href="paper.html">tOM Paper</a>
+      <a href="store.html">Hannam Store</a>
+    </div>
+    <div class="f-col">
+      <h4>Visit</h4>
+      <p>서울 용산구 한남대로20길 33</p>
+      <p>12:00 &mdash; 21:00 &middot; 연중무휴</p>
+      <a href="tel:0231432616">02-3143-2616</a>
+      <a href="https://www.instagram.com/tom_hannam_official/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="f-biz">
+    <p>상호 tOM &middot; 대표 <span class="f-tbd">확인 전</span> &middot; 사업자등록번호 <span class="f-tbd">확인 전</span> &middot; 통신판매업 신고번호 <span class="f-tbd">확인 전</span></p>
+    <p>서울 용산구 한남대로20길 33 &middot; 개인정보보호책임자 <span class="f-tbd">확인 전</span></p>
+    <p class="f-copy">&copy; 2026 tOM</p>
+  </div>
 </footer>
+<!-- FOOTER:END -->
 
 <script>
 /* 리뷰 모드 + Bag 카운트 (2026-08-17) */

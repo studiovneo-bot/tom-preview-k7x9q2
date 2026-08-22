@@ -126,7 +126,9 @@ a{color:inherit;text-decoration:none}
 .cell .s{
   display:block;font-family:var(--display-font);
   font-size:13px;font-weight:400;line-height:1.6;
-  text-transform:capitalize;margin-top:8px;
+  /* text-transform:capitalize 제거 (2026-08-21) — 'tOM'을 'TOM'으로,
+     'Made in Italy'를 'Made In Italy'로 바꿔 버린다. 문안 그대로 쓴다 */
+  margin-top:8px;
 }
 /* 칸마다 '글자가 실제로 놓이는 자리'의 휘도를 캔버스로 재서 고른 색.
    칸 전체 폭이 아니라 Range로 글자 범위만 재야 한다 — 처음에 전체 폭을 재서
@@ -208,14 +210,6 @@ button{
 }
 
 /* ── 푸터 ── */
-footer{
-  margin-top:88px;background:var(--ink);color:#8f8f8f;
-  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);
-}
-footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-footer a{color:#8f8f8f}
-footer a:hover{color:#fff}
-
 /* ── 모바일 — Totême는 한 칸씩 세로로 쌓는다 ──
    헤더 반응형은 본선 home.html의 확정 규칙(2026-08-16 Róhe 모바일 문법 +
    중간 폭 3열 복원)을 그대로 옮겨온다. 샘플이 이걸 빠뜨려 390에서 헤더가 겹쳤었다 */
@@ -329,6 +323,40 @@ footer a:hover{color:#fff}
   font-size:var(--t-meta);color:var(--body);max-width:44em;
 }
 .review .memo{display:block}
+/* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
+footer{
+  margin-top:88px;background:var(--ink);color:#8f8f8f;
+  padding:52px var(--pad) 30px;font-size:var(--t-micro);line-height:1.9;
+  text-align:left;
+}
+.f-top{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding-bottom:34px;border-bottom:1px solid #2a2a2a;
+}
+.f-col h4{
+  font-family:var(--display-font);font-weight:400;color:#f5f4f1;
+  font-size:14px;letter-spacing:.06em;margin-bottom:12px;
+}
+.f-col a{display:block;color:#8f8f8f;padding:3px 0}
+.f-col a:hover{color:#fff}
+.f-col p{margin:0;color:#8f8f8f}
+.f-biz{padding-top:22px;color:#6b6b6b}
+.f-biz p{margin:0}
+.f-tbd{
+  color:#8f8f8f;border-bottom:1px dotted #5a5a5a;
+}
+.f-copy{margin-top:14px !important;color:#5a5a5a}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+@media (max-width:900px){
+  footer{padding:38px var(--pad) 26px}
+  .f-top{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .f-col a{padding:7px 0}
+}
+@media (max-width:520px){
+  .f-top{grid-template-columns:1fr;gap:22px}
+}
+/* FOOTER:END */
 </style>
 </head>
 <body>
@@ -348,7 +376,7 @@ footer a:hover{color:#fff}
     <img class="mk-l" src="img/tom-logo.svg" alt="tOM" data-half="l">
     <img class="mk-r" src="img/tom-logo.svg" alt="" aria-hidden="true" data-half="r">
   </a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct" href="#">Bag (0)</a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct" href="cart.html">Bag (0)</a></div>
 </header>
 
 <!-- 목록 한 화면 — 전체를 먼저 보여준다 -->
@@ -361,7 +389,7 @@ footer a:hover{color:#fff}
     <li><a href="#nostra"><span class="nm">Nostrasantissima</span><span class="og">Italia</span></a></li>
     <li><a href="#ziggy"><span class="nm">Ziggy Chen</span><span class="og">Shanghai · Since 2012</span></a></li>
     <li><a href="#uma"><span class="nm">Uma Wang</span><span class="og">Womenswear · Shoes</span></a></li>
-    <li><a href="#tagliovivo"><span class="nm">Tagliovivo</span><span class="og">Made in Italy</span></a></li>
+    <li><a href="#tagliovivo"><span class="nm">tagliovivo</span><span class="og">Made in Italy</span></a></li>
   </ol>
   <div class="tail">일곱 곳 · Hannam, Seoul</div>
 </section>
@@ -402,24 +430,54 @@ footer a:hover{color:#fff}
   </a>
 
   <a class="cell cell--ink" id="tagliovivo" href="exclusive.html">
-    <img src="img/collection-2024/bag-antler.jpg" alt="Tagliovivo × tOM 가방">
-    <figcaption><span class="t">Tagliovivo</span><span class="s">Made in Italy — tOM 협업 5점 한정</span></figcaption>
+    <img src="img/collection-2024/bag-antler.jpg" alt="tagliovivo × tOM 가방">
+    <figcaption><span class="t">tagliovivo</span><span class="s">Made in Italy — tOM 협업 넘버드 에디션</span></figcaption>
   </a>
 
 </div>
 
-<p class="memo">브랜드 사진 중 캠페인 이미지는 각 브랜드 공식 웹사이트·룩북에서 가져온 내부 시안용입니다. 대외 공개 전 사용 허가 확인이 필요합니다. Uma Wang·Tagliovivo·Tom Atelier 사진은 자체 촬영분입니다. 문단 원고는 brands-v1-spread.html에 보존되어 있습니다.</p>
+<p class="memo">브랜드 사진 중 캠페인 이미지는 각 브랜드 공식 웹사이트·룩북에서 가져온 내부 시안용입니다. 대외 공개 전 사용 허가 확인이 필요합니다. Uma Wang·tagliovivo·Tom Atelier 사진은 자체 촬영분입니다. 문단 원고는 brands-v1-spread.html에 보존되어 있습니다.</p>
 
 <section class="said">
   <div class="rule"></div>
   <span class="meta">Hannam, Seoul — Since 1997</span>
 </section>
 
+<!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
-  <nav>
-    <a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a>
-  </nav>
+  <div class="f-top">
+    <div class="f-col">
+      <h4>Shop</h4>
+      <a href="new.html">Arrivals</a>
+      <a href="exclusive.html">Online Exclusive</a>
+      <a href="brands.html">Brands</a>
+    </div>
+    <div class="f-col">
+      <h4>Information</h4>
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns &amp; Exchange</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="f-col">
+      <h4>Read</h4>
+      <a href="paper.html">tOM Paper</a>
+      <a href="store.html">Hannam Store</a>
+    </div>
+    <div class="f-col">
+      <h4>Visit</h4>
+      <p>서울 용산구 한남대로20길 33</p>
+      <p>12:00 &mdash; 21:00 &middot; 연중무휴</p>
+      <a href="tel:0231432616">02-3143-2616</a>
+      <a href="https://www.instagram.com/tom_hannam_official/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="f-biz">
+    <p>상호 tOM &middot; 대표 <span class="f-tbd">확인 전</span> &middot; 사업자등록번호 <span class="f-tbd">확인 전</span> &middot; 통신판매업 신고번호 <span class="f-tbd">확인 전</span></p>
+    <p>서울 용산구 한남대로20길 33 &middot; 개인정보보호책임자 <span class="f-tbd">확인 전</span></p>
+    <p class="f-copy">&copy; 2026 tOM</p>
+  </div>
 </footer>
+<!-- FOOTER:END -->
 
 <script>
 /* 리뷰 모드 — 주소 뒤 ?review 면 내부 메모가 보인다 */

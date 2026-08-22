@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
+
+<title>Nº 3 / 5 — tOM Paper</title>
+<style>
+/* ───────────────────────────────────────────────
+   tOM — PAPER 기사 상세 (첫 실기사, 2026-08-21)
+
+   이 페이지가 푸는 문제:
+   Paper 목록은 있었는데 기사를 눌러도 갈 곳이 없었다(전부 href="#").
+   기사 한 편이 실제로 읽히는 순간 Paper 는 '구상'에서 '지면'이 된다.
+
+   원고 근거: 40시스템/TOM_CONTENT_OS/content-packages/tagliovivo-tom-2024/
+             exports/paper/article.md  (사실은 같은 폴더 facts.md)
+
+   ⚠ 색 규칙의 예외:
+   에디토리얼 페이지는 흑백이 정본이다. 이 기사만 **라벨 컷 3장에 색을 남긴다.**
+   기사의 주제 자체가 '탠 가죽 위의 잉크 글씨'라서, 흑백으로 두면
+   각인과 필기의 구분이 죽고 마지막 컷(빛)은 의미가 사라진다.
+   가방 컷(뿔·사다리·흰 가방)은 규칙대로 흑백이다.
+   ─────────────────────────────────────────────── */
+
+:root{
+  --bg:#f5f4f1; --ink:#111; --body:#6d6d6d; --soft:#9a9a9a; --line:#dcdcdc;
+  --red:#b3261e;
+  --t-body:16px; --t-meta:13px; --t-micro:11px;
+  --pad:45px;
+  --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;
+  --display-font:"Times New Roman",Times,"Noto Serif",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--body);
+  font-family:"acumin-pro","Acumin Pro","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:var(--t-body);line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+/* 한글은 어절 단위로만 끊는다 */
+body,p,li,dd,figcaption{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty;line-break:strict}
+h1,h2,h3{word-break:keep-all;text-wrap:balance;font-weight:400;color:var(--ink)}
+img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.06)}
+.mark img,.keep img{filter:none}   /* 로고 · 라벨 컷은 색을 남긴다 */
+a{color:inherit;text-decoration:none}
+
+/* ── 헤더 (다른 페이지와 동일) ───────────── */
+.head{
+  background:transparent;color:var(--ink);
+  height:90px;padding:0 var(--pad);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;
+}
+.acct{font-family:var(--nav-font);font-size:13px;letter-spacing:.3px;color:var(--body)}
+.acct:hover{color:var(--ink)}
+.mark{line-height:1;grid-column:2}
+.mark img{height:24px;width:auto;display:block}
+.head nav{
+  grid-column:1;grid-row:1;display:flex;align-items:center;gap:35px;flex-wrap:wrap;
+  font-family:var(--nav-font);font-weight:400;font-size:13px;letter-spacing:.3px;
+}
+.head nav a{color:var(--body)}
+.head nav a:hover,.head nav a.on{color:var(--ink)}
+.head .util{grid-column:3;grid-row:1;justify-self:end;display:flex;gap:28px}
+
+.kicker{font-family:var(--nav-font);font-weight:300;font-size:var(--t-micro);
+  letter-spacing:.3px;color:var(--soft)}
+.date{font-family:var(--nav-font);font-weight:300;font-size:var(--t-micro);
+  letter-spacing:.3px;color:var(--soft);white-space:nowrap}
+
+/* ── 기사 머리 ──────────────────────────── */
+.art-head{
+  max-width:34em;margin:0 auto;padding:60px var(--pad) 52px;text-align:center;
+}
+.art-head .kicker{display:block}
+.art-head h1{
+  font-family:var(--display-font);
+  font-size:64px;line-height:1.05;letter-spacing:.04em;margin:16px 0 0;
+}
+.art-head .deck{
+  font-family:var(--display-font);
+  font-size:19px;line-height:1.65;color:var(--ink);margin:22px 0 0;
+}
+.art-head .date{display:block;margin-top:26px}
+
+/* ── 본문 ──────────────────────────────── */
+.band{margin:0}                       /* 풀블리드 */
+.band img{aspect-ratio:2.2/1;object-fit:cover;object-position:center}
+.col{max-width:34em;margin:0 auto;padding:0 var(--pad)}
+.col p{
+  font-family:var(--display-font);
+  font-size:18px;line-height:1.95;color:var(--ink);margin-top:26px;
+}
+.col p.lede{font-size:21px;line-height:1.85;margin-top:52px}
+.col p.first{margin-top:52px}
+.col p b{font-weight:400;border-bottom:1px solid var(--line)}
+
+figure{margin:56px 0 0}
+figure.col-fig{max-width:34em;margin-left:auto;margin-right:auto;padding:0 var(--pad)}
+figure img{aspect-ratio:4/5;object-fit:cover;object-position:center}
+figure.wide img{aspect-ratio:16/9}
+figcaption{
+  font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px;
+  color:var(--soft);margin-top:10px;padding:0 var(--pad);
+}
+figure.col-fig figcaption{padding:0}
+
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:0 var(--pad);margin-top:56px}
+.pair figure{margin:0}
+.pair figcaption{padding:0}
+
+/* ── 기사 끝 ──────────────────────────── */
+.credit{
+  max-width:34em;margin:64px auto 0;padding:0 var(--pad);
+  font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px;
+  color:var(--soft);line-height:2;
+}
+.rule{height:2px;background:var(--red);margin:56px var(--pad) 0}
+.back{
+  max-width:34em;margin:0 auto;padding:28px var(--pad) 0;text-align:center;
+  font-family:var(--nav-font);font-size:var(--t-meta);letter-spacing:.3px;
+}
+.back a{color:var(--body);border-bottom:1px solid var(--line);padding-bottom:2px}
+.back a:hover{color:var(--ink)}
+
+.memo{margin:56px var(--pad) 0;padding:11px 13px;border:1px solid var(--line);
+  color:var(--soft);font-size:var(--t-micro);line-height:1.7;display:none}
+.review .memo{display:block}
+
+/* ── 반응형 — paper.html 의 3단 규칙을 그대로 따른다 ──────────
+   ⚠ 처음에 헤더 규칙을 일부만 옮겨와서 390px 에서 가로가 넘쳤다.
+      util 이 3열에 남아 그리드가 뷰포트보다 넓어지고, 본문까지 잘려 보였다. */
+@media (max-width:900px){
+  :root{--pad:16px}
+  /* 좁은 화면: 로고 좌 · Log In 우 한 줄, 메뉴는 그 아래 한 줄 */
+  .head{height:auto;grid-template-columns:1fr auto;align-items:center;justify-items:start;
+        gap:12px 16px;padding:18px var(--pad) 14px}
+  .mark{grid-column:1;grid-row:1}
+  .head nav{grid-column:1 / -1;grid-row:2;justify-content:flex-start;row-gap:8px;column-gap:18px;font-size:12px}
+  .head .util{grid-column:2;grid-row:1;justify-self:end}
+
+  .art-head{padding:36px var(--pad) 36px}
+  .art-head h1{font-size:40px}
+  .art-head .deck{font-size:17px}
+  .col p{font-size:17px}
+  .col p.lede{font-size:19px}
+  /* 히어로는 라벨이 주제다. 4:5 로 자르면 글자가 잘려 나간다 — 원본 비율 유지 */
+  .band img{aspect-ratio:auto}
+  .pair{grid-template-columns:1fr;gap:8px}
+  figure{margin-top:36px}
+  .rule{margin-top:44px}
+}
+
+/* 중간 폭(681~900px)은 데스크톱 헤더를 복원한다 — 다른 페이지와 같은 규칙 */
+@media (min-width:681px) and (max-width:900px){
+  .head{height:90px;grid-template-columns:1fr auto 1fr;align-items:center;
+        justify-items:stretch;gap:28px;padding:0 var(--pad)}
+  .mark{grid-column:2;grid-row:1}
+  .head nav{grid-column:1;grid-row:1;justify-content:flex-start;column-gap:28px;font-size:13px}
+  .head .util{grid-column:3;grid-row:1;justify-self:end}
+}
+
+@media (max-width:680px){
+  :root{--t-meta:14px;--t-micro:12px;--soft:#6d6d6d;--body:#595959}
+  .head nav a,.acct{padding:12px 2px}
+  footer a{display:inline-block;padding:12px 6px}
+  .head .util{gap:16px}
+}
+/* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
+footer{
+  margin-top:88px;background:var(--ink);color:#8f8f8f;
+  padding:52px var(--pad) 30px;font-size:var(--t-micro);line-height:1.9;
+  text-align:left;
+}
+.f-top{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding-bottom:34px;border-bottom:1px solid #2a2a2a;
+}
+.f-col h4{
+  font-family:var(--display-font);font-weight:400;color:#f5f4f1;
+  font-size:14px;letter-spacing:.06em;margin-bottom:12px;
+}
+.f-col a{display:block;color:#8f8f8f;padding:3px 0}
+.f-col a:hover{color:#fff}
+.f-col p{margin:0;color:#8f8f8f}
+.f-biz{padding-top:22px;color:#6b6b6b}
+.f-biz p{margin:0}
+.f-tbd{
+  color:#8f8f8f;border-bottom:1px dotted #5a5a5a;
+}
+.f-copy{margin-top:14px !important;color:#5a5a5a}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+@media (max-width:900px){
+  footer{padding:38px var(--pad) 26px}
+  .f-top{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .f-col a{padding:7px 0}
+}
+@media (max-width:520px){
+  .f-top{grid-template-columns:1fr;gap:22px}
+}
+/* FOOTER:END */
+</style>
+</head>
+<body>
+
+<header class="head">
+  <nav>
+    <a href="brands.html">Brands</a>
+    <a href="new.html">Arrivals</a>
+    <a href="exclusive.html">Exclusive</a>
+    <a class="nav-paper on" href="paper.html">Paper</a>
+    <a href="store.html">Store</a>
+  </nav>
+  <div class="mark"><a href="home.html"><img src="img/tom-logo.svg" alt="tOM"></a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
+</header>
+
+<article>
+
+  <div class="art-head">
+    <span class="kicker">Brand</span>
+    <h1>Nº 3 / 5</h1>
+    <p class="deck">라벨 한&nbsp;장에 두&nbsp;종류의 글씨가 있다. 눌러 찍은&nbsp;것과, 손으로 적은&nbsp;것.</p>
+    <span class="date">2026. 08. 21</span>
+  </div>
+
+  <div class="band keep">
+    <img src="img/collection-2024/paper-no35-hero.jpg" alt="검은 가방 안쪽에 스티치된 탠 가죽 라벨. tagliovivo × tOM, Made in Italy, 손으로 적힌 2024와 3/5">
+  </div>
+
+  <div class="col">
+    <p class="lede">가방 안쪽에 손바닥만&nbsp;한 탠 가죽이 크림색 실로 꿰매져 있다. 거기 적힌&nbsp;것을 읽으려면 가방을 열고 안감 쪽으로 손을 넣어야 한다. 사는 사람도 잘 보지 않는 자리다.</p>
+
+    <p>라벨에 눌러 찍힌 글자는 넷이다. <b>tagliovivo&nbsp;×&nbsp;tOM</b>, <b>MADE IN ITALY</b>, <b>PRODUCTION YEAR</b>, 그리고 <b>Nº</b>.</p>
+
+    <p>앞의 둘은 이름이고, 뒤의 둘은 비어 있는 칸이다.</p>
+  </div>
+
+  <figure class="col-fig keep">
+    <img src="img/collection-2024/paper-no35-number.jpg" alt="눌러 찍힌 Production Year 와 Nº, 그 옆에 잉크로 적힌 2024와 3/5">
+    <figcaption>눌러 찍힌 <i>Production Year</i>와 <i>Nº</i>, 그리고 잉크로 적힌 2024와 3/5</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>라벨은 물건보다 먼저 만들어진다. 연도도 번호도 그때는 알&nbsp;수 없다. 그래서 그&nbsp;자리를 비워 두고, 물건이 완성된 다음에 사람이 채운다. 이 가방의 칸에는 잉크로 <b>2024</b>, 그리고 <b>3/5</b>라고 적혀 있다.</p>
+
+    <p>다섯&nbsp;점 중 세&nbsp;번째.</p>
+  </div>
+
+  <figure class="wide">
+    <img src="img/collection-2024/paper-no35-antler-wide.jpg" alt="사슴뿔 오브제에 손잡이를 걸어 놓은 검은 가죽 가방">
+    <figcaption>뿔 위에 걸린 채로</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>이 촬영에는 라벨이 읽히는 컷이 두&nbsp;장 있다. 하나는 <b>3/5</b>, 다른 하나는 <b>9/10</b>이다. 같은 이름이 찍힌 두&nbsp;물건의 번호가 서로 다르다. 숫자는 브랜드에 붙는&nbsp;것이 아니라 물건 하나하나에 붙는다.</p>
+
+    <p>숫자가 손글씨라는 사실이 말해 주는&nbsp;것은 정성이 아니라 수량이다. 백&nbsp;개를 만들었다면 손으로 적지 않았을&nbsp;것이다. 손으로 적을&nbsp;수 있는 만큼만 만들었다는 뜻이고, 그&nbsp;수를 라벨에 인쇄해 둘 만큼 미리 정해 두지도 않았다는 뜻이다.</p>
+  </div>
+
+  <div class="pair">
+    <figure>
+      <img src="img/collection-2024/bag-ladder.jpg" alt="알루미늄 사다리에 걸린 검은 가죽 가방 두 점">
+      <figcaption>사다리, 오후</figcaption>
+    </figure>
+    <figure>
+      <img src="img/collection-2024/exclusive-whitebag.jpg" alt="검은 옷을 입은 사람이 들고 있는 흰 가죽 가방">
+      <figcaption>같은 구조, 다른 색</figcaption>
+    </figure>
+  </div>
+
+  <div class="col">
+    <p>tagliovivo의 이름으로 이탈리아에서 만들어졌고, tOM이 이름을 나란히 걸었다. <b>×</b>&nbsp;하나를 사이에 두고 두&nbsp;이름이 같은 크기로 눌려 있다.</p>
+
+    <p>tOM은 1997년부터 한남동에서 매장 하나로만 운영해 왔다. 29년 동안 온라인 판매를 하지 않았다. 그&nbsp;시간 동안 이 가게가 해 온 일은 파는 일이라기보다 <b>고르는 일</b>에 가깝다. 번호를 손으로 적어야 할 만큼만 만들어지는 물건이 한남동 매장의 사다리에 걸려 있는 이유다.</p>
+
+    <p>물건을 어디에 놓느냐가 그&nbsp;가게가 물건을 어떻게 보는지를 말한다. tOM은 이 가방을 사슴뿔에 걸어 두었다. 알루미늄 사다리에 걸어 두기도 했다. 진열대가 아니라 그날 거기 있던&nbsp;것 위에.</p>
+  </div>
+
+  <figure class="col-fig keep">
+    <img src="img/collection-2024/bag-label-flare.jpg" alt="주황빛이 스쳐 지나가는 탠 가죽 라벨. 손으로 적힌 2024와 9/10">
+    <figcaption>같은 이름, 다른 번호 — Nº 9 / 10</figcaption>
+  </figure>
+
+  <p class="credit">
+    Photography: Neo Kim (2024)<br>
+    Text: tOM Paper
+  </p>
+
+  <div class="rule"></div>
+  <p class="back"><a href="paper.html">tOM Paper 로 돌아가기</a></p>
+
+</article>
+
+<p class="memo">첫 실기사입니다. 사실은 촬영 원본에서 확인한 것만 썼습니다 — 라벨 각인, 손으로 적힌 번호(3/5 · 9/10), Made in Italy, 촬영일. <b>가격·가죽 종류·치수·재고는 확인 전이라 본문에 넣지 않았습니다.</b> 색 규칙 예외: 이 기사만 라벨 컷 3장에 색을 남겼습니다(기사의 주제가 잉크 글씨라서). 게재 전 확인 항목은 원고 파일의 검수 목록에 있습니다.</p>
+
+<!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
+<footer>
+  <div class="f-top">
+    <div class="f-col">
+      <h4>Shop</h4>
+      <a href="new.html">Arrivals</a>
+      <a href="exclusive.html">Online Exclusive</a>
+      <a href="brands.html">Brands</a>
+    </div>
+    <div class="f-col">
+      <h4>Information</h4>
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns &amp; Exchange</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="f-col">
+      <h4>Read</h4>
+      <a href="paper.html">tOM Paper</a>
+      <a href="store.html">Hannam Store</a>
+    </div>
+    <div class="f-col">
+      <h4>Visit</h4>
+      <p>서울 용산구 한남대로20길 33</p>
+      <p>12:00 &mdash; 21:00 &middot; 연중무휴</p>
+      <a href="tel:0231432616">02-3143-2616</a>
+      <a href="https://www.instagram.com/tom_hannam_official/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="f-biz">
+    <p>상호 tOM &middot; 대표 <span class="f-tbd">확인 전</span> &middot; 사업자등록번호 <span class="f-tbd">확인 전</span> &middot; 통신판매업 신고번호 <span class="f-tbd">확인 전</span></p>
+    <p>서울 용산구 한남대로20길 33 &middot; 개인정보보호책임자 <span class="f-tbd">확인 전</span></p>
+    <p class="f-copy">&copy; 2026 tOM</p>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+
+<script>
+/* 리뷰 모드 + Bag 카운트 — 다른 페이지와 동일 */
+(function(){try{
+  if(location.search.indexOf('review')>-1)sessionStorage.setItem('tomreview','1');
+  if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
+  var n=sessionStorage.getItem('tombag')||'0';
+  document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+}catch(e){}})();
+</script>
+</body>
+</html>

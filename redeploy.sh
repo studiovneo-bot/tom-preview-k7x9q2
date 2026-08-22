@@ -1,19 +1,21 @@
 #!/bin/bash
 # tOM 스테이징 재배포 — 본선(tom-proto) 최신본을 스테이징에 반영
 # 사용: bash redeploy.sh
-# 하는 일: 본선 9페이지+이미지 복사 → 게이트·noindex 재주입 → 커밋 → 푸시
+# 하는 일: 본선 15페이지+이미지 복사 → 게이트·noindex 재주입 → 커밋 → 푸시
 # 게이트 암호는 gate.html에 있으며 이 스크립트는 건드리지 않는다.
 set -euo pipefail
 cd "$(dirname "$0")"
 SRC="../tom-proto"
 
 # 1) 본선 복사 (실험 파일 v1~v3, README 제외)
-for f in index home brands new exclusive product paper store login signup; do
+# ⚠ 페이지를 새로 만들면 이 목록에 반드시 추가한다. 빠지면 스테이징에서 그 링크가 깨진다.
+for f in index home brands new exclusive product paper paper-no35 store login signup \
+         cart shipping returns contact; do
   cp "$SRC/$f.html" "./$f.html"
 done
 rm -rf img && cp -R "$SRC/img" img
 
-# 2) 게이트 + noindex 주입 (gate.html 제외 9페이지)
+# 2) 게이트 + noindex 주입 (gate.html 제외 전 페이지)
 python3 - <<'EOF'
 import pathlib
 SNIPPET = """<meta name="robots" content="noindex,nofollow">

@@ -216,14 +216,6 @@ button{
 }
 
 /* ── 푸터 ── */
-footer{
-  margin-top:88px;background:var(--ink);color:#8f8f8f;
-  padding:24px var(--pad);text-align:center;font-size:var(--t-micro);
-}
-footer nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-footer a{color:#8f8f8f}
-footer a:hover{color:#fff}
-
 /* ── 모바일 — Totême는 한 칸씩 세로로 쌓는다 ──
    헤더 반응형은 본선 home.html의 확정 규칙(2026-08-16 Róhe 모바일 문법 +
    중간 폭 3열 복원)을 그대로 옮겨온다. 샘플이 이걸 빠뜨려 390에서 헤더가 겹쳤었다 */
@@ -264,6 +256,40 @@ footer a:hover{color:#fff}
 @media (max-width:680px){
   .head nav a,.acct{padding:12px 2px}   /* 터치 영역 44px */
 }
+/* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
+footer{
+  margin-top:88px;background:var(--ink);color:#8f8f8f;
+  padding:52px var(--pad) 30px;font-size:var(--t-micro);line-height:1.9;
+  text-align:left;
+}
+.f-top{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding-bottom:34px;border-bottom:1px solid #2a2a2a;
+}
+.f-col h4{
+  font-family:var(--display-font);font-weight:400;color:#f5f4f1;
+  font-size:14px;letter-spacing:.06em;margin-bottom:12px;
+}
+.f-col a{display:block;color:#8f8f8f;padding:3px 0}
+.f-col a:hover{color:#fff}
+.f-col p{margin:0;color:#8f8f8f}
+.f-biz{padding-top:22px;color:#6b6b6b}
+.f-biz p{margin:0}
+.f-tbd{
+  color:#8f8f8f;border-bottom:1px dotted #5a5a5a;
+}
+.f-copy{margin-top:14px !important;color:#5a5a5a}
+footer a{color:#8f8f8f}
+footer a:hover{color:#fff}
+@media (max-width:900px){
+  footer{padding:38px var(--pad) 26px}
+  .f-top{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .f-col a{padding:7px 0}
+}
+@media (max-width:520px){
+  .f-top{grid-template-columns:1fr;gap:22px}
+}
+/* FOOTER:END */
 </style>
 </head>
 <body>
@@ -283,7 +309,7 @@ footer a:hover{color:#fff}
     <img class="mk-l" src="img/tom-logo.svg" alt="tOM" data-half="l">
     <img class="mk-r" src="img/tom-logo.svg" alt="" aria-hidden="true" data-half="r">
   </a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct" href="#">Bag (0)</a></div>
+  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct" href="cart.html">Bag (0)</a></div>
 </header>
 
 <!-- 2026-08-18 Neo 지정: 바탕화면 "TOM 메인 페이지 이미지" 4장으로 교체.
@@ -294,16 +320,6 @@ footer a:hover{color:#fff}
      문구는 전부 예시. 상품명·시즌명은 톰 자료 수령 후 확정 -->
 <div class="grid">
 
-  <a class="cell cell--ink" href="new.html">
-    <img src="img/main-2026-08-18/arrivals-coat.jpg" alt="새로 들어온 상품">
-    <figcaption><span class="t">New Arrival</span><span class="s">Arrivals</span></figcaption>
-  </a>
-
-  <a class="cell cell--ink" href="exclusive.html">
-    <img src="img/main-2026-08-18/exclusive-night.jpg" alt="온라인 단독 상품">
-    <figcaption><span class="t">Online Exclusive</span><span class="s">Exclusive</span></figcaption>
-  </a>
-
   <a class="cell cell--ink" href="paper.html">
     <!-- 2026-08-18 Neo 지정: Uma Wang 니트 + C-스탠드 스튜디오 컷.
          구 홈의 히어로 밴드에 쓰던 사진이고 그 밴드가 없어졌으므로 중복이 아니다.
@@ -312,6 +328,16 @@ footer a:hover{color:#fff}
           어떤 색을 써도 25~75%가 묻혔다 → Paper 페이지 안으로) -->
     <img src="img/collection-2024/hero-cstand.jpg" alt="tOM Paper — Uma Wang">
     <figcaption><span class="t">tOM Paper</span><span class="s">Journal</span></figcaption>
+  </a>
+
+  <a class="cell cell--ink" href="new.html">
+    <img src="img/main-2026-08-18/arrivals-coat.jpg" alt="새로 들어온 상품">
+    <figcaption><span class="t">New Arrival</span><span class="s">Arrivals</span></figcaption>
+  </a>
+
+  <a class="cell cell--ink" href="exclusive.html">
+    <img src="img/main-2026-08-18/exclusive-night.jpg" alt="온라인 단독 상품">
+    <figcaption><span class="t">Online Exclusive</span><span class="s">Exclusive</span></figcaption>
   </a>
 
   <a class="cell cell--paper" href="store.html">
@@ -343,11 +369,41 @@ footer a:hover{color:#fff}
   </div>
 </div>
 
+<!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
-  <nav>
-    <a href="paper.html">tOM Paper</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a><a href="#">Instagram</a>
-  </nav>
+  <div class="f-top">
+    <div class="f-col">
+      <h4>Shop</h4>
+      <a href="new.html">Arrivals</a>
+      <a href="exclusive.html">Online Exclusive</a>
+      <a href="brands.html">Brands</a>
+    </div>
+    <div class="f-col">
+      <h4>Information</h4>
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns &amp; Exchange</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="f-col">
+      <h4>Read</h4>
+      <a href="paper.html">tOM Paper</a>
+      <a href="store.html">Hannam Store</a>
+    </div>
+    <div class="f-col">
+      <h4>Visit</h4>
+      <p>서울 용산구 한남대로20길 33</p>
+      <p>12:00 &mdash; 21:00 &middot; 연중무휴</p>
+      <a href="tel:0231432616">02-3143-2616</a>
+      <a href="https://www.instagram.com/tom_hannam_official/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="f-biz">
+    <p>상호 tOM &middot; 대표 <span class="f-tbd">확인 전</span> &middot; 사업자등록번호 <span class="f-tbd">확인 전</span> &middot; 통신판매업 신고번호 <span class="f-tbd">확인 전</span></p>
+    <p>서울 용산구 한남대로20길 33 &middot; 개인정보보호책임자 <span class="f-tbd">확인 전</span></p>
+    <p class="f-copy">&copy; 2026 tOM</p>
+  </div>
 </footer>
+<!-- FOOTER:END -->
 
 <script>
 /* 헤더 자동 대비 — 2026-08-18
