@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
 
-<title>Bag — tOM</title>
+<title>Order Complete — tOM</title>
 <style>
 /* 20시안/_tools/build_pages.py 가 생성한다. 이 파일을 직접 고치지 말 것 */
 :root{
@@ -125,6 +125,87 @@ a{color:inherit;text-decoration:none}
   .head nav a,.acct{padding:12px 2px}
 }
 
+.co{max-width:64em;margin:0 auto;padding:56px var(--pad) 0}
+.co-top{display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.co-step{font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.18em;color:var(--soft)}
+.co-step b{font-weight:400;color:var(--ink)}
+.co h1{font-family:var(--display-font);font-size:42px;line-height:1.1;letter-spacing:.03em;margin-top:12px}
+.co-rule{height:2px;background:var(--red);margin:26px 0 0}
+.co-hint{margin-top:14px;font-size:var(--t-micro);color:var(--soft)}
+.co-grid{display:grid;grid-template-columns:1fr 20em;gap:64px;margin-top:44px;align-items:start}
+
+.fs{border:0;margin:0 0 42px}
+.fs legend{font-family:var(--display-font);font-size:20px;color:var(--ink);letter-spacing:.02em;
+  padding:0 0 14px;border-bottom:1px solid var(--ink);width:100%}
+.f{display:grid;grid-template-columns:7.5em 1fr;gap:16px;align-items:baseline;
+  padding:14px 0;border-bottom:1px solid var(--line)}
+.f > label{color:var(--soft);font-size:var(--t-meta)}
+.f .req:after{content:"·";color:var(--red);margin-left:6px;font-size:16px;line-height:1}
+.f input,.f select,.f textarea{
+  width:100%;border:0;border-bottom:1px solid transparent;background:transparent;
+  font:inherit;font-size:var(--t-body);color:var(--ink);padding:2px 0;
+}
+.f input::placeholder,.f textarea::placeholder{color:#c2beb7}
+.f input:focus,.f select:focus,.f textarea:focus{outline:0;border-bottom-color:var(--ink)}
+.f textarea{resize:none;line-height:1.6}
+.f .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pay{display:grid;gap:0}
+.pay label{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);
+  color:var(--ink);font-size:var(--t-meta);cursor:default}
+.pay label:last-child{border-bottom:0}
+.pay input{accent-color:#111}
+.agree{margin-top:6px}
+.agree label{display:flex;gap:12px;align-items:flex-start;padding:11px 0;font-size:var(--t-meta);color:var(--body)}
+.agree a{border-bottom:1px solid var(--line)}
+
+.sm{position:sticky;top:34px}
+.sm h2{font-family:var(--display-font);font-size:20px;color:var(--ink);
+  padding-bottom:14px;border-bottom:1px solid var(--ink)}
+.sm .item{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:20px 0;border-bottom:1px solid var(--line)}
+.sm .item img{aspect-ratio:4/5;object-fit:cover}
+.sm .nm{font-family:var(--display-font);font-size:16px;color:var(--ink);line-height:1.35}
+.sm .br{font-size:var(--t-micro);color:var(--soft);margin-top:5px}
+.sm .pr{font-size:var(--t-meta);color:var(--ink);margin-top:8px}
+.sm .row2{display:flex;justify-content:space-between;padding:11px 0;font-size:var(--t-meta)}
+.sm .row2 b{font-weight:400;color:var(--ink)}
+.sm .total{border-top:1px solid var(--ink);margin-top:6px;padding-top:16px;
+  display:flex;justify-content:space-between;align-items:baseline}
+.sm .total span{font-size:var(--t-meta);color:var(--soft)}
+.sm .total b{font-family:var(--display-font);font-size:22px;font-weight:400;color:var(--ink)}
+.one-note{margin-top:20px;padding:12px 14px;border:1px solid var(--line);
+  color:var(--body);font-size:var(--t-micro);line-height:1.8}
+.one-note b{color:var(--ink);font-weight:400}
+.btn{display:block;width:100%;margin-top:22px;padding:15px;text-align:center;border:1px solid #c3bfb8;
+  background:transparent;color:#a29e97;font-family:var(--nav-font);font-size:13px;
+  letter-spacing:.08em;cursor:not-allowed}
+.btnnote{text-align:center;color:var(--soft);font-size:var(--t-micro);margin-top:10px}
+
+@media (max-width:900px){
+  .co{padding-top:34px}
+  .co h1{font-size:32px}
+  .co-grid{grid-template-columns:1fr;gap:40px;margin-top:32px}
+  .sm{position:static;order:-1}
+  .f{grid-template-columns:1fr;gap:4px;padding:12px 0}
+  .f .two{grid-template-columns:1fr}
+}
+
+.dn-lead{margin-top:16px;font-family:var(--display-font);font-size:18px;color:var(--ink);line-height:1.7}
+.dn-no{margin-top:8px;font-size:var(--t-meta);color:var(--soft)}
+.dn-no b{font-weight:400;color:var(--ink);font-family:var(--nav-font);letter-spacing:.06em}
+.steps{counter-reset:s;margin-top:4px}
+.steps li{list-style:none;counter-increment:s;display:grid;grid-template-columns:2.2em 1fr;
+  gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:var(--t-meta)}
+.steps li:before{content:counter(s,decimal-leading-zero);font-family:var(--display-font);
+  font-size:14px;color:var(--soft)}
+.steps li.on:before{color:var(--red)}
+.steps li.on span{color:var(--ink)}
+.go{display:block;width:100%;margin-top:14px;padding:14px;text-align:center;
+  border:1px solid var(--ink);color:var(--ink);font-family:var(--nav-font);
+  font-size:13px;letter-spacing:.08em}
+.go:hover{background:var(--ink);color:var(--bg)}
+.go.line{border-color:var(--line);color:var(--body)}
+.go.line:hover{background:transparent;border-color:var(--ink);color:var(--ink)}
+
 /* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
 footer{
   margin-top:88px;background:var(--ink);color:#8f8f8f;
@@ -175,33 +256,55 @@ footer a:hover{color:#fff}
   <div class="util"><a class="acct" href="search.html">Search</a><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
-<div class="bagwrap">
-  <span class="kicker" style="font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft)">Bag</span>
-  <h1 style="font-family:var(--display-font);font-size:42px;line-height:1.1;letter-spacing:.03em;margin-top:12px">Shopping Bag</h1>
+<div class="co">
+  <span class="co-step">Bag &nbsp;&mdash;&nbsp; Order &nbsp;&mdash;&nbsp; <b>Done</b></span>
+  <h1>Thank You</h1>
+  <div class="co-rule"></div>
+  <p class="dn-lead">주문이 접수되었습니다.</p>
+  <p class="dn-no">주문번호 <b>TOM-260824-0001</b> &nbsp;&middot;&nbsp; 확인 메일을 보내드렸습니다.</p>
 
-  <div id="empty" class="empty">
-    <p>담긴 물건이 없습니다.</p>
-    <a class="go" href="new.html">Arrivals 보기</a>
-  </div>
+  <div class="co-grid">
+    <div>
+      <fieldset class="fs">
+        <legend>받으실 곳</legend>
+        <div class="f"><label>받는 분</label><span>김민수</span></div>
+        <div class="f"><label>연락처</label><span>010-0000-0000</span></div>
+        <div class="f"><label>주소</label><span>서울 용산구 한남대로20길 33</span></div>
+        <div class="f"><label>배송 메모</label><span>부재 시 문 앞에 놓아주세요</span></div>
+      </fieldset>
 
-  <div id="filled" style="display:none;margin-top:34px">
-    <div class="line">
-      <img src="img/collection-2024/bag-antler.jpg" alt="">
-      <div>
-        <div class="nm">상품명</div>
-        <div class="br">tagliovivo &middot; Nº 3 / 5</div>
-        <div class="br" style="margin-top:8px">수량 <span id="qty">1</span></div>
-      </div>
-      <div class="pr">&#8361;1,980,000</div>
+      <fieldset class="fs">
+        <legend>다음 순서</legend>
+        <ol class="steps">
+          <li class="on"><span>결제 확인 &mdash; 완료</span></li>
+          <li><span>상품 확인과 포장</span></li>
+          <li><span>발송 &mdash; 결제 후 <span class="tbd">확인 전</span></span></li>
+          <li><span>배송 완료</span></li>
+        </ol>
+      </fieldset>
     </div>
-    <div class="sum"><span>소계</span><b id="sub">&#8361;1,980,000</b></div>
-    <div class="sum" style="border-top:1px solid var(--line)"><span>배송비</span><b>확인 전</b></div>
-    <button class="btn" type="button" disabled>주문하기</button>
-    <p class="btnnote">결제는 아직 연결되지 않았습니다. <a href="order.html" style="border-bottom:1px solid var(--line)">주문서 화면 보기</a></p>
-  </div>
 
-  <p class="note" style="max-width:38em">담긴 물건과 금액은 <b>예시</b>입니다. 실제 재고&middot;가격&middot;결제와 연결되어 있지 않습니다. 상품 페이지에서 「장바구니에 담기」를 누르면 이 화면이 담긴 상태로 바뀝니다.</p>
+    <aside class="sm">
+      <h2>Order Summary</h2>
+      <div class="item">
+        <img src="img/collection-2024/bag-antler.jpg" alt="">
+        <div>
+          <div class="nm">상품명</div>
+          <div class="br">tagliovivo</div>
+          <div class="pr">&#8361;1,980,000</div>
+        </div>
+      </div>
+      <div class="row2"><span>소계</span><b>&#8361;1,980,000</b></div>
+      <div class="row2"><span>배송비</span><b class="tbd">확인 전</b></div>
+      <div class="total"><span>결제 금액</span><b>&#8361;1,980,000</b></div>
+
+      <a class="go" href="mypage.html">주문 내역 보기</a>
+      <a class="go line" href="new.html">계속 둘러보기</a>
+      <p class="btnnote">결제가 실제로 이루어지지 않았습니다. 구조를 보여주는 화면입니다.</p>
+    </aside>
+  </div>
 </div>
+
 
 <!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
@@ -246,16 +349,6 @@ footer a:hover{color:#fff}
   var n=sessionStorage.getItem('tombag')||'0';
   document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
 }catch(e){}})();
-
-(function(){
-  var n=parseInt(sessionStorage.getItem('tombag')||'0',10);
-  if(n>0){
-    document.getElementById('empty').style.display='none';
-    document.getElementById('filled').style.display='block';
-    document.getElementById('qty').textContent=n;
-    document.getElementById('sub').textContent='\u20A9'+(1980000*n).toLocaleString('ko-KR');
-  }
-})();
 
 </script>
 </body>

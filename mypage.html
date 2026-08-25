@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
 
-<title>Bag — tOM</title>
+<title>My Page — tOM</title>
 <style>
 /* 20시안/_tools/build_pages.py 가 생성한다. 이 파일을 직접 고치지 말 것 */
 :root{
@@ -125,6 +125,47 @@ a{color:inherit;text-decoration:none}
   .head nav a,.acct{padding:12px 2px}
 }
 
+.my{max-width:64em;margin:0 auto;padding:56px var(--pad) 0}
+.my .kicker{font-family:var(--nav-font);font-weight:300;font-size:var(--t-micro);
+  letter-spacing:.3px;color:var(--soft);display:block}
+.my h1{font-family:var(--display-font);font-size:42px;line-height:1.1;letter-spacing:.03em;margin-top:12px}
+.my-rule{height:2px;background:var(--red);margin-top:26px}
+.my-grid{display:grid;grid-template-columns:13em 1fr;gap:64px;margin-top:44px;align-items:start}
+.my-nav{position:sticky;top:34px;display:grid;font-family:var(--nav-font);font-size:var(--t-meta);letter-spacing:.3px}
+.my-nav a{padding:11px 0;border-bottom:1px solid var(--line);color:var(--body)}
+.my-nav a.on{color:var(--ink)}
+.my-nav a:hover{color:var(--ink)}
+.my-nav .out{margin-top:22px;border-bottom:0;color:var(--soft)}
+.my h2{font-family:var(--display-font);font-size:20px;color:var(--ink);
+  padding-bottom:14px;border-bottom:1px solid var(--ink)}
+.ord{padding:24px 0;border-bottom:1px solid var(--line)}
+.ord-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.ord-no{font-family:var(--nav-font);font-size:var(--t-meta);letter-spacing:.06em;color:var(--ink)}
+.ord-dt{font-size:var(--t-micro);color:var(--soft)}
+.ord-st{font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.14em;color:var(--ink)}
+.ord-st.wait{color:var(--soft)}
+.ord-line{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:start;margin-top:18px}
+.ord-line img{aspect-ratio:4/5;object-fit:cover}
+.ord-line .nm{font-family:var(--display-font);font-size:16px;color:var(--ink)}
+.ord-line .br{font-size:var(--t-micro);color:var(--soft);margin-top:4px}
+.ord-line .pr{font-size:var(--t-meta);color:var(--ink);white-space:nowrap}
+.ord-act{margin-top:16px;display:flex;gap:22px;font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px}
+.ord-act a{color:var(--body);border-bottom:1px solid var(--line);padding-bottom:2px}
+.ord-act a:hover{color:var(--ink);border-color:var(--ink)}
+.my-note{margin-top:36px;padding:12px 14px;border:1px solid var(--line);
+  color:var(--soft);font-size:var(--t-micro);line-height:1.8}
+@media (max-width:900px){
+  .my{padding-top:34px}
+  .my h1{font-size:32px}
+  .my-grid{grid-template-columns:1fr;gap:34px;margin-top:30px}
+  .my-nav{position:static;grid-auto-flow:column;grid-auto-columns:max-content;
+    gap:18px;overflow-x:auto}
+  .my-nav a{border-bottom:0;padding:0 0 10px}
+  .my-nav .out{margin-top:0}
+  .ord-line{grid-template-columns:56px 1fr}
+  .ord-line .pr{grid-column:2}
+}
+
 /* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
 footer{
   margin-top:88px;background:var(--ink);color:#8f8f8f;
@@ -175,33 +216,56 @@ footer a:hover{color:#fff}
   <div class="util"><a class="acct" href="search.html">Search</a><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
-<div class="bagwrap">
-  <span class="kicker" style="font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft)">Bag</span>
-  <h1 style="font-family:var(--display-font);font-size:42px;line-height:1.1;letter-spacing:.03em;margin-top:12px">Shopping Bag</h1>
+<div class="my">
+  <span class="kicker">Account</span>
+  <h1>My Page</h1>
+  <div class="my-rule"></div>
 
-  <div id="empty" class="empty">
-    <p>담긴 물건이 없습니다.</p>
-    <a class="go" href="new.html">Arrivals 보기</a>
-  </div>
+  <div class="my-grid">
+    <nav class="my-nav">
+      <a class="on" href="mypage.html">주문 내역</a>
+      <a href="mypage.html">배송 조회</a>
+      <a href="mypage.html">회원 정보</a>
+      <a href="mypage.html">주소록</a>
+      <a class="out" href="home.html">로그아웃</a>
+    </nav>
 
-  <div id="filled" style="display:none;margin-top:34px">
-    <div class="line">
-      <img src="img/collection-2024/bag-antler.jpg" alt="">
-      <div>
-        <div class="nm">상품명</div>
-        <div class="br">tagliovivo &middot; Nº 3 / 5</div>
-        <div class="br" style="margin-top:8px">수량 <span id="qty">1</span></div>
+    <div>
+      <h2>주문 내역</h2>
+
+      <div class="ord">
+        <div class="ord-h">
+          <span class="ord-no">TOM-260824-0001</span>
+          <span class="ord-dt">2026. 08. 24</span>
+          <span class="ord-st wait">배송 준비</span>
+        </div>
+        <div class="ord-line">
+          <img src="img/collection-2024/bag-antler.jpg" alt="">
+          <div><div class="nm">상품명</div><div class="br">tagliovivo</div></div>
+          <div class="pr">&#8361;1,980,000</div>
+        </div>
+        <div class="ord-act"><a href="mypage.html">주문 상세</a><a href="mypage.html">배송 조회</a><a href="returns.html">교환 &middot; 반품</a></div>
       </div>
-      <div class="pr">&#8361;1,980,000</div>
-    </div>
-    <div class="sum"><span>소계</span><b id="sub">&#8361;1,980,000</b></div>
-    <div class="sum" style="border-top:1px solid var(--line)"><span>배송비</span><b>확인 전</b></div>
-    <button class="btn" type="button" disabled>주문하기</button>
-    <p class="btnnote">결제는 아직 연결되지 않았습니다. <a href="order.html" style="border-bottom:1px solid var(--line)">주문서 화면 보기</a></p>
-  </div>
 
-  <p class="note" style="max-width:38em">담긴 물건과 금액은 <b>예시</b>입니다. 실제 재고&middot;가격&middot;결제와 연결되어 있지 않습니다. 상품 페이지에서 「장바구니에 담기」를 누르면 이 화면이 담긴 상태로 바뀝니다.</p>
+      <div class="ord">
+        <div class="ord-h">
+          <span class="ord-no">TOM-260731-0014</span>
+          <span class="ord-dt">2026. 07. 31</span>
+          <span class="ord-st">배송 완료</span>
+        </div>
+        <div class="ord-line">
+          <img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-05.jpg" alt="">
+          <div><div class="nm">상품명</div><div class="br">Ziggy Chen</div></div>
+          <div class="pr">&#8361;3,200,000</div>
+        </div>
+        <div class="ord-act"><a href="mypage.html">주문 상세</a><a href="returns.html">교환 &middot; 반품</a></div>
+      </div>
+
+      <p class="my-note">주문 내역과 상태는 <b>예시</b>입니다. 실제 주문&middot;배송과 연결되어 있지 않습니다.</p>
+    </div>
+  </div>
 </div>
+
 
 <!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
@@ -246,16 +310,6 @@ footer a:hover{color:#fff}
   var n=sessionStorage.getItem('tombag')||'0';
   document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
 }catch(e){}})();
-
-(function(){
-  var n=parseInt(sessionStorage.getItem('tombag')||'0',10);
-  if(n>0){
-    document.getElementById('empty').style.display='none';
-    document.getElementById('filled').style.display='block';
-    document.getElementById('qty').textContent=n;
-    document.getElementById('sub').textContent='\u20A9'+(1980000*n).toLocaleString('ko-KR');
-  }
-})();
 
 </script>
 </body>

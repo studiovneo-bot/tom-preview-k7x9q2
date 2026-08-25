@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
 
-<title>Bag — tOM</title>
+<title>Brand — tOM</title>
 <style>
 /* 20시안/_tools/build_pages.py 가 생성한다. 이 파일을 직접 고치지 말 것 */
 :root{
@@ -125,6 +125,41 @@ a{color:inherit;text-decoration:none}
   .head nav a,.acct{padding:12px 2px}
 }
 
+.title{padding:44px var(--pad) 26px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.title h1{font-family:var(--nav-font);font-weight:400;font-size:13px;letter-spacing:.4px;color:var(--ink)}
+.title .intro{font-size:var(--t-meta);color:var(--body);line-height:1.85;max-width:52ch}
+.drop{padding:12px var(--pad) 0}
+.drop > h2{display:flex;align-items:center;gap:14px;font-family:var(--nav-font);font-weight:300;
+  font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft);margin-bottom:14px}
+.drop > h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.grid img{aspect-ratio:4/5;object-fit:cover;object-position:center;transition:opacity .2s}
+.card:hover img{opacity:.85}
+.card figcaption{padding:10px 2px 20px}
+.brand{display:block;font-size:var(--t-micro);letter-spacing:.3px;color:var(--ink)}
+.name{display:block;font-size:var(--t-meta);color:var(--body);margin-top:1px}
+.meta{display:flex;justify-content:space-between;gap:8px;margin-top:5px}
+.price{font-size:var(--t-meta);color:var(--ink)}
+.one{font-family:var(--nav-font);font-weight:300;font-size:var(--t-micro);letter-spacing:.3px;
+  color:var(--soft);white-space:nowrap}
+.memo{margin:26px var(--pad) 0;padding:11px 13px;border:1px solid var(--line);
+  color:var(--soft);font-size:var(--t-micro);line-height:1.7}
+@media (max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .title{grid-template-columns:1fr;gap:14px;padding:32px var(--pad) 20px}
+}
+
+.bd-index{padding:34px var(--pad) 0;display:flex;gap:22px;flex-wrap:wrap;
+  font-family:var(--nav-font);font-size:var(--t-meta);letter-spacing:.3px}
+.bd-index a{color:var(--soft);padding-bottom:3px;border-bottom:1px solid transparent}
+.bd-index a:hover{color:var(--ink)}
+.bd-index a.on{color:var(--ink);border-bottom-color:var(--ink)}
+.title h1.big{font-family:var(--display-font);font-size:38px;letter-spacing:.02em;line-height:1.1}
+@media (max-width:900px){
+  .bd-index{gap:14px;padding-top:24px}
+  .title h1.big{font-size:28px}
+}
+
 /* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
 footer{
   margin-top:88px;background:var(--ink);color:#8f8f8f;
@@ -175,33 +210,46 @@ footer a:hover{color:#fff}
   <div class="util"><a class="acct" href="search.html">Search</a><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
-<div class="bagwrap">
-  <span class="kicker" style="font-family:var(--nav-font);font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft)">Bag</span>
-  <h1 style="font-family:var(--display-font);font-size:42px;line-height:1.1;letter-spacing:.03em;margin-top:12px">Shopping Bag</h1>
+<nav class="bd-index">
+  <a href="brand.html">Biek Verstappen</a>
+  <a href="brand.html">Giovanni Cavagna</a>
+  <a href="brand.html">Nostrasantissima</a>
+  <a href="brand.html">tagliovivo</a>
+  <a href="brand.html">UMA</a>
+  <a class="on" href="brand.html">Ziggy Chen</a>
+</nav>
 
-  <div id="empty" class="empty">
-    <p>담긴 물건이 없습니다.</p>
-    <a class="go" href="new.html">Arrivals 보기</a>
-  </div>
-
-  <div id="filled" style="display:none;margin-top:34px">
-    <div class="line">
-      <img src="img/collection-2024/bag-antler.jpg" alt="">
-      <div>
-        <div class="nm">상품명</div>
-        <div class="br">tagliovivo &middot; Nº 3 / 5</div>
-        <div class="br" style="margin-top:8px">수량 <span id="qty">1</span></div>
-      </div>
-      <div class="pr">&#8361;1,980,000</div>
-    </div>
-    <div class="sum"><span>소계</span><b id="sub">&#8361;1,980,000</b></div>
-    <div class="sum" style="border-top:1px solid var(--line)"><span>배송비</span><b>확인 전</b></div>
-    <button class="btn" type="button" disabled>주문하기</button>
-    <p class="btnnote">결제는 아직 연결되지 않았습니다. <a href="order.html" style="border-bottom:1px solid var(--line)">주문서 화면 보기</a></p>
-  </div>
-
-  <p class="note" style="max-width:38em">담긴 물건과 금액은 <b>예시</b>입니다. 실제 재고&middot;가격&middot;결제와 연결되어 있지 않습니다. 상품 페이지에서 「장바구니에 담기」를 누르면 이 화면이 담긴 상태로 바뀝니다.</p>
+<div class="title">
+  <h1 class="big">Ziggy Chen</h1>
+  <p class="intro">브랜드 소개 문구가 들어갈 자리입니다. 톰이 이 브랜드를 왜 들여오는지 두세 문장으로 적습니다. 아직 확정된 문구가 아닙니다.</p>
 </div>
+
+<section class="drop">
+  <h2>Available &nbsp;&mdash;&nbsp; 6 pieces</h2>
+  <div class="grid">
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-01.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">&#8361;1,980,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-05.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">&#8361;3,200,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-05.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">&#8361;2,450,000</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-09.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">&#8361;2,760,000</span><span class="one">Sold</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-09.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">&#8361;1,340,000</span><span class="one">Sold</span></span></figcaption></figure>
+    <figure class="card"><a href="product.html"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-01.jpg" alt=""></a>
+      <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
+      <span class="meta"><span class="price">&#8361;1,620,000</span></span></figcaption></figure>
+  </div>
+</section>
+
+<p class="memo">브랜드 페이지의 <b>구조</b>를 보여주는 화면입니다. 브랜드 소개 문구와 상품은 확정된 것이 아닙니다. 실제로는 브랜드마다 이 화면이 하나씩 생깁니다.</p>
+
 
 <!-- FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 -->
 <footer>
@@ -246,16 +294,6 @@ footer a:hover{color:#fff}
   var n=sessionStorage.getItem('tombag')||'0';
   document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
 }catch(e){}})();
-
-(function(){
-  var n=parseInt(sessionStorage.getItem('tombag')||'0',10);
-  if(n>0){
-    document.getElementById('empty').style.display='none';
-    document.getElementById('filled').style.display='block';
-    document.getElementById('qty').textContent=n;
-    document.getElementById('sub').textContent='\u20A9'+(1980000*n).toLocaleString('ko-KR');
-  }
-})();
 
 </script>
 </body>

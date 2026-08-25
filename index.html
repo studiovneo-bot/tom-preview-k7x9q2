@@ -6,110 +6,221 @@
 <meta name="robots" content="noindex,nofollow">
 <script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
 
-<title>tOM — hannam</title>
-<style>
-/* ───────────────────────────────────────────────
-   tOM 커버 — 확정 (2026-08-18 Neo "이 배열이 더 낫다, 균형감만 더")
-   지그재그 계단 배열 + 접지선. 좌측 스택 판은 폐기.
+<title>tOM</title>
+<!-- tOM 커버(랜딩) — 겹쳐 찍기(오버프린트)
+     2026-08-23 Neo 채택. 그전 판(브랜드명을 흩어 놓은 활자 커버)은
+     스테이징 git 이력과 _릴리스/tom-proto-v1_20260819.zip 에 남아 있다.
 
-   균형 규칙:
-   · 일곱 단이 같은 간격(12.6vh)으로 내려간다
-   · 좌우 들여쓰기는 8vw 하나 — 좌→우→좌→중앙→우→좌→우
-   · 가운데 줄(Giovanni)만 정중앙에서 접지선을 가로지른다
-   · 로고(상단 중앙)와 Enter(하단 중앙)가 수직축을 이룬다
-   · 붉은 괘선 하나만 왼쪽 모서리를 뚫는다
-   어디를 눌러도 입장 → home.html
-   ─────────────────────────────────────────────── */
+     사진은 들어올 때마다 무작위로 바뀐다(아래 스크립트). 웹사본은 img/landing-2026-08-23/.
+     원본은 바탕화면 톰_랜딩페이지이미지 폴더에 있고 건드리지 않았다.
+     ⚠ 사진을 추가하려면 스크립트의 목록과 '사진별 배치' 블록 둘 다 손봐야 한다.
+     의도: 사진과 활자를 나란히 두지 않고 같은 자리에 겹친다.
+     mix-blend-mode:difference 라 글자가 밝은 바닥에서는 검게, 검은 옷 위에서는 희게 뒤집힌다.
+     → 사진이 바뀌면 글자도 따라 바뀐다. 인쇄의 오버프린트와 같은 원리다.
+     그림자·그라데이션·둥근모서리를 쓰지 않는다는 원칙은 지킨다(반전은 효과가 아니라 인쇄 문법).
+     글자를 화면 밖으로 흘려보내 '화면이 지면의 일부'로 읽히게 한다.
+     사진은 샘플이다. 2단계 촬영본으로 교체된다. -->
+<style>
 :root{
-  --bg:#f5f4f1;
-  --ink:#111;
-  --soft:#9a9a9a;
-  --line:#dcdcdc;
-  --red:#a5202a;
+  --bg:#f5f4f1; --ink:#111; --red:#b3261e;
   --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;
-  --display-font:"Times New Roman",Times,"Noto Serif",serif;
+  --display-font:"Times New Roman",Times,serif;
+  --pad:45px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
-body{
-  background:var(--bg);color:var(--ink);
-  font-family:var(--nav-font);
-  overflow:hidden;
-  -webkit-font-smoothing:antialiased;
-}
+body{background:#e8e6e2;color:var(--ink);font-family:var(--nav-font);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
-.cover{position:relative;display:block;height:100%;cursor:pointer}
-
-/* 접지선 — 화면은 펼침면이다 */
-.fold{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
-
-.mark{position:absolute;top:26px;left:50%;transform:translateX(-50%);z-index:3}
-.mark img{height:28px;width:auto;display:block}
-
-/* 이름들 — 같은 크기, 같은 간격, 8vw 들여쓰기 교차 */
-.n{
-  position:absolute;z-index:1;
-  font-family:var(--display-font);font-weight:400;
-  font-size:min(10.2vw,14.5vh);
-  line-height:.85;letter-spacing:-.03em;white-space:nowrap;
-  color:var(--ink);
-  transition:color .15s ease;
+.cover{position:relative;display:block;width:100%;height:100dvh;overflow:hidden;background:#e8e6e2}
+.cover>img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 0%;
+  filter:grayscale(1) contrast(1.04);
 }
-.n:hover{color:#b3b3b3}
 
-.n1{top:9vh;    left:8vw}                                  /* Tom Atelier */
-.n2{top:21.6vh; right:8vw}                                 /* Biek Verstappen */
-.n4{top:34.2vh; left:8vw}                                  /* Nostrasantissima */
-.n3{top:46.8vh; left:50%;transform:translateX(-50%)}       /* Giovanni Cavagna — 정중앙 */
-.n6{top:59.4vh; right:8vw}                                 /* Uma Wang */
-.n7{top:72vh;   left:8vw}                                  /* tagliovivo */
-.n5{top:84.6vh; right:8vw}                                 /* Ziggy Chen */
+/* 활자 층 — 두 가지 방식이 있다.
+   ① 붉은 활자(기본): 겹침 합성을 끄고 붉은색을 그대로 얹는다. 밝고 잔잔한 사진에서만 안전하다
+   ② 겹침 합성(difference): 흰 글자가 바닥색의 정반대로 자동 반전된다. 검은 덩어리가 큰 사진용
+   ⚠ 두 방식을 섞을 수 없다 — 겹침 위에 빨강을 얹으면 |눈 − 빨강| = 청록이 나온다.
+   지금 세 장은 모두 밝은 사진이라 ①이 기본이고, 필요한 부분만 ②로 되돌린다. */
+.over{
+  position:absolute;inset:0;
+  mix-blend-mode:normal;color:var(--red);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 0 0 var(--pad);
+  /* 사진의 어두운 덩어리 위치를 40px 격자로 실측해 글자 자리를 정했다(2026-08-23).
+     데스크톱 1440x900 — 나뭇가지 y0~200 / x520~1160, 바위 y480~620 / x600~840.
+     → 글자 열의 오른쪽 끝을 600 앞에서 끊으면 바위와 절대 겹치지 않는다.
+     세로 중앙 정렬이면 블록 상단이 y292 라 가지(200)도 피한다. */
+  pointer-events:none;
+}
+.over ul{list-style:none}
+.over .mark{position:absolute;top:34px;left:var(--pad)}
 
-/* 빨강 하나 — 왼쪽 모서리를 뚫고 들어오는 괘선 */
-.redrule{position:absolute;top:91vh;left:-2vw;width:12vw;height:2px;background:var(--red);z-index:1}
+/* ── 사진별 배치 ────────────────────────
+   기준값은 p1(snow-single). 사진이 늘면 아래에 한 블록씩 추가한다.
+   값 정하는 법: 글자를 숨긴 화면을 렌더해 40px 격자로 어두운 덩어리 지도를 그리고,
+   그 덩어리를 피하도록 큰 활자 크기와 오른쪽 열 시작 높이를 정한다. */
 
+/* 로고는 어느 사진에서든 검은 덩어리를 지날 수 있다 → 항상 겹침 합성으로 자동 반전 */
+.over .mark{mix-blend-mode:difference}
+.since{color:var(--red)}
+.enter{color:var(--red);border-color:var(--red)}
+
+/* p1 snow-single — 눈밭. 기본값 그대로. 묻힘 0.5% / 폰 0.4% */
+
+/* p2 cloud-a — 구름. 전면이 중간톤이라 겹침 합성은 55%가 뭉갠다. 빨강이라야 산다(4.5% / 폰 0%) */
+
+/* p3 snow-ridge — 오른쪽 절반이 검은 바위다.
+   ① 오른쪽 명단이 바위 위에 통째로 얹힌다 — 빨강 대비 2.8 은 13px 글자에 부족하다 → 명단만 겹침으로 되돌린다
+   ② 폰은 세로로 잘리며 바위가 글자 뒤로 들어온다 → 크롭을 왼쪽 눈밭으로 민다(묻힘 2.1% → 0.4%) */
+.p3 .over .index{mix-blend-mode:difference;color:#fff}
+
+/* 오른쪽 목록 = 취급 브랜드 '전체' 명단(알파벳순).
+   왼쪽에 크게 띄운 브랜드도 이 명단에 그대로 들어간다 —
+   어느 브랜드도 '작은 쪽에만 있는' 상태가 되지 않게 하기 위한 규칙이다.
+   순서는 알파벳순으로 고정해 서열로 읽히지 않게 한다.
+   나무가 x520~1160 / y0~200 을 지나므로 y240 아래에서 시작한다.
+   오른쪽 끝에 맞춰 흘려 왼쪽 큰 활자와 양끝으로 맞선다 */
+.index{
+  position:absolute;right:var(--pad);top:238px;
+  text-align:right;list-style:none;
+  font-family:"Didot","Bodoni 72","Times New Roman",Times,serif;
+  font-size:13px;line-height:1.78;letter-spacing:.04em;
+  font-weight:400;
+}
+.over .index li{white-space:nowrap;font-size:13px;line-height:1.78;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
+/* ⚠ .over li 로 걸면 오른쪽 색인의 li 까지 92px 이 된다 — 반드시 .big 으로 좁힌다 */
+.over .big li{
+  font-family:"Didot","Bodoni 72","Times New Roman",Times,serif;
+  font-weight:500;
+  font-size:clamp(26px,5.8vw,92px);
+  line-height:1.0;letter-spacing:-.012em;
+  text-transform:uppercase;
+  white-space:nowrap;                        /* 화면 밖으로 흘린다 */
+}
+/* 들여쓰기를 주지 않는다 — 여섯 줄을 같은 왼쪽 축에 세운다 (2026-08-23 Neo) */
+
+/* 로고도 겹침 층에 넣는다.
+   밖에 두면 사진의 검은 덩어리 위에서 그대로 묻힌다(눈 위 바위 사진에서 실제로 사라졌다).
+   흰색으로 반전시켜 넣으면 글자와 똑같이 바닥색의 반대로 뒤집힌다 */
+.mark{position:absolute;top:34px;left:var(--pad);line-height:1}
+.mark img{height:26px;width:auto;display:block;filter:invert(1)}
+/* 붉은 룰은 반전 밖에 둔다 — 겹침 층에 넣으면 색이 뒤집혀 붉은색이 아니게 된다 */
+.rule{position:absolute;top:74px;left:var(--pad);width:54px;height:2px;background:var(--red);z-index:3}
+
+.foot{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:0 var(--pad) 32px;
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:18px;
+}
+.since{font-family:var(--display-font);font-size:15px;line-height:1.5;letter-spacing:.02em;color:var(--ink)}
 .enter{
-  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
-  font-family:var(--display-font);font-size:15px;letter-spacing:.2px;color:var(--soft);z-index:3;
-  background:var(--bg);padding:6px 14px;
-}
-.cover:hover .enter{color:var(--ink)}
-
-/* 모바일 — 같은 문법, 세로 지면. 로고는 메인 페이지처럼 좌측 */
-@media (max-width:680px){
-  .mark{left:16px;transform:none}
-  .n{font-size:5.6vh}
-  .n1{top:10vh;   left:6vw}
-  .n2{top:21.5vh; left:auto;right:6vw}
-  .n4{top:33vh;   left:6vw}
-  .n3{top:44.5vh; left:50%;transform:translateX(-50%)}
-  .n6{top:56vh;   right:6vw}
-  .n7{top:67.5vh; left:6vw}
-  .n5{top:79vh;   right:6vw;left:auto}
-  .redrule{top:88vh;left:-4vw;width:26vw}
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+  padding-bottom:3px;border-bottom:1px solid var(--ink);
 }
 
-@media (prefers-reduced-motion:reduce){
-  .n{transition:none}
+@media (max-width:900px){
+  :root{--pad:18px}
+  .p3 .cover>img{object-position:0% 0%}
+  .mark{top:22px}
+  .mark img{height:22px}
+  .rule{top:56px;left:var(--pad)}
+  /* 폰 390x844 — 가지 y0~160, 바위 y400~560(x80~320, 글자 바로 밑).
+     세로 중앙에 두면 바위와 겹친다 → 위로 올려 가지와 바위 사이에 앉힌다 */
+  /* 폰 390x844 — 가지 y0~160, 바위 y400~560. 큰 이름은 그 사이에 앉힌다.
+     데스크톱에서 두 줄로 쪼개던 이름을 폰에서는 한 줄로 붙여 여덟 줄을 여섯 줄로 줄인다 */
+  .over{padding-left:var(--pad);justify-content:flex-start;padding-top:150px}
+  .brk{display:none}
+  .over .big li{font-size:clamp(24px,8.6vw,36px);line-height:1.04;letter-spacing:-.025em}
+  /* 오른쪽 열은 폰에서 설 자리가 없다 → 바위 아래 빈 눈밭(y560~780)으로 내린다 */
+  /* 폰 — 24개를 단으로 쌓으면 하단 정보와 부딪힌다.
+     가운뎃점으로 이어 흘려 다섯 줄 안에 접는다 */
+  .index{
+    position:absolute;left:var(--pad);right:var(--pad);top:556px;
+    text-align:left;columns:none;
+  }
+  .over .index li{display:inline;white-space:normal;font-size:11px;line-height:1.95;letter-spacing:.02em}
+  .over .index li+li::before{content:"· ";opacity:.55}
+  .foot{padding-bottom:24px}
 }
 </style>
 </head>
 <body>
 
 <a class="cover" href="home.html" aria-label="tOM 입장">
-  <span class="fold" aria-hidden="true"></span>
-  <span class="mark"><img src="img/tom-logo.svg" alt="tOM"></span>
-  <span class="n n1" aria-hidden="true">Tom Atelier</span>
-  <span class="n n2" aria-hidden="true">Biek Verstappen</span>
-  <span class="n n4" aria-hidden="true">Nostrasantissima</span>
-  <span class="n n3" aria-hidden="true">Giovanni Cavagna</span>
-  <span class="n n6" aria-hidden="true">Uma Wang</span>
-  <span class="n n7" aria-hidden="true">tagliovivo</span>
-  <span class="n n5" aria-hidden="true">Ziggy Chen</span>
-  <span class="redrule" aria-hidden="true"></span>
-  <span class="enter">Enter</span>
+  <img id="cover" alt="">
+  <script>
+  /* 들어올 때마다 사진을 바꾼다.
+     ⚠ 글자 자리는 사진마다 따로 잡아야 한다 — 사진의 검은 덩어리 위치가 다르기 때문이다.
+        그래서 고른 사진을 <html> 에 p1·p2·p3 클래스로 알리고, 그 클래스로 배치를 갈아 끼운다.
+     ?p=1 처럼 붙이면 그 사진으로 고정된다(검수·시연용).
+     img 태그 바로 뒤에서 실행되므로 다른 사진이 먼저 보였다 바뀌는 일은 없다. */
+  (function(){
+    var P=["snow-single","cloud-a","snow-ridge"];   /* 2026-08-23 Neo 확정. snow-rocks·branches 는 파일만 남기고 목록에서 뺐다 */
+    var q=(location.search.match(/[?&]p=([0-9])/)||[])[1];
+    var i=q?Math.min(Math.max(+q,1),P.length)-1:Math.floor(Math.random()*P.length);
+    document.documentElement.classList.add("p"+(i+1));
+    document.getElementById("cover").src="img/landing-2026-08-23/"+P[i]+".jpg";
+  })();
+  </script>
+
+  <span class="over" aria-hidden="true">
+    <ul class="big">
+      <li>Biek<br class="brk"> Verstappen</li>
+      <li>Giovanni<br class="brk"> Cavagna</li>
+      <li>Nostrasantissima</li>
+      <li>Uma Wang</li>
+      <li>tagliovivo</li>
+      <li>Ziggy Chen</li>
+    </ul>
+    <ul class="index">
+      <li>A Diciannoveventitre</li>
+      <li>Aleksandr Manamïs</li>
+      <li>Biek Verstappen</li>
+      <li>Boris Bidjan Saberi</li>
+      <li>Carol Christian Poell</li>
+      <li>Daniela Gregis</li>
+      <li>Devoa</li>
+      <li>Forme d'Expression</li>
+      <li>Geoffrey B. Small</li>
+      <li>Giovanni Cavagna</li>
+      <li>Guidi</li>
+      <li>Individual Sentiments</li>
+      <li>Jan-Jan Van Essche</li>
+      <li>Julius</li>
+      <li>Label Under Construction</li>
+      <li>m.a+</li>
+      <li>Nostrasantissima</li>
+      <li>Paul Harnden</li>
+      <li>Rick Owens</li>
+      <li>tagliovivo</li>
+      <li>The Viridi-Anne</li>
+      <li>Uma Wang</li>
+      <li>Werkstatt:München</li>
+      <li>Ziggy Chen</li>
+    </ul>
+    <span class="mark"><img src="img/tom-logo.svg" alt="tOM"></span>
+  </span>
+
+  <span class="rule" aria-hidden="true"></span>
+
+  <span class="foot">
+    <span class="since">Hannam, Seoul<br>Since 1997</span>
+    <span class="enter">Enter</span>
+  </span>
 </a>
 
+
+<div class="revnote">오른쪽 목록은 <b>자리표시 예시</b>입니다. 톰이 실제로 취급하는 브랜드가 아닙니다 — 실제 목록 수령 후 교체.</div>
+<style>
+.revnote{display:none}
+html.review .revnote{
+  display:block;position:fixed;left:50%;bottom:14px;transform:translateX(-50%);
+  background:#b3261e;color:#fff;padding:7px 14px;font:12px/1.4 -apple-system,"Apple SD Gothic Neo",sans-serif;
+  letter-spacing:.02em;z-index:99;
+}
+</style>
 </body>
 </html>

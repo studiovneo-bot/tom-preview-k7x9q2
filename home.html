@@ -309,7 +309,7 @@ footer a:hover{color:#fff}
     <img class="mk-l" src="img/tom-logo.svg" alt="tOM" data-half="l">
     <img class="mk-r" src="img/tom-logo.svg" alt="" aria-hidden="true" data-half="r">
   </a></div>
-  <div class="util"><a class="acct" href="login.html">Log In</a><a class="acct" href="cart.html">Bag (0)</a></div>
+  <div class="util"><a class="acct" href="search.html">Search</a><a class="acct" href="login.html">Log In</a><a class="acct" href="cart.html">Bag (0)</a></div>
 </header>
 
 <!-- 2026-08-18 Neo 지정: 바탕화면 "TOM 메인 페이지 이미지" 4장으로 교체.
@@ -466,7 +466,14 @@ footer a:hover{color:#fff}
     /* 화면에 실제로 걸리는 필터를 캔버스에도 똑같이 건다.
        이걸 빠뜨리면 원본 컬러를 읽어 휘도표가 렌더 결과와 어긋난다 */
     x.filter = getComputedStyle(img).filter || 'none';
-    x.drawImage(img,(w-dw)/2,(h-dh)/2,dw,dh);
+    /* ⚠ 예전에는 항상 가운데((w-dw)/2)로 그렸다. object-position 을 준 사진이 하나라도
+       생기면 휘도표와 화면이 통째로 어긋난다 — 실제로 상단 띠에 22% 를 주자
+       헤더가 '밝다'고 잘못 읽어 메뉴 글자가 흰색으로 바뀌어 눈밭 위에서 사라졌다.
+       CSS 가 정한 크롭 위치를 그대로 읽어서 같은 자리에 그린다. */
+    var op=getComputedStyle(img).objectPosition.split(' ');
+    var opx=parseFloat(op[0])/100, opy=parseFloat(op[1])/100;
+    if(isNaN(opx)) opx=0.5; if(isNaN(opy)) opy=0.5;
+    x.drawImage(img,(w-dw)*opx,(h-dh)*opy,dw,dh);
     x.filter='none';
 
     var d=x.getImageData(0,0,w,h).data;      /* 칸당 한 번만 */
