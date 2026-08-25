@@ -31,9 +31,17 @@
   font-weight:400 900;font-style:normal;font-display:swap;
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+2000-206F,U+2122,U+2191,U+2193,U+2212;
 }
+/* 본문·메뉴 서체 (2026-08-25 Neo 확정) — acumin-pro 는 Adobe Fonts 라 사이트에 올릴 수 없다.
+   Inter 는 SIL OFL 이라 직접 올린다. 라틴만 담았고 한글은 시스템 서체로 떨어진다. */
+@font-face{
+  font-family:"tOM Sans";
+  src:url("font/inter-latin.woff2") format("woff2");
+  font-weight:100 900;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+2000-206F,U+2122,U+2191,U+2193,U+2212;
+}
 :root{
   --bg:#f5f4f1; --ink:#111; --red:#b3261e;
-  --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;
+  --nav-font:"tOM Sans","Helvetica Neue",-apple-system,Arial,sans-serif;
   --display-font:"Times New Roman",Times,serif;
   --pad:45px;
 }
