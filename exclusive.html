@@ -77,18 +77,28 @@ button{font:inherit;cursor:pointer}
 
 /* ── 상품 구분 (NEW ARRIVAL의 .drop과 동일 처리) ───── */
 .drop{padding:12px var(--pad) 0}
+/* 2026-08-25 Neo 확정(E-B안) — Exclusive 는 '몇 점 없는 것'이다.
+   New Arrival 과 같은 얼굴이면 그 차이가 사라진다. 소제목을 디스플레이 서체로 세운다 */
 .drop > h2{
-  display:flex;align-items:center;gap:14px;
-  font-family:var(--nav-font);font-weight:300;
-  font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft);
-  margin-bottom:14px;
+  display:flex;align-items:center;gap:16px;
+  font-family:var(--display-font);font-weight:400;
+  font-size:26px;letter-spacing:.02em;color:var(--ink);
+  margin-bottom:18px;
 }
 .drop > h2::after{content:"";flex:1;height:1px;background:var(--line)}
 
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+/* 2열로 크게 — 사진이 두 배가 되면서 희소함이 화면 크기로 읽힌다.
+   번호는 CSS 카운터. 전체 개수는 build_products.py 가 --n 으로 넣는다(수가 바뀌면 따라 바뀐다) */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;counter-reset:pc}
+.card{counter-increment:pc}
+.card .brand::before{
+  content:"N\00BA " counter(pc,decimal-leading-zero) "  /  " var(--n,"");
+  display:block;font-family:var(--nav-font);font-size:var(--t-micro);
+  letter-spacing:.16em;color:var(--soft);margin-bottom:7px;
+}
 .grid img{aspect-ratio:4/5;object-fit:cover;object-position:center;transition:opacity .2s}
 .card:hover img{opacity:.85}
-.card figcaption{padding:10px 2px 20px}
+.card figcaption{padding:16px 2px 46px}
 .brand{display:block;font-size:var(--t-micro);letter-spacing:.3px;color:var(--ink)}
 .name{display:block;font-size:var(--t-meta);color:var(--body);margin-top:1px}
 .meta{display:flex;justify-content:space-between;gap:8px;margin-top:5px}
@@ -117,7 +127,7 @@ button{font:inherit;cursor:pointer}
 
 @media (max-width:900px){
   :root{--pad:16px;--t-nav:12px}
-  .grid{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}   /* Exclusive 는 폰에서 한 칸 — 크게 보는 것이 이 페이지의 의도다 */
   /* 좁은 화면 — Róhe 모바일 문법 (2026-08-16): 로고 좌 · Log In 우 한 줄,
      메뉴는 그 아래 왼쪽 정렬 한 줄. 세로 3단 스택(Log In 고아 줄)을 버림 */
   .head{height:auto;grid-template-columns:1fr auto;align-items:center;justify-items:start;gap:12px 16px;padding:18px var(--pad) 14px}
@@ -209,7 +219,7 @@ footer a:hover{color:#fff}
 <!-- PRODUCTS:START — 상품 정본은 20시안/_data/products.json 이다. 이 안을 직접 고치지 말고 build_products.py 를 돌린다 -->
 <section class="drop">
   <h2>12 Pieces</h2>
-  <div class="grid">
+  <div class="grid" style="--n:'12'">
     <figure class="card"><a href="product.html"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-01.jpg" alt=""></a>
       <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
       <span class="meta"><span class="price">₩1,980,000</span></span></figcaption></figure>
