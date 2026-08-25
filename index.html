@@ -21,6 +21,16 @@
      글자를 화면 밖으로 흘려보내 '화면이 지면의 일부'로 읽히게 한다.
      사진은 샘플이다. 2단계 촬영본으로 교체된다. -->
 <style>
+/* 커버 서체 (2026-08-25 Neo 확정 — A안)
+   왜 웹폰트인가: Didot 은 맥에만 있는 서체라 윈도우·안드로이드 손님은 Times 로 떨어졌다.
+   Bodoni Moda 는 같은 디도 계열이며 SIL OFL 라이선스라 사이트에 직접 올려도 된다(font/OFL.txt).
+   가변 서체라 크기에 따라 굵기가 자동으로 맞춰진다 — 오른쪽 작은 명단이 얇아져 사라지지 않는다. */
+@font-face{
+  font-family:"tOM Display";
+  src:url("font/bodoni-moda-latin.woff2") format("woff2");
+  font-weight:400 900;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+2000-206F,U+2122,U+2191,U+2193,U+2212;
+}
 :root{
   --bg:#f5f4f1; --ink:#111; --red:#b3261e;
   --nav-font:"acumin-pro","Acumin Pro","Helvetica Neue","Inter",-apple-system,Arial,sans-serif;
@@ -86,15 +96,17 @@ a{color:inherit;text-decoration:none}
 .index{
   position:absolute;right:var(--pad);top:238px;
   text-align:right;list-style:none;
-  font-family:"Didot","Bodoni 72","Times New Roman",Times,serif;
+  font-family:"tOM Display","Didot","Bodoni 72","Times New Roman",Times,serif;
+  font-optical-sizing:auto;
   font-size:13px;line-height:1.78;letter-spacing:.04em;
   font-weight:400;
 }
 .over .index li{white-space:nowrap;font-size:13px;line-height:1.78;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
 /* ⚠ .over li 로 걸면 오른쪽 색인의 li 까지 92px 이 된다 — 반드시 .big 으로 좁힌다 */
 .over .big li{
-  font-family:"Didot","Bodoni 72","Times New Roman",Times,serif;
-  font-weight:500;
+  font-family:"tOM Display","Didot","Bodoni 72","Times New Roman",Times,serif;
+  font-optical-sizing:auto;
+  font-weight:400;   /* Bodoni Moda 는 500 이면 Didot 보다 두껍다 */
   font-size:clamp(26px,5.8vw,92px);
   line-height:1.0;letter-spacing:-.012em;
   text-transform:uppercase;
