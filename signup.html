@@ -192,7 +192,7 @@ footer a:hover{color:#fff}
     <p>tOM 계정을 만듭니다</p>
   </div>
 
-  <form onsubmit="return false">
+  <form onsubmit="try{sessionStorage.setItem('tomuser','1')}catch(e){};location.href='mypage.html';return false">
     <div class="field">
       <label for="name">Name</label>
       <input id="name" type="text" placeholder="이름" autocomplete="name">
@@ -257,6 +257,10 @@ footer a:hover{color:#fff}
   if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
   var n=sessionStorage.getItem('tombag')||'0';
   document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+  if(sessionStorage.getItem('tomuser')==='1'){
+    document.querySelectorAll('a.acct[href="login.html"]').forEach(function(e){
+      e.textContent='My Page';e.setAttribute('href','mypage.html');});
+  }
 }catch(e){}})();
 </script>
 </body>

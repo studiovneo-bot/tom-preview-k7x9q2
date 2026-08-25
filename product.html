@@ -471,6 +471,10 @@ footer a:hover{color:#fff}
       var n=parseInt(sessionStorage.getItem('tombag')||'0',10)+1;
       sessionStorage.setItem('tombag',String(n));
       document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+  if(sessionStorage.getItem('tomuser')==='1'){
+    document.querySelectorAll('a.acct[href="login.html"]').forEach(function(e){
+      e.textContent='My Page';e.setAttribute('href','mypage.html');});
+  }
     }catch(e){}
     var t=b.textContent; b.textContent='담았습니다'; b.disabled=true;
     setTimeout(function(){b.textContent=t;b.disabled=false},1400);

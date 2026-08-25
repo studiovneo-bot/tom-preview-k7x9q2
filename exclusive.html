@@ -296,6 +296,10 @@ footer a:hover{color:#fff}
   if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
   var n=sessionStorage.getItem('tombag')||'0';
   document.querySelectorAll('.bagn').forEach(function(e){e.textContent=n});
+  if(sessionStorage.getItem('tomuser')==='1'){
+    document.querySelectorAll('a.acct[href="login.html"]').forEach(function(e){
+      e.textContent='My Page';e.setAttribute('href','mypage.html');});
+  }
 }catch(e){}})();
 </script>
 </body>
