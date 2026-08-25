@@ -15,6 +15,7 @@ for f in index home brands new exclusive product paper paper-no35 store login si
 done
 rm -rf img && cp -R "$SRC/img" img
 rm -rf font && cp -R "$SRC/font" font    # 커버 웹폰트 — 빠지면 윈도우에서 Times 로 떨어진다
+rm -rf js && cp -R "$SRC/js" js        # 측정 스크립트 — 빠지면 스테이징에서만 이벤트가 안 잡힌다
 
 # 2) 게이트 + noindex 주입 (gate.html 제외 전 페이지)
 python3 - <<'EOF'
