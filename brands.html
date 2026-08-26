@@ -490,8 +490,12 @@ footer a:hover{color:#fff}
 <!-- FOOTER:END -->
 
 <script>
-/* 리뷰 모드 — 주소 뒤 ?review 면 내부 메모가 보인다 */
-(function(){try{if(/[?&]review\b/.test(location.search))document.body.classList.add('review');}catch(e){}})();
+/* 리뷰 모드 — 다른 22페이지와 같은 방식으로 맞춤 (2026-08-26)
+   옛 방식은 이 페이지에서 직접 ?review 를 쳐야만 켜졌다. 이제 한 번 켜면 넘어가도 유지된다. */
+(function(){try{
+  if(location.search.indexOf('review')>-1)sessionStorage.setItem('tomreview','1');
+  if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
+}catch(e){}})();
 </script>
 
 <script>
