@@ -37,6 +37,25 @@ for p in pathlib.Path(".").glob("*.html"):
 print(f"게이트 주입: {n}페이지")
 EOF
 
+# 2-2) 커버의 자리표시 경고를 스테이징에서는 항상 켠다 (2026-08-26 Neo)
+# ⚠ 스테이징 전용이다. 본선(tom-proto)에는 넣지 않는다 — 실제 오픈 사이트에 이 띠가 뜨면 안 된다.
+# 켜는 것은 커버의 브랜드 명단 경고 하나뿐이다. 상품·브랜드 페이지의 내부 메모는 그대로 ?review 로 남긴다
+# (그 안에 「캠페인 이미지 사용 허가 확인 필요」처럼 톰에게 그대로 보이면 곤란한 문장이 있다).
+python3 - <<'EOF'
+import pathlib
+MARK = "STAGING:COVER-REVNOTE"
+SNIPPET = ('<script>/* ' + MARK + ' — 스테이징에서는 자리표시 경고를 늘 띄운다. '
+           'redeploy.sh 가 넣는다 */document.documentElement.classList.add("review");</script>\n')
+p = pathlib.Path("index.html")
+t = p.read_text(encoding="utf-8")
+if MARK in t:
+    print("커버 경고: 이미 켜져 있음")
+else:
+    assert "</body>" in t, "index.html 에 </body> 가 없다"
+    p.write_text(t.replace("</body>", SNIPPET + "</body>", 1), encoding="utf-8")
+    print("커버 경고: 항상 켜기 주입 완료")
+EOF
+
 # 3) 커밋·푸시
 git add -A
 if git diff --cached --quiet; then

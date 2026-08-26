@@ -242,6 +242,16 @@ html.review .revnote{
   letter-spacing:.02em;z-index:99;
 }
 </style>
+<script>
+/* 리뷰 모드 — 위 경고를 켜는 스위치. 다른 22페이지와 같은 방식이다.
+   ⚠ 이 세 줄이 없으면 위의 문구와 CSS 가 있어도 경고는 영영 안 뜬다 (2026-08-26 에 실제로 그 상태였다).
+   sessionStorage 를 쓰므로 한 번 ?review 로 열면 다른 페이지로 넘어가도 켜져 있다. */
+(function(){try{
+  if(location.search.indexOf('review')>-1)sessionStorage.setItem('tomreview','1');
+  if(sessionStorage.getItem('tomreview')==='1')document.documentElement.classList.add('review');
+}catch(e){}})();
+</script>
 <script defer src="js/tom-track.js"></script>
+<script>/* STAGING:COVER-REVNOTE — 스테이징에서는 자리표시 경고를 늘 띄운다. redeploy.sh 가 넣는다 */document.documentElement.classList.add("review");</script>
 </body>
 </html>
