@@ -9,24 +9,22 @@
 <title>tOM — hannam</title>
 <style>
 /* ───────────────────────────────────────────────
-   tOM 홈 — 본선 (2026-08-18 Neo 확정: "최종을 toteme 판으로 가고
-   기존에 만든 랜딩 페이지는 유지")
-   구 홈(가운데 세리프 캡션 + 45px 거터)은 home-v4-center.html 로 남겨둠
-   Totême(toteme.com/ko-kr) 문법을 실측해 옮겼다:
-   · 사진이 화면을 통째로 채운다 — 여백 0, 사진 사이 간격 0. 한 칸 = 50vw × 100vh
-   · 헤더는 fixed · 배경 완전 투명. 사진 위에 그냥 얹힌다. 경계선도 띠도 없다
-   · 캡션은 사진 안 하단 중앙 두 줄. 크기 차이만으로 위계를 만든다
+   tOM 홈 — 본선 v6 (2026-09-04 Neo 확정: "이 구조로 본선 홈 교체")
+   09-03 톰 미팅의 박양규 대표 발언을 사이트로 옮긴 룩북형 홈.
+   구 홈(Totême 2×2 격자, 08-18~08-25)은 home-v5-toteme.html 로 남겨둠.
+   그 전 홈은 home-v4-center.html.
 
-   tOM에 옮기며 바꾼 것:
-   · 서체 — Totême는 산세리프 라이트지만 tOM 정본 Times 세리프로 (Neo 지시)
-   · 캡션 높이 — Totême 실측 130px는 tOM 사진에서 인물 위에 얹혀 28px로 내림
-   · 헤더 글자색 — Totême는 잉크 하나로 끝나지만(전 사진이 하이키)
-     tOM 사진은 밝기가 제각각이라 스크롤에 따라 자동으로 뒤집는다
-   · 마감 블록(레드룰·매장·뉴스레터·검정 푸터)은 구 홈에서 그대로 살렸다
-   · Selected Brands 타이포 블록은 뺐다 — 커버(index.html)가 곧 브랜드 목록이다
+   층이 둘이다:
+   ① 위 = 박 대표의 룩북 — 브랜드 셋 크게 · 로고 없는 명단 · 러프한 흑백 컷 · 가격 없음
+   ② 아래 = 판매층 — Online Exclusive 에만 가격 · 신상은 가격 미공개(09-04 Neo)
+   맨 밑 = 매장으로 오게 하는 장치.
 
-   ?band 를 붙이면 헤더 뒤에 배경 띠를 깐 비교판. 2026-08-18 Neo가 투명판으로 확정,
-   띠판은 되살릴 일에 대비해 코드만 남겨둔 것이다
+   근거(전사 원문 30미팅자료/톰_미팅_전사원문_20260903.md):
+   "기존 게 싫어"[08:30] · "우리는 일반 거하고 틀려"[08:44] · 날리고 흑백으로[01:34]
+   잉크식 브랜드 3개[11:26] · 로고 나열 ✗[13:53] · 온라인은 매장으로 끄는 통로[19:43]
+   신상 가격 미공개[15:50] · 세일 없음[22:58]
+
+   08-25 D안(홈 2×2 · 칸별 사진 규칙)은 이 판으로 대체됐다. 헤더·푸터·스크립트는 그대로.
    ─────────────────────────────────────────────── */
 
 /* 본문·메뉴 서체 (2026-08-25 Neo 확정) — acumin-pro 는 Adobe Fonts 라 사이트에 올릴 수 없다.
@@ -37,9 +35,11 @@
   font-weight:100 900;font-style:normal;font-display:swap;
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+2000-206F,U+2122,U+2191,U+2193,U+2212;
 }
+
 :root{
   --bg:#f5f4f1;
   --ink:#111;
+  --paper:#f2f1ee;
   --nav-font:"tOM Sans","Helvetica Neue",-apple-system,Arial,sans-serif;
   --display-font:"Times New Roman",Times,"Noto Serif",serif;  /* tOM 정본 디스플레이 서체 */
   --red:#b3261e;       /* Bazaar 레드. 페이지 전체에서 한 번만 */
@@ -54,41 +54,20 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{
-  background:var(--bg);color:var(--ink);
-  font-family:var(--nav-font);
-  font-size:16px;line-height:1.75;
-  -webkit-font-smoothing:antialiased;
-}
+body{background:var(--bg);color:var(--ink);font-family:var(--nav-font);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
 img{display:block;width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 
-/* ── 헤더 — Totême: 투명 · 사진 위 · 스크롤을 따라온다 ──
-   2026-08-18 Neo "스크롤 내릴 때 로고랑 메뉴가 같이 내려오는 인터랙션은 어떠니"
-
-   Totême 원본도 `position:fixed`다. 그런데 그쪽은 전 사진이 하이키라
-   잉크 헤더 하나로 끝난다. tOM 사진은 밝기가 제각각이라 그대로 따라오게 하면
-   밝은 칸에서 흰 글자가, 어두운 칸에서 검은 글자가 통째로 사라진다
-   (오늘 QA에서 실제로 잡힌 결함이라 한 번 `absolute`로 후퇴했었다).
-
-   그래서 따라오게 하되 **글자색이 뒤 사진 밝기에 따라 스스로 뒤집히게** 했다.
-   스크림·그림자를 덧대지 않는 대신, 각 사진을 캔버스로 미리 훑어
-   4px 격자 적분영상으로 휘도표를 만들어 두고
-   스크롤할 때마다 각 링크와 로고 좌우 절반이 지금 어떤 밝기 위에 있는지 조회한다.
-   판정 기준 70 — 그보다 밝으면 잉크, 어두우면 흰색 (근거는 스크립트 주석) */
+/* ── 헤더 — 투명 · 사진 위 · 스크롤을 따라온다 (08-18 확정, 변경 없음).
+   글자색은 뒤 사진 밝기에 따라 스크립트가 뒤집는다. 사진이 없는 자리(종이색)는 잉크 */
 .head{
   position:fixed;top:0;left:0;right:0;z-index:10;
   background:transparent;
   height:90px;padding:0 var(--pad);
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;
-  /* 고정 헤더가 상단 90px 띠 전체의 클릭을 먹어 밑의 사진 링크가 안 눌렸다(QA 4차).
-     글자에만 클릭을 허용하고 빈 공간은 통과시킨다 */
   pointer-events:none;
 }
 .head a{pointer-events:auto}
-/* 기본은 잉크. 스크립트가 **링크 하나하나**에 .z-paper를 붙였다 뗀다.
-   메뉴 5개를 한 덩어리로 재면 왼쪽이 밝을 때 오른쪽 링크가 어두운 배경에
-   묻혀도 잉크로 남는다 — QA에서 잡힌 결함(휘도 31~39 위에 잉크) */
 .head, .head a{color:#090909}
 .head a{transition:color .22s ease}
 .head a.z-paper{color:#f2f1ee}
@@ -97,164 +76,127 @@ a{color:inherit;text-decoration:none}
 .mark img{height:24px;width:auto;display:block;transition:filter .22s ease}
 .mark .mk-r{position:absolute;top:0;left:0;clip-path:inset(0 0 0 50%)}
 .mark img.z-paper{filter:invert(1) brightness(2.2)}
-.head nav{
-  grid-column:1;grid-row:1;
-  display:flex;align-items:center;gap:35px;flex-wrap:wrap;
-  font-size:13px;letter-spacing:.3px;
-}
+.head nav{grid-column:1;grid-row:1;display:flex;align-items:center;gap:35px;flex-wrap:wrap;font-size:13px;letter-spacing:.3px}
 .head .util{grid-column:3;grid-row:1;justify-self:end;display:flex;gap:35px}
 .acct{font-size:13px;letter-spacing:.3px}
 
-/* ── Totême 격자 — 50vw × 100vh, 간격 0 ── */
-.grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0;                       /* Totême 실측: 사진끼리 붙는다 */
-}
-.cell{position:relative;height:100vh;overflow:hidden;display:block}
-.cell img{width:100%;height:100%;object-fit:cover}
-/* tOM 정본: 에디토리얼 페이지는 흑백(상품 페이지만 예외) — 본선 home.html과 동일 */
-.cell img{filter:grayscale(1) contrast(1.06)}
-.cell figcaption{
-  position:absolute;left:0;right:0;bottom:0;
-  /* Totême 실측은 바닥에서 130px(padding-bottom 96px)이지만 tOM 사진에서는
-     그 높이가 정확히 인물·사물 위에 얹힌다. 8px 간격으로 훑어 네 칸 모두
-     바닥에 가까울수록 좋았다(사진 하단이 바닥·아스팔트라 비교적 고르다). 18px */
-  padding-bottom:18px;
-  text-align:center;pointer-events:none;
-}
-/* 2026-08-18 Neo "폰트를 세리프로 해보자" — Totême는 산세리프 라이트지만
-   tOM 정본 디스플레이 서체는 Times다. 세리프는 같은 px에서 작아 보이므로
-   18→22px, 12→13px로 올리고 굵기 300(세리프에 없는 굵기)을 400으로 되돌린다 */
-.cell .t{
-  display:block;font-family:var(--display-font);
-  font-size:28px;font-weight:400;line-height:1.22;
-  letter-spacing:0;
-}
-.cell .s{
-  display:block;font-family:var(--display-font);
-  font-size:14px;font-weight:400;line-height:1.6;
-  text-transform:capitalize;margin-top:7px;
-}
-/* 칸별 캡션 색 — 2026-08-18 Neo "메인홈 4구성 메뉴의 가독성이 너무 떨어져"
+/* ── 사진 구역 공통 — 헤더 휘도표의 대상(.zone). 에디토리얼은 흑백(tOM 정본) ── */
+.zone{position:relative;display:block;overflow:hidden;background:#222}
+.zone img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:opacity .25s}
+.zone:hover img{opacity:.9}
 
-   **평균 휘도로 고르면 안 된다.** 두 번 틀렸다.
-   ① 처음엔 칸 전체 폭을 재서 arrivals를 반대로 골랐고
-   ② 다음엔 글자 범위를 쟀지만 '평균'을 써서 exclusive-night을 흰색으로 골랐다.
-      그 자리는 밝은 골함석 벽과 검은 옷이 섞여 평균은 중간이지만
-      **글자 면적의 97%가 대비 3.5 미만**이었다. 사실상 안 보이는 상태였다.
+/* ── ① 첫 화면 — 이번 시즌의 브랜드 셋 ──
+   종이색 위에 큰 세리프 문장 하나, 그 밑에 세 기둥. 가격·버튼 없음.
+   바잉 다녀올 때마다 문장과 세 기둥이 바뀐다 — 커버 왼쪽 큰 활자와 같은 주기 */
+.season{padding:150px var(--pad) 0}
+.season .kicker{font-size:var(--t-micro);letter-spacing:.4px;color:var(--soft)}
+.season h1{font-family:var(--display-font);font-weight:400;font-size:clamp(34px,4.6vw,64px);line-height:1.08;letter-spacing:-.01em;margin:10px 0 0;max-width:18ch}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:54px}
+.trio .zone{height:82vh}
+.trio figcaption{position:absolute;left:22px;right:22px;bottom:20px;color:var(--paper);pointer-events:none}
+.trio .b{display:block;font-family:var(--display-font);font-size:34px;line-height:1.1}
+.trio .n{display:block;font-size:var(--t-meta);margin-top:8px;opacity:.85}
+.trio .n i{font-style:normal;border-bottom:1px solid rgba(242,241,238,.5)}
+/* 밝은 사진 위 캡션은 잉크 — '안 읽히는 면적 비율'로 고른다(운영가이드 함정 10) */
+.trio .zone--ink figcaption{color:var(--ink)}
+.trio .zone--ink .n i{border-color:rgba(17,17,17,.4)}
 
-   판정 기준을 평균에서 **'대비 3.5 미만인 픽셀의 비율'** 로 바꿨다.
-   각 사진에서 캡션 높이를 8px 간격으로 훑어 그 비율이 최소가 되는 색을 고른다.
-   결과(나쁨 비율): arrivals 잉크 0% / paper 잉크 14% / exclusive 잉크 4% / store 흰색 0%
-   → 매장 칸만 흰색, 나머지 셋은 잉크.
-
-   Totême는 네 칸 전부 잉크 하나로 끝난다. 사진이 전부 하이키라서 가능한 일이다 */
-.cell--ink figcaption{color:#090909}
-.cell--paper figcaption{color:#f2f1ee}
-
-/* 사진이 화면을 채우므로 링크 전체가 눌린다 */
-.cell::after{content:"";position:absolute;inset:0}
-.cell img{transition:opacity .25s}
-.cell:hover img{opacity:.9}
-
-/* ── 띠 버전 (주소 뒤 ?band) ────────────────────
-   2026-08-18 Neo "헤더 뒤에 배경 띠 깐 버전도 만들어서 비교해줘"
-
-   투명 헤더의 유일한 약점은 칸의 하단 캡션이 화면 맨 위에 닿을 때 스치는 것이다.
-   띠를 깔면 그 문제가 사라지고 자동 대비 장치도 필요 없어진다.
-   대신 사진이 화면 끝까지 가지 않게 되어 Totême 문법의 핵심(여백 0)이 하나 깨진다.
-
-   띠 색은 tOM 정본 배경 #f5f4f1. 검은 띠도 가능하나 그러면 사이트가 무거워진다.
-   띠 높이만큼 사진을 밀어 내려 헤더가 사진을 가리지 않게 한다 — 가리면 띠를 깐 의미가 없다 */
-body.band .head{
-  background:var(--bg);
-  border-bottom:1px solid rgba(17,17,17,.10);   /* 종이색끼리 만나므로 경계 한 줄 */
-}
-body.band .head a{color:var(--ink)}
-body.band .mark img{filter:none}
-body.band .mark .mk-r{display:none}
-body.band .grid{padding-top:var(--headh,90px)}
-body.band .cell{height:calc(100vh - var(--headh, 90px))}
-@media (max-width:900px){
-  body.band .head--tight nav{display:flex}   /* 띠가 있으면 메뉴를 접을 이유가 없다 */
-}
-
-/* ── 아래는 기존 홈(home-v4-center.html)에서 그대로 옮겨온 마감 블록 ──
-   2026-08-18 Neo "최종을 toteme 판으로 가고 기존에 만든 랜딩 페이지는 유지".
-   격자만 Totême 문법으로 갈아끼우고 매장·뉴스레터·레드룰·검정 푸터는 살린다.
-   Selected Brands 타이포 블록은 뺐다 — 커버(index.html)가 곧 브랜드 목록이라
-   같은 것을 두 번 보여줄 이유가 없다는 Neo 판단 */
+/* ── 명단 — 로고 ✗, 톰의 활자 하나. 오른쪽 작은 명단 = 커버와 같은 원칙(전체·알파벳순).
+   미는 셋만 잉크. ⚠ 명단 24개는 자리표시(커버와 동일) — 실목록 오면 통째로 교체 */
+.roster{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:110px var(--pad) 0;align-items:end}
+.roster p{font-family:var(--display-font);font-size:clamp(22px,2.4vw,32px);line-height:1.3;max-width:22ch}
+.roster ul{list-style:none;columns:2;column-gap:40px;font-size:var(--t-meta);line-height:2}
+.roster li{break-inside:avoid;color:var(--body)}
+.roster li.have{color:var(--ink)}
 
 /* ── 조용한 마감선 — 페이지를 가로지르는 한 번의 레드 ── */
-.said{padding:52px var(--pad) 0}
+.said{padding:90px var(--pad) 0}
 .said .rule{width:100%;height:3px;background:var(--red);margin-bottom:14px}
 .said .meta{display:block;font-size:10px;letter-spacing:.4px;color:var(--soft)}
 
-/* ── 매장 · 뉴스레터 ───────────────────── */
-.foot-info{
-  display:grid;grid-template-columns:1fr 1fr;gap:40px;
-  padding:82px var(--pad) 0;
-}
-.foot-info h3{
-  font-size:var(--t-micro);letter-spacing:.3px;
-  color:var(--soft);font-weight:400;margin-bottom:12px;
-}
+/* ── 러프 컷 띠 — "날리고, 과장하고, 흑백으로"(박 대표 09-03)는 상품 페이지가 아니라 여기서 산다.
+   캡션 없음, 번호만. Paper로 간다 */
+.rough{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:60px var(--pad) 0}
+.rough .zone{aspect-ratio:4/5;background:#111}
+.rough .zone img{filter:grayscale(1) contrast(1.18)}
+.rough .zone:nth-child(2) img{object-position:50% 20%}
+.rough span{position:absolute;left:14px;top:12px;color:var(--paper);font-size:var(--t-micro);letter-spacing:.3px}
+.rough-cap{padding:14px var(--pad) 0;display:flex;justify-content:space-between;font-size:var(--t-meta);color:var(--body)}
+.rough-cap a{border-bottom:1px solid var(--line)}
+
+/* ── ② 판매층 — Online Exclusive. 홈에서 가격이 보이는 유일한 자리 (09-04 Neo 확정).
+   신상은 가격 미공개, 익스클루시브(재고·온라인 전용)만 가격 표기 */
+.excl{padding:130px var(--pad) 0}
+.excl header{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--ink);padding-top:16px}
+.excl h2{font-family:var(--display-font);font-weight:400;font-size:28px}
+.excl header p{font-size:var(--t-meta);color:var(--body)}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px;margin-top:36px}   /* minmax(0) — 카드 글줄이 열을 늘리지 않게(320px 실측 19px 넘침) */
+.pgrid a{display:block}
+.pgrid .ph{aspect-ratio:4/5;overflow:hidden;background:#e9e8e4}
+.pgrid img{width:100%;height:100%;object-fit:cover}
+.pgrid .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0 10px;margin-top:10px;font-size:var(--t-meta)}
+.pgrid .brand{font-family:var(--display-font);font-size:17px}
+.pgrid .only{font-size:var(--t-micro);color:var(--soft);letter-spacing:.3px}
+.pgrid .price{color:var(--ink)}
+.excl .more{display:inline-block;margin-top:28px;font-size:var(--t-meta);border-bottom:1px solid var(--ink)}
+
+/* ── 신상 — 가격 없음. 자리엔 "Enquire" (문구는 Neo 결정 대기) ── */
+.arr{padding:110px var(--pad) 0}
+.arr header{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:16px}
+.arr h2{font-family:var(--display-font);font-weight:400;font-size:22px}
+.arr header p{font-size:var(--t-meta);color:var(--body)}
+.arr .pgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.arr .pgrid img{filter:grayscale(1)}
+.arr .enq{color:var(--body)}
+
+/* ── ③ 매장 — 온라인은 매장으로 끌어오는 통로(박 대표). 한 화면 통째로.
+   사진은 흰 벽 파사드(면이 고르다) + 잉크 글자 — 09-04 실측으로 검은 벽돌에서 교체 */
+.store{margin-top:130px;height:92vh;color:var(--paper);background:#111}
+.store img{filter:grayscale(1) contrast(1.08)}
+.store .in{position:absolute;left:var(--pad);right:var(--pad);bottom:84px;pointer-events:none}   /* 벽 밑 검은 단에 시간 줄이 걸려 올림 */
+.store .big{font-family:var(--display-font);font-size:clamp(34px,5vw,70px);line-height:1.02}
+.store .info{font-size:var(--t-meta);line-height:1.9;margin-top:14px}   /* 오른쪽 검은 벽 위에 얹히지 않게 큰 글자 밑에 둔다 */
+.store .info a{border-bottom:1px solid rgba(242,241,238,.5);pointer-events:auto}
+/* 09-04 실측: 검은 벽돌(store-brick)은 헤더 Search 가 묻혔다 → 면이 고른 흰 벽(store-front) + 잉크 글자 (함정 11) */
+.store--ink{color:var(--ink)}.store--ink .info a{border-color:rgba(17,17,17,.4)}
+
+/* ── 매장 · 뉴스레터 (구 홈에서 그대로) ── */
+.foot-info{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:82px var(--pad) 0}
+.foot-info h3{font-size:var(--t-micro);letter-spacing:.3px;color:var(--soft);font-weight:400;margin-bottom:12px}
 .foot-info p{color:var(--ink)}
 .foot-info .sub{color:var(--body);font-size:var(--t-meta);margin-top:2px}
 .foot-info > div:last-child{justify-self:end;width:100%;max-width:420px}
-
 form{display:flex;margin-top:14px;max-width:420px}
-input[type=email]{
-  flex:1;min-width:0;
-  border:1px solid var(--line);border-right:0;border-radius:0;
-  background:transparent;padding:12px 13px;
-  font:inherit;font-size:var(--t-meta);color:var(--ink);
-}
+input[type=email]{flex:1;min-width:0;border:1px solid var(--line);border-right:0;border-radius:0;background:transparent;padding:12px 13px;font:inherit;font-size:var(--t-meta);color:var(--ink)}
 input[type=email]::placeholder{color:var(--soft)}
 input[type=email]:focus{outline:0;border-color:var(--ink)}
-button{
-  border:0;border-radius:0;cursor:pointer;
-  background:var(--ink);color:#fff;padding:12px 22px;
-  font-family:var(--nav-font);font-weight:300;font-size:var(--t-meta);
-}
+button{border:0;border-radius:0;cursor:pointer;background:var(--ink);color:#fff;padding:12px 22px;font-family:var(--nav-font);font-weight:300;font-size:var(--t-meta)}
 
-@media (max-width:900px){
-  .foot-info{grid-template-columns:1fr;gap:30px;padding-top:60px}
-  .foot-info > div:last-child{justify-self:start}
-}
-
-/* ── 푸터 ── */
-/* ── 모바일 — Totême는 한 칸씩 세로로 쌓는다 ──
-   헤더 반응형은 본선 home.html의 확정 규칙(2026-08-16 Róhe 모바일 문법 +
-   중간 폭 3열 복원)을 그대로 옮겨온다. 샘플이 이걸 빠뜨려 390에서 헤더가 겹쳤었다 */
+/* ── 모바일 — 헤더 반응형은 본선 확정 규칙(08-16 Róhe 문법 + 중간 폭 3열 복원) 그대로 ── */
 @media (max-width:900px){
   :root{--pad:16px}
-  .grid{grid-template-columns:1fr}
-  .cell{height:88vh}
-  .cell figcaption{padding-bottom:14px}
+  .season{padding-top:120px}
+  .trio{grid-template-columns:1fr}.trio .zone{height:70vh}
+  .roster{grid-template-columns:1fr;padding-top:70px}.roster ul{columns:2}
+  .rough{grid-template-columns:1fr 1fr}
+  /* 좁은 폭에서 제목+설명 한 줄이 넘친다 → 줄바꿈 허용 */
+  .excl header,.arr header,.rough-cap{flex-wrap:wrap;gap:4px 16px}
+  .pgrid,.arr .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .store{height:80vh}
+  .foot-info{grid-template-columns:1fr;gap:30px;padding-top:60px}
+  .foot-info > div:last-child{justify-self:start}
   .head{height:auto;grid-template-columns:1fr auto;align-items:center;justify-items:start;gap:12px 16px;padding:18px var(--pad) 14px}
   .mark{grid-column:1;grid-row:1}
   .head nav{grid-column:1 / -1;grid-row:2;justify-content:flex-start;row-gap:8px;column-gap:18px}
   .head .util{grid-column:2;grid-row:1;justify-self:end;gap:16px}
-  /* 2026-08-18 Neo — 폰에서는 칸이 한 줄씩 세로로 쌓이므로
-     헤더가 칸이 바뀔 때마다 앞 칸의 캡션과 겹쳤다.
-     **내릴 때 숨고 올릴 때 돌아오는** 방식으로 바꾼다.
-     내리는 중에는 사진만 보이고, 손가락을 위로 올리면 메뉴가 통째로 돌아온다.
-     (앞 판의 '메뉴 줄만 접기'는 겹침 자체를 없애지 못해 폐기) */
   .head{transition:transform .28s ease, background-color .2s ease}
   .head--away{transform:translateY(-100%)}
-  /* 맨 위(첫 사진 위)에서는 투명 그대로 — 첫인상은 사진이 화면을 꽉 채운다.
-     스크롤을 올려 헤더를 다시 불러낸 때만 종이색 띠를 깐다.
-     그 순간엔 앞 칸의 캡션과 반드시 겹치고, 뒤 사진 밝기도 예측할 수 없다.
-     띠는 '항상 있는 비용'이 아니라 '메뉴를 부를 때만 생기는 것'이라 사진을 잠식하지 않는다 */
   .head--solid{background:var(--bg);box-shadow:0 1px 0 rgba(17,17,17,.10)}
   .head--solid a{color:var(--ink) !important}
   .head--solid .mark img{filter:none !important}
   .head--solid .mk-r{display:none}
-  /* 세로로 쌓이면 사진 경계도 가로다 — 투명 상태의 로고는 좌우가 아니라 위아래로 가른다 */
   .mark .mk-r{clip-path:inset(50% 0 0 0)}
 }
-/* 중간 폭(반쪽 창 681~900px)은 데스크톱 헤더 유지 */
 @media (min-width:681px) and (max-width:900px){
   .head{height:90px;grid-template-columns:1fr auto 1fr;align-items:center;justify-items:stretch;gap:28px;padding:0 var(--pad)}
   .mark{grid-column:2;grid-row:1}
@@ -264,6 +206,11 @@ button{
 @media (max-width:680px){
   .head nav a,.acct{padding:12px 2px}   /* 터치 영역 44px */
 }
+/* 320px: 명단 2열이 'Label Under Construction' 폭에 걸려 19px 넘쳤다(_mobile-check 실측) → 1열 */
+@media (max-width:360px){
+  .roster ul{columns:1}
+}
+
 /* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
 footer{
   margin-top:88px;background:var(--ink);color:#8f8f8f;
@@ -320,57 +267,91 @@ footer a:hover{color:#fff}
   <div class="util"><a class="acct" href="search.html">Search</a><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
-<!-- 2026-08-18 Neo 지정: 바탕화면 "TOM 메인 페이지 이미지" 4장으로 교체.
-     원본은 5000~6400px급 → 1600×2000(4:5)·sRGB·q84로 변환해 img/main-2026-08-18/ 에 둠.
-     L1005751(매장컷)은 파일 자체에 흰 테두리(가로 87 세로 109px)가 구워져 있어 잘라냄.
-     TOM_2는 흰 배경이 작품의 일부라 자르지 않았다.
-     ※ 네 칸이 Arrivals·Exclusive·Paper·Store가 되면서 Brands가 홈 격자에서 빠진다 — Neo 확인 필요
-     문구는 전부 예시. 상품명·시즌명은 톰 자료 수령 후 확정 -->
-<div class="grid">
 
-  <!-- 2026-08-25 Neo 확정 (D안): 윗줄 = 살 것(Exclusive·New)에 상품이 보이는 사진,
-       아랫줄 = 이야기(Paper 인물 컷)·장소(Hannam). 순서와 사진을 함께 재배치했다.
-       캡션 색은 사진을 따라간다 — 세 사진 모두 잉크 판정, 매장만 흰색(기존 실측 유지). -->
+<!-- ① 박 대표의 층 — 룩북 ─────────────────────────
+     문장·"Only at tOM in Korea"·연도는 전부 예시. 톰 확인 전 대외 노출 금지.
+     캠페인 3장은 브랜드 공식 사이트 출처(img/campaign-2026-08-13/출처.md) — 대외 공개 전 허가 필요 -->
+<section class="season" id="season">
+  <span class="kicker">FW 26 &middot; Hannam, Seoul</span>
+  <h1>Three houses we brought back from Paris this autumn.</h1>
+  <div class="trio">
+    <a class="zone" href="brand.html"><img src="img/campaign-2026-08-13/ziggy-campaign.jpg" alt="Ziggy Chen">
+      <figcaption><span class="b">Ziggy Chen</span><span class="n">Shanghai &middot; <i>Only at tOM in Korea</i></span></figcaption></a>
+    <a class="zone" href="brand.html"><img src="img/campaign-2026-08-13/biek-campaign.jpg" alt="Biek Verstappen">
+      <figcaption><span class="b">Biek Verstappen</span><span class="n">Antwerp &middot; <i>Only at tOM in Korea</i></span></figcaption></a>
+    <a class="zone zone--ink" href="brand.html"><img src="img/campaign-2026-08-13/nostra-campaign.jpg" alt="Nostrasantissima">
+      <figcaption><span class="b">Nostrasantissima</span><span class="n">Umbria &middot; <i>Since 2012 at tOM</i></span></figcaption></a>
+  </div>
+</section>
 
-  <a class="cell cell--ink" href="exclusive.html">
-    <!-- Uma Wang 니트 + C-스탠드 — 행거에 걸린 '물건'이라 커머스 칸의 사진이다.
-         하단이 고르게 비어 있어 캡션 자리도 깨끗하다. -->
-    <img src="img/collection-2024/hero-cstand.jpg" alt="온라인 단독 상품">
-    <figcaption><span class="t">Online Exclusive</span><span class="s">Exclusive</span></figcaption>
-  </a>
-
-  <a class="cell cell--ink" href="new.html">
-    <img src="img/main-2026-08-18/arrivals-coat.jpg" alt="새로 들어온 상품">
-    <figcaption><span class="t">New Arrival</span><span class="s">Arrivals</span></figcaption>
-  </a>
-
-  <a class="cell cell--paper" href="paper.html">
-    <!-- 2026-08-25 Neo 지정: NARS 책 + 안경 컷.
-         인물 컷(세로 골함석)과 매장 컷(가로 벽돌)이 나란히 오면 선 패턴 두 장이 부딪힌다.
-         책·잡지가 보이는 이 컷이 '읽을 것'과도 맞는다. 인물 컷(exclusive-night)은 홈에서 빠짐.
-         ⚠ 원본(paper-nars)은 하단이 어두운 책/흰 지면으로 갈라져 캡션이 어떤 색이든 묻힌다
-           — 예전에 홈에서 빠졌던 이유. 그래서 홈 칸 전용 파생 크롭(-homecell, 안경·재킷 중심)을 쓴다.
-           캡션은 어두운 재킷 위 → 흰색(cell--paper). 원본 파일은 그대로 두었다 -->
-    <img src="img/collection-2024/paper-nars-homecell.jpg" alt="tOM Paper">
-    <figcaption><span class="t">tOM Paper</span><span class="s">Journal</span></figcaption>
-  </a>
-
-  <a class="cell cell--paper" href="store.html">
-    <!-- 2026-08-25 Neo 지정: 검은 벽돌 파사드 로우앵글 (원본 바탕화면 TOM-POPUP-49, 3333×5000).
-         상단 4:5 크롭(하늘·창 유지) → 1600×2000 q78. 하단이 어두운 벽돌이라 흰 캡션 그대로 -->
-    <img src="img/main-2026-08-18/store-brick.jpg" alt="한남동 매장">
-    <figcaption><span class="t">Hannam</span><span class="s">Store</span></figcaption>
-  </a>
-
-</div>
+<!-- 명단 24개 = 자리표시(커버 index.html 과 같은 목록). 실목록 오면 커버와 함께 통째로 교체 -->
+<section class="roster" id="brands">
+  <p>Twenty-nine years of choosing. No logos — one typeface, ours.</p>
+  <ul>
+    <li>A Diciannoveventitre</li><li>Aleksandr Manamïs</li><li class="have">Biek Verstappen</li><li>Boris Bidjan Saberi</li>
+    <li>Carol Christian Poell</li><li>Daniela Gregis</li><li>Devoa</li><li>Forme d'Expression</li>
+    <li>Geoffrey B. Small</li><li>Giovanni Cavagna</li><li>Guidi</li><li>Individual Sentiments</li>
+    <li>Jan-Jan Van Essche</li><li>Julius</li><li>Label Under Construction</li><li>m.a+</li>
+    <li class="have">Nostrasantissima</li><li>Paul Harnden</li><li>Rick Owens</li><li>tagliovivo</li>
+    <li>The Viridi-Anne</li><li>Uma Wang</li><li>Werkstatt:München</li><li class="have">Ziggy Chen</li>
+  </ul>
+</section>
 
 <section class="said">
   <div class="rule"></div>
   <span class="meta">Hannam, Seoul — Since 1997</span>
 </section>
 
+<!-- 러프 컷 = Neo 촬영분(90소스/web_2000 → img/home-2026-09-04). Paper 로 간다 -->
+<div class="rough" id="paper">
+  <a class="zone" href="paper.html"><img src="img/home-2026-09-04/rough-R0014268.jpg" alt=""><span>01</span></a>
+  <a class="zone" href="paper.html"><img src="img/home-2026-09-04/rough-R0014300.jpg" alt=""><span>02</span></a>
+  <a class="zone" href="paper.html"><img src="img/home-2026-09-04/rough-R0014282.jpg" alt=""><span>03</span></a>
+  <a class="zone" href="paper.html"><img src="img/home-2026-09-04/rough-R0018728.jpg" alt=""><span>04</span></a>
+</div>
+<div class="rough-cap"><span>tOM Paper &middot; Nº 36 &middot; the shop, one Thursday</span><a href="paper.html">Read</a></div>
+
+<!-- ② 판매층 ─────────────────────────────────────
+     카드는 _data/products.json 의 EXC-SAMPLE-001~003 과 같은 값(confirmed:false). 실상품 오면 교체 -->
+<section class="excl" id="exclusive">
+  <header><h2>Online Exclusive</h2><p>Not on the floor in Hannam. One of each.</p></header>
+  <div class="pgrid">
+    <a href="product.html"><div class="ph"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-01.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Ziggy Chen</span><span class="price">1,980,000</span></div><span class="only">Online only &middot; 1 piece</span></a>
+    <a href="product.html"><div class="ph"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-02.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Biek Verstappen</span><span class="price">2,450,000</span></div><span class="only">Online only &middot; 1 piece</span></a>
+    <a href="product.html"><div class="ph"><img src="img/sample-exclusive-2026-08-13/sample-exclusive-03.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Nostrasantissima</span><span class="price">860,000</span></div><span class="only">Online only &middot; 1 piece</span></a>
+  </div>
+  <a class="more" href="exclusive.html">All 12 pieces</a>
+</section>
+
+<!-- 신상 = 가격 미공개(09-04 Neo 확정). "Enquire" 문구는 Neo 결정 대기. 카드는 NEW-SAMPLE-001~004 -->
+<section class="arr">
+  <header><h2>New Arrival &middot; 26 / FW</h2><p>Prices in store.</p></header>
+  <div class="pgrid">
+    <a href="product.html"><div class="ph"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-01.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Ziggy Chen</span><span class="enq">Enquire</span></div></a>
+    <a href="product.html"><div class="ph"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-02.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Uma Wang</span><span class="enq">Enquire</span></div></a>
+    <a href="product.html"><div class="ph"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-03.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Biek Verstappen</span><span class="enq">Enquire</span></div></a>
+    <a href="product.html"><div class="ph"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-04.jpg" alt=""></div>
+      <div class="meta"><span class="brand">Giovanni Cavagna</span><span class="enq">Enquire</span></div></a>
+  </div>
+</section>
+
+<!-- ③ 매장으로 ──────────────────────────────────── -->
+<a class="store zone store--ink" id="store" href="store.html">
+  <img src="img/main-2026-08-18/store-front.jpg" alt="한남동 매장">
+  <div class="in">
+    <div class="big">Come to<br>Hannam.</div>
+    <div class="info">한남대로20길 33<br>12:00 — 21:00 &middot; every day<br><span>02-3143-2616</span> &middot; <span>Instagram</span></div>
+  </div>
+</a>
+
 <!-- 매장 · 뉴스레터 -->
-<div class="foot-info" id="store">
+<div class="foot-info">
   <div>
     <h3>Store</h3>
     <p>한남대로20길 33</p>
@@ -440,7 +421,7 @@ footer a:hover{color:#fff}
      잉크가 흰색보다 훨씬 극단적인 색이라 경계는 중간이 아니라 훨씬 아래다.
      여유를 조금 둬 70. 이보다 어두우면 흰색, 밝으면 잉크 */
   var STEP=4, THRESHOLD=70;   /* 휘도표 해상도 4px */
-  var cells=[].slice.call(document.querySelectorAll('.cell'));
+  var cells=[].slice.call(document.querySelectorAll('.zone'));
   var head=document.querySelector('.head');
   /* 판정 단위 = **글자 하나하나**.
      ① 화면 비율(우측 30%)로 잡았더니 밝은 벽돌과 어두운 모서리가 섞여
