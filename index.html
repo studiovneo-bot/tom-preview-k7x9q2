@@ -102,14 +102,18 @@ a{color:inherit;text-decoration:none}
    나무가 x520~1160 / y0~200 을 지나므로 y240 아래에서 시작한다.
    오른쪽 끝에 맞춰 흘려 왼쪽 큰 활자와 양끝으로 맞선다 */
 .index{
-  position:absolute;right:var(--pad);top:238px;
+  position:absolute;right:var(--pad);top:212px;
   text-align:right;list-style:none;
   font-family:"tOM Display","Didot","Bodoni 72","Times New Roman",Times,serif;
   font-optical-sizing:auto;
-  font-size:13px;line-height:1.78;letter-spacing:.04em;
+  /* 2026-09-08 — 톰 1차 리스트로 24→28줄이 되며 하단 Enter 를 덮었다.
+     시작을 26px 올리고 행간을 1.78→1.66 으로 좁혀 28줄을 y212~810 안에 넣는다.
+     명단은 x1215 오른쪽에만 서므로 나뭇가지(x520~1160)와는 위로 올려도 겹치지 않는다.
+     ⚠ 브랜드가 더 늘면 여기서 더 좁히지 말고 두 단으로 나눈다 — 12px 밑으로는 활자가 사라진다. */
+  font-size:13px;line-height:1.66;letter-spacing:.04em;
   font-weight:400;
 }
-.over .index li{white-space:nowrap;font-size:13px;line-height:1.78;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
+.over .index li{white-space:nowrap;font-size:13px;line-height:1.66;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
 /* ⚠ .over li 로 걸면 오른쪽 색인의 li 까지 92px 이 된다 — 반드시 .big 으로 좁힌다 */
 .over .big li{
   font-family:"tOM Display","Didot","Bodoni 72","Times New Roman",Times,serif;
@@ -189,36 +193,40 @@ a{color:inherit;text-decoration:none}
   <span class="over" aria-hidden="true">
     <ul class="big">
       <li>Biek<br class="brk"> Verstappen</li>
-      <li>Giovanni<br class="brk"> Cavagna</li>
-      <li>Nostrasantissima</li>
+      <li>Horisaki</li>
+      <li>Isaac<br class="brk"> Sellam</li>
+      <li>Mavranyma</li>
       <li>Uma Wang</li>
-      <li>tagliovivo</li>
       <li>Ziggy Chen</li>
     </ul>
     <ul class="index">
-      <li>A Diciannoveventitre</li>
       <li>Aleksandr Manamïs</li>
+      <li>Andrew Driftwood</li>
+      <li>Another-Archive</li>
+      <li>Babara Alan</li>
+      <li>Begfabel</li>
       <li>Biek Verstappen</li>
-      <li>Boris Bidjan Saberi</li>
-      <li>Carol Christian Poell</li>
-      <li>Daniela Gregis</li>
-      <li>Devoa</li>
-      <li>Forme d'Expression</li>
-      <li>Geoffrey B. Small</li>
+      <li>By Waild</li>
+      <li>Chiahung Su</li>
+      <li>Claudio Cutuli</li>
+      <li>Daniele Basta</li>
+      <li>Doys</li>
+      <li>Fabio Quaranta</li>
       <li>Giovanni Cavagna</li>
       <li>Guidi</li>
+      <li>Horisaki</li>
       <li>Individual Sentiments</li>
-      <li>Jan-Jan Van Essche</li>
-      <li>Julius</li>
-      <li>Label Under Construction</li>
-      <li>m.a+</li>
+      <li>Isaac Sellam</li>
+      <li>Isabel Benenato</li>
+      <li>Leon Louis</li>
+      <li>Marc Point</li>
+      <li>Masnada</li>
+      <li>Mavranyma</li>
       <li>Nostrasantissima</li>
-      <li>Paul Harnden</li>
-      <li>Rick Owens</li>
       <li>tagliovivo</li>
-      <li>The Viridi-Anne</li>
       <li>Uma Wang</li>
-      <li>Werkstatt:München</li>
+      <li>Un-Namable</li>
+      <li>Yeung Chin</li>
       <li>Ziggy Chen</li>
     </ul>
     <span class="mark"><img src="img/tom-logo.svg" alt="tOM"></span>
@@ -233,7 +241,7 @@ a{color:inherit;text-decoration:none}
 </a>
 
 
-<div class="revnote">오른쪽 목록은 <b>자리표시 예시</b>입니다. 톰이 실제로 취급하는 브랜드가 아닙니다 — 실제 목록 수령 후 교체.</div>
+<div class="revnote">브랜드 명단 = 톰 제공 1차 리스트(2026-09-08) 28개. 추가 브랜드 예정 · 표기 정본은 톰 확인 전.</div>
 <style>
 .revnote{display:none}
 html.review .revnote{
