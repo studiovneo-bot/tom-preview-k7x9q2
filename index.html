@@ -182,7 +182,15 @@ a{color:inherit;text-decoration:none}
      ?p=1 처럼 붙이면 그 사진으로 고정된다(검수·시연용).
      img 태그 바로 뒤에서 실행되므로 다른 사진이 먼저 보였다 바뀌는 일은 없다. */
   (function(){
-    var P=["snow-single","cloud-a","snow-ridge"];   /* 2026-08-23 Neo 확정. snow-rocks·branches 는 파일만 남기고 목록에서 뺐다 */
+    var P=["snow-single"];   /* 2026-09-08 Neo 「텍스트가 더 잘 보이게」 — snow-single 한 장으로 좁혔다.
+                                후보 7장을 전부 렌더해 글자 자리의 배경 밝기를 실측한 결과(붉은 활자 #b3261e 대비):
+                                  snow-single  명단 최암 대비 4.30 · 큰활자 3.93   ← 유일하게 전 구간 안전
+                                  cloud-a      2.04 / 2.55       구름 중간톤이 13px 명단을 먹는다
+                                  snow-ridge   2.95 / 2.93       오른쪽 절반이 검은 바위
+                                  cloud-b      1.75 / 1.11       태양광에 큰 활자가 사라진다
+                                  snow-rocks · branches · branches-fine  최암 0 — 검은 가지·바위가 글자를 관통
+                                파일은 img/landing-2026-08-23/ 에 그대로 있다. 되살리려면 이 배열에 이름만 넣는다.
+                                ⚠ 다시 여러 장으로 갈 거면 사진마다 글자 자리를 새로 잡아야 한다 — 명단이 28줄이라 y212~816을 통째로 쓴다 */
     var q=(location.search.match(/[?&]p=([0-9])/)||[])[1];
     var i=q?Math.min(Math.max(+q,1),P.length)-1:Math.floor(Math.random()*P.length);
     document.documentElement.classList.add("p"+(i+1));
