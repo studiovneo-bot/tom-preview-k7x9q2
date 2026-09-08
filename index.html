@@ -88,12 +88,10 @@ a{color:inherit;text-decoration:none}
 
 /* p1 snow-single — 눈밭. 기본값 그대로. 묻힘 0.5% / 폰 0.4% */
 
-/* p2 cloud-a — 구름. 전면이 중간톤이라 겹침 합성은 55%가 뭉갠다. 빨강이라야 산다(4.5% / 폰 0%) */
 
-/* p3 snow-ridge — 오른쪽 절반이 검은 바위다.
-   ① 오른쪽 명단이 바위 위에 통째로 얹힌다 — 빨강 대비 2.8 은 13px 글자에 부족하다 → 명단만 겹침으로 되돌린다
-   ② 폰은 세로로 잘리며 바위가 글자 뒤로 들어온다 → 크롭을 왼쪽 눈밭으로 민다(묻힘 2.1% → 0.4%) */
-.p3 .over .index{mix-blend-mode:difference;color:#fff}
+/* p2 branches-fine — 가는 가지. 원본 L1040269 를 2333x1458+1425+1137 로 잘라 오른쪽 세로 띠를 비웠다.
+   자르기 전에는 가지가 명단을 통째로 지나 한 줄도 못 읽었다(겹침 반전으로도 안 됐다).
+   ⚠ 이 사진을 다시 자르면 명단 자리부터 확인한다. */
 
 /* 오른쪽 목록 = 취급 브랜드 '전체' 명단(알파벳순).
    왼쪽에 크게 띄운 브랜드도 이 명단에 그대로 들어간다 —
@@ -147,7 +145,9 @@ a{color:inherit;text-decoration:none}
 
 @media (max-width:900px){
   :root{--pad:18px}
-  .p3 .cover>img{object-position:0% 0%}
+  /* p2 가는 가지 — 폰은 세로로 잘리며 왼쪽 굵은 가지가 큰 활자를 정면으로 지난다.
+     크롭을 오른쪽으로 밀어 굵은 가지를 화면 오른쪽에 세운다(50%·68%·82% 를 실제로 렌더해 비교, 68% 채택) */
+  .p2 .cover>img{object-position:68% 0%}
   .mark{top:22px}
   .mark img{height:22px}
   .rule{top:56px;left:var(--pad)}
@@ -182,15 +182,14 @@ a{color:inherit;text-decoration:none}
      ?p=1 처럼 붙이면 그 사진으로 고정된다(검수·시연용).
      img 태그 바로 뒤에서 실행되므로 다른 사진이 먼저 보였다 바뀌는 일은 없다. */
   (function(){
-    var P=["snow-single"];   /* 2026-09-08 Neo 「텍스트가 더 잘 보이게」 — snow-single 한 장으로 좁혔다.
-                                후보 7장을 전부 렌더해 글자 자리의 배경 밝기를 실측한 결과(붉은 활자 #b3261e 대비):
-                                  snow-single  명단 최암 대비 4.30 · 큰활자 3.93   ← 유일하게 전 구간 안전
-                                  cloud-a      2.04 / 2.55       구름 중간톤이 13px 명단을 먹는다
-                                  snow-ridge   2.95 / 2.93       오른쪽 절반이 검은 바위
-                                  cloud-b      1.75 / 1.11       태양광에 큰 활자가 사라진다
-                                  snow-rocks · branches · branches-fine  최암 0 — 검은 가지·바위가 글자를 관통
-                                파일은 img/landing-2026-08-23/ 에 그대로 있다. 되살리려면 이 배열에 이름만 넣는다.
-                                ⚠ 다시 여러 장으로 갈 거면 사진마다 글자 자리를 새로 잡아야 한다 — 명단이 28줄이라 y212~816을 통째로 쓴다 */
+    var P=["snow-single","branches-fine"];   /* 2026-09-08 Neo 확정 — 이 두 장만 돌린다.
+       고른 근거: 후보 7장을 전부 렌더해 「글자가 실제로 덮는 픽셀」의 배경 밝기를 쟀다(붉은 활자 #b3261e 대비 3 미만 = 묻힘).
+         snow-single    묻힘 0.0%   — 손댈 것 없음
+         branches-fine  묻힘 5.3% → 사진을 다시 잘라 2.7%, 오른쪽 명단 자리는 0%
+         snow-rocks     아무리 잘라도 25%가 바위에 먹힌다 → 뺐다(겹침 반전으로만 살릴 수 있는데 그 장만 빨강을 잃는다)
+         cloud-a 2.04 · cloud-b 1.75 · branches 최암 0 — 전부 기각
+       파일은 img/landing-2026-08-23/ 에 다 남아 있다. 되살리려면 이 배열에 이름만 넣는다.
+       ⚠ 사진을 추가하면 글자가 덮는 자리가 밝은지 먼저 재고, 필요하면 사진을 그 자리에 맞춰 자른다. */
     var q=(location.search.match(/[?&]p=([0-9])/)||[])[1];
     var i=q?Math.min(Math.max(+q,1),P.length)-1:Math.floor(Math.random()*P.length);
     document.documentElement.classList.add("p"+(i+1));
