@@ -179,6 +179,32 @@ button{font:inherit;cursor:pointer}
   .head .util{gap:16px}
   .notify{padding:12px 2px;margin-top:0}
 }
+
+/* ── 2026-09-09 Neo 확정 (E안) — Arrivals 를 판매 목록이 아니라 시즌 화면으로 ──
+   ① 맨 위 한 화면을 사진 하나로 연다(오프닝)
+   ② 격자는 정렬을 지킨다 — 4열 → 3열로만 줄여 옷을 크게 본다.
+      ⚠ 간격은 넓히지 않는다. New(빽빽) vs Exclusive(한 점씩 떨어뜨림)를 가르는 것이
+      열 수가 아니라 간격이기 때문이다(08-25 확정). 여기를 벌리면 두 페이지가 같아 보인다
+   ③ 가격 대신 Enquire — 신상 가격 미공개(09-04 Neo). 자리는 build_products.py 가 만든다
+   ④ 상품명은 숨긴다 — 지금은 전부 '상품명 확인 전' 자리표시다. 톰 자료가 오면 이 한 줄만 지운다 */
+.opener{position:relative;margin:0;height:74vh;overflow:hidden;background:#111}
+.opener img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:grayscale(1) contrast(1.08)}
+.opener .cap{position:absolute;left:var(--pad);bottom:34px;color:#f2f1ee}
+.opener .cap b{display:block;font-family:var(--display-font);font-weight:400;font-size:clamp(28px,3.6vw,46px);line-height:1.06}
+.opener .cap span{display:block;font-size:var(--t-micro);letter-spacing:.4px;margin-top:10px;opacity:.85}
+.title{padding-top:52px}
+.grid{grid-template-columns:repeat(3,1fr);gap:10px}
+.grid img{aspect-ratio:2/3;filter:grayscale(1)}
+.card:hover img{filter:grayscale(0)}
+.name{display:none}
+.brand{font-family:var(--display-font);font-size:17px;letter-spacing:0}
+.enq{font-size:var(--t-meta);color:var(--body)}
+.meta{margin-top:4px}
+@media (max-width:900px){
+  .opener{height:56vh}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+
 /* FOOTER:START — 20시안/_tools/build_footer.py 가 생성한다. 직접 고치지 말 것 */
 footer{
   margin-top:88px;background:var(--ink);color:#8f8f8f;
@@ -229,6 +255,12 @@ footer a:hover{color:#fff}
   <div class="util"><a class="acct" href="search.html">Search</a><a class="acct" href="login.html">Log In</a><a class="acct bag" href="cart.html">Bag (<span class="bagn">0</span>)</a></div>
 </header>
 
+<!-- 오프닝 — 2026-09-09 Neo 사진 확정(arrivals-coat). 상품 구간(PRODUCTS) 밖이라 생성기가 건드리지 않는다 -->
+<figure class="opener">
+  <img src="img/main-2026-08-18/arrivals-coat.jpg" alt="">
+  <figcaption class="cap"><b>27 / SS</b><span>지금 들어오는 것들</span></figcaption>
+</figure>
+
 <div class="title">
   <h1>New Arrival</h1>
 </div>
@@ -239,16 +271,16 @@ footer a:hover{color:#fff}
   <div class="grid" style="--n:'4'">
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-01.jpg" alt=""></a>
       <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩1,980,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-02.jpg" alt=""></a>
       <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩2,450,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-03.jpg" alt=""></a>
       <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩860,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-04.jpg" alt=""></a>
       <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩640,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
   </div>
 </section>
 <section class="drop">
@@ -256,30 +288,30 @@ footer a:hover{color:#fff}
   <div class="grid" style="--n:'8'">
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-05.jpg" alt=""></a>
       <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩3,200,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-06.jpg" alt=""></a>
       <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩1,180,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-07.jpg" alt=""></a>
       <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩720,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-08.jpg" alt=""></a>
       <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩1,340,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-09.jpg" alt=""></a>
       <figcaption><span class="brand">Ziggy Chen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩2,760,000</span><span class="one">Sold</span></span>
+      <span class="meta"><span class="enq">Enquire</span><span class="one">Sold</span></span>
       <a class="notify" href="#newsletter">이 브랜드 입고 알림</a></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-10.jpg" alt=""></a>
       <figcaption><span class="brand">Biek Verstappen</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩1,620,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-11.jpg" alt=""></a>
       <figcaption><span class="brand">Giovanni Cavagna</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩580,000</span><span class="one">Sold</span></span>
+      <span class="meta"><span class="enq">Enquire</span><span class="one">Sold</span></span>
       <a class="notify" href="#newsletter">이 브랜드 입고 알림</a></figcaption></figure>
     <figure class="card"><a href="product.html"><img src="img/sample-new-arrival-2026-08-13/sample-new-arrival-12.jpg" alt=""></a>
       <figcaption><span class="brand">Nostrasantissima</span><span class="name">상품명</span>
-      <span class="meta"><span class="price">₩940,000</span></span></figcaption></figure>
+      <span class="meta"><span class="enq">Enquire</span></span></figcaption></figure>
   </div>
 </section>
 <!-- PRODUCTS:END -->
