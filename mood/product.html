@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<script>(function(){try{if(sessionStorage.getItem('tomkey')!=='ok')location.replace('gate.html');}catch(e){location.replace('gate.html');}})();</script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tOM — Ziggy Chen, Washed wool coat</title>
+<link rel="stylesheet" href="site.css">
+<style>
+.pdp{display:grid;grid-template-columns:1.35fr 1fr;align-items:start}
+.pdp .imgs img{width:100%;display:block}
+.pdp .info{position:sticky;top:var(--hh);padding:34px 36px;min-height:calc(100vh - var(--hh));display:flex;flex-direction:column;gap:22px}
+.pdp .row{display:flex;justify-content:space-between}
+.sizes{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #111}
+.sizes button{padding:11px 10px;font-size:11px;border-right:1px solid #111;text-align:left}
+.sizes button:last-child{border-right:0}.sizes button.on{background:#111;color:#fff}
+.buy{display:block;text-align:center;background:#111;color:#fff;padding:15px}
+.ask{display:block;text-align:center;border:1px solid #111;padding:14px}
+.meas{border-top:1px solid #111;padding-top:14px}
+.meas svg{width:100%;height:auto;display:block;margin:10px 0}
+.meas svg text{font:9.5px "tOM Sans",sans-serif;letter-spacing:.06em;fill:#111}
+.meas .u{display:flex;gap:16px}
+.meas .u label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.meas .t div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e6e3dc}
+.desc{font-size:12px;line-height:1.7;color:#444;text-transform:none;letter-spacing:0;word-break:keep-all}
+@media (max-width:760px){.pdp{grid-template-columns:1fr}.pdp .info{position:static;min-height:0;padding:24px 18px}}
+</style>
+</head>
+<body data-page="exclusive.html">
+
+<section class="pdp">
+  <div class="imgs">
+    <img src="ai/p01.jpg" alt="">
+    <img src="ai/s02.jpg" alt="" loading="lazy">
+    <img src="ai/s01.jpg" alt="" loading="lazy">
+  </div>
+  <div class="info lab">
+    <div><div>Ziggy Chen</div><div class="soft" style="margin-top:4px">Washed wool coat</div></div>
+    <div class="row"><span>₩ 1,280,000</span><span class="soft">Nº 01 / 12 — Online Exclusive</span></div>
+    <div class="sizes"><button>44</button><button class="on">46</button><button>48</button><button>50</button></div>
+    <button class="buy" data-add>Add to bag</button>
+    <a class="ask" href="store.html">Enquire</a>
+    <p class="desc">손으로 씻어 낸 울. 비대칭으로 떨어지는 앞판. 한남동 매장에서 직접 잰 치수입니다.</p>
+    <div class="meas">
+      <div class="row"><span>tOM Measure</span><span class="soft">Hand-measured in Hannam</span></div>
+      <svg viewBox="0 0 400 300" aria-label="코트 실측 도면">
+        <g fill="none" stroke="#111" stroke-width="1.1">
+          <path d="M160 30 L185 22 Q200 34 215 22 L240 30 L300 60 L322 200 L298 204 L282 96 L286 286 L114 286 L118 96 L102 204 L78 200 L100 60 Z"/>
+          <path d="M200 34 L180 286" stroke-dasharray="2 3"/>
+        </g>
+        <g stroke="#b3261e" stroke-width="1" fill="#b3261e">
+          <line x1="160" y1="12" x2="240" y2="12"/><path d="M160 12 l6 -3 v6z M240 12 l-6 -3 v6z"/>
+          <line x1="118" y1="140" x2="282" y2="140"/><path d="M118 140 l6 -3 v6z M282 140 l-6 -3 v6z"/>
+          <line x1="56" y1="30" x2="56" y2="286"/><path d="M56 30 l-3 6 h6z M56 286 l-3 -6 h6z"/>
+        </g>
+        <text x="200" y="8" text-anchor="middle" data-cm="46" data-k="SHOULDER">SHOULDER 46</text>
+        <text x="200" y="134" text-anchor="middle" data-cm="60" data-k="CHEST">CHEST 60</text>
+        <text x="44" y="160" text-anchor="middle" transform="rotate(-90 44 160)" data-cm="118" data-k="LENGTH">LENGTH 118</text>
+        <text x="330" y="220" data-cm="64" data-k="SLEEVE">SLEEVE 64</text>
+      </svg>
+      <div class="u"><label><input type="radio" name="u" value="cm" checked> CM</label><label><input type="radio" name="u" value="in"> Inches</label></div>
+      <div class="t">
+        <div><span>Shoulder</span><b data-cm="46" style="font-weight:400">46 cm</b></div>
+        <div><span>Chest</span><b data-cm="60" style="font-weight:400">60 cm</b></div>
+        <div><span>Length</span><b data-cm="118" style="font-weight:400">118 cm</b></div>
+        <div><span>Sleeve</span><b data-cm="64" style="font-weight:400">64 cm</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="two">
+  <a class="cell" href="product.html"><img src="ai/p02.jpg" alt="" loading="lazy"><span class="cap">Nº 02 / 12 — Hand-knit sweater</span></a>
+  <a class="cell" href="product.html"><img src="ai/p04.jpg" alt="" loading="lazy"><span class="cap">Nº 04 / 12 — Back-zip boots</span></a>
+</section>
+
+<script src="site.js"></script>
+<script>
+document.querySelectorAll('.sizes button').forEach(function(b){b.onclick=function(){document.querySelectorAll('.sizes button').forEach(function(x){x.classList.remove('on')});b.classList.add('on')}});
+document.querySelectorAll('.meas input').forEach(function(r){r.onchange=function(){var m=r.value;
+ document.querySelectorAll('.meas [data-cm]').forEach(function(e){var c=+e.getAttribute('data-cm'),v=m==='in'?(c/2.54).toFixed(1):c;
+  e.textContent=e.tagName.toLowerCase()==='b'?v+(m==='in'?' in':' cm'):e.getAttribute('data-k')+' '+v})}});
+</script>
+</body>
+</html>
