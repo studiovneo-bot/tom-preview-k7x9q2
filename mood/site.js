@@ -32,7 +32,6 @@
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){openBag(false);mm.classList.remove('open')}});
 
-  var tag=document.createElement('div');tag.className='tag';tag.textContent='무드 시안 — 사진·영상은 AI로 만든 예시이며 실제 상품이 아닙니다';document.body.appendChild(tag);
 
   /* 영상 위 그레인 */
   var S=2,still=matchMedia('(prefers-reduced-motion: reduce)').matches,G=[];
